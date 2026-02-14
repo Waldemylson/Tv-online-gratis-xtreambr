@@ -1,10 +1,9 @@
-
 <!DOCTYPE html>
 <html lang="pt-br">
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Portal IPTV - Canais</title>
+  <title>IPTV Premium - XTREAMBR TV</title>
   <style>
     * { margin: 0; padding: 0; box-sizing: border-box; }
     body {
@@ -54,6 +53,31 @@
 </head>
 <body>
 
+  <!-- Mensagem obrigatória adaptada do seu site antigo (aparece logo ao carregar, usuário tem que ler e confirmar) -->
+  <script>
+    // Mensagem obrigatória + pedido de doação (adaptada do seu popup antigo)
+    var mensagem = "Apoie o Projeto!\n\n" +
+                   "✅ Há 3 anos compartilhando conteúdo gratuito para todos!\n" +
+                   "💰 Feito por paixão, sem fins lucrativos.\n" +
+                   "☕ Ajude com R$ 5,00 (um cafezinho por mês)!\n\n" +
+                   "Pix: xtreambr@gmail.com\n" +
+                   "WhatsApp para falar ou enviar comprovante: +351939799936\n" +
+                   "Nome: Waldemylson\n\n" +
+                   "Obrigado pela força! 💚\n\n" +
+                   "Digite 'OK' ou 'DOAR' para continuar e acessar os canais.";
+
+    var resposta = prompt(mensagem, "Digite OK ou DOAR");
+
+    if (resposta === null || (resposta.toLowerCase() !== "ok" && resposta.toLowerCase() !== "doar")) {
+      alert("Você precisa ler a mensagem e aceitar para acessar os canais.\nVolte quando quiser ajudar! 😊");
+      window.location = "about:blank";  // Fecha a aba ou deixa em branco
+    } else {
+      alert("Obrigado por ler e apoiar! Boa sessão nos canais. 💚");
+      // Aqui o site normal carrega
+    }
+  </script>
+
+  <!-- Conteúdo normal do site (só aparece depois de aceitar a mensagem) -->
   <p class="header">ABRA-O EM QUALQUER LUGAR</p>
 
   <div class="search-box">
@@ -250,4 +274,4 @@
   </script>
 
 </body>
-    </html>
+</html>
