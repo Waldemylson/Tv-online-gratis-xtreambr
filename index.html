@@ -1,451 +1,253 @@
+
 <!DOCTYPE html>
 <html lang="pt-br">
 <head>
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <meta name="robots" content="index, follow">
-    <meta name="description" content="Venha assistir TV a Cabo online e Futebol ao vivo Grátis em HD. Canais como: Globo, SBT, Record, HBO, SporTV, Premiere e muito mais! Sem anúncios e sem travar.">
-    <meta name="author" content="Gugabytee">
-    <meta name="keywords" content="free, tv online, tv ao vivo brasil, lista canais tv, tv ao vivo, webtv fullhd, tv internet, canal online, emissora online, streaming de tv, rede canais, esportes iptv, tv a cabo gratis">
-
-    <!-- Favicons -->
-    <link rel="icon" href="/favicon.ico" type="image/x-icon">
-    <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
-    <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
-    <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png">
-    <link rel="manifest" href="/site.webmanifest">
-
-    <!-- Canonical -->
-    <link rel="canonical" href="https://tvacabo.pages.dev">
-
-    <!-- Open Graph -->
-    <meta property="og:locale" content="pt_BR">
-    <meta property="og:type" content="website">
-    <meta property="og:title" content="TV A CABO ONLINE GRATIS">
-    <meta property="og:description" content="Assistir Tv Online Gratis, Futebol, Canais ao vivo de Filmes, Séries, Abertos, Desenhos e muito mais! E o melhor, é de Graça!">
-    <meta property="og:url" content="https://tvacabo.pages.dev">
-    <meta property="og:site_name" content="TV A CABO ONLINE GRATIS">
-    <meta property="og:image" content="https://tvacabo.pages.dev/favicon.png">
-    <meta property="og:image:width" content="1200">
-    <meta property="og:image:height" content="628">
-    <meta property="og:image:type" content="image/png">
-
-    <!-- Twitter Card -->
-    <meta name="twitter:card" content="summary_large_image">
-
-    <title>TV A CABO - Assista Canais Online Ao Vivo Grátis</title>
-
-    <!-- Font Awesome -->
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.6.0/css/all.min.css" integrity="sha512-Kc323vGBEqzTmouAECnVceyQqyqdsSiqLQISBL29aUW4U/M7pSPA/gEUZQqv1cwx4OnYxTxve5UMg5GT6L4JJg==" crossorigin="anonymous" referrerpolicy="no-referrer">
-
-    <style>
-        * { margin: 0; padding: 0; box-sizing: border-box; }
-        body { background-color: #000; color: #fff; font-family: Arial, Helvetica, sans-serif; line-height: 1.6; padding: 20px 10px; }
-        a { text-decoration: none; color: #04ff00; transition: color 0.2s ease; }
-        a:hover, a:focus { color: #03cc00; }
-        .container { max-width: 1200px; margin: 0 auto; }
-        .header, .footer { margin: 20px 0; text-align: center; }
-        button { cursor: pointer; transition: all 0.2s; }
-
-        /* Popup compacto */
-        #donation-overlay { display:none; position:fixed; inset:0; background:rgba(0,0,0,0.85); z-index:9998; }
-        #donation-popup {
-            display:none; position:fixed; top:50%; left:50%; transform:translate(-50%,-50%);
-            width:320px; max-width:92%; background:#111; color:#fff; border:2px solid #04ff00;
-            border-radius:14px; padding:20px 16px; box-shadow:0 0 30px rgba(4,255,0,0.35);
-            z-index:9999;
-        }
-        #close-popup { position:absolute; top:8px; right:12px; font-size:36px; color:#04ff00; cursor:pointer; font-weight:bold; line-height:1; }
-        #close-popup:hover { color:#fcff01; }
-        #donation-popup h2 { color:#04ff00; margin:0 0 14px; text-align:center; font-size:1.6em; }
-        #donation-popup p { margin:0 0 10px; text-align:center; font-size:1em; }
-        #pix-box {
-            margin:12px 0; padding:10px; background:#1a1a1a; border:1px solid #04ff00;
-            border-radius:8px; text-align:center;
-        }
-        #pix-key { font-size:1.1em; margin:0 0 8px; color:#e0ffe0; font-family:monospace; }
-        #copy-pix-btn {
-            padding:8px 24px; font-size:0.95em; font-weight:bold;
-            background:#04ff00; color:#000; border:none; border-radius:6px;
-            box-shadow:0 2px 8px rgba(4,255,0,0.4);
-        }
-        #copy-pix-btn:hover { background:#03cc00; transform:translateY(-1px); }
-        #copy-feedback { margin-top:6px; color:#fcff01; font-weight:bold; font-size:0.9em; min-height:1.2em; opacity:0; transition:opacity 0.4s; }
-
-        .search-wrapper { width:100%; display:flex; justify-content:center; margin:20px 0; }
-        .search-box { position:relative; width:min(90%,420px); }
-        .search-box input { width:100%; padding:12px 45px 12px 20px; font-size:16px; border-radius:25px; border:2px solid #04ff00; background:rgba(4,255,0,0.05); color:#fff; outline:none; transition:all 0.3s ease; }
-        .search-box input::placeholder { color:#b6ffb3; }
-        .search-box input:focus { border-color:#fcff01; box-shadow:0 0 15px rgba(4,255,0,0.6); }
-        .search-box i { position:absolute; right:18px; top:50%; transform:translateY(-50%); color:#04ff00; font-size:16px; pointer-events:none; }
-        .search-box input:focus ~ i { color:#fcff01; }
-        .section-title { text-align:center; font-weight:bold; margin:20px 0; }
-        .main-title { color:#fcff01; font-size:1.2rem; }
-        .subtitle { color:#fff; }
-        #channels-content { margin:20px 0; }
-        #channels-content p { text-align:center; margin:6px 0; }
-        .channel-link { font-weight:bold; }
-        .divider { text-align:center; color:#04ff00; margin:20px 0; }
-        .disclaimer { text-align:center; font-style:italic; color:#fcff01; margin:5px 0; }
-
-        @media (max-width:480px) {
-            body { padding:15px 8px; }
-            #donation-popup { width:90%; padding:18px 14px; }
-            #close-popup { font-size:30px; }
-        }
-    </style>
-
-    <style type="text/css">* {user-select: auto !important; -webkit-user-select: auto !important;}</style>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Portal IPTV - Canais</title>
+  <style>
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    body {
+      background: #000;
+      color: #0f0;
+      font-family: Arial, sans-serif;
+      padding: 20px;
+      text-align: center;
+    }
+    .header { color: #fff; font-size: 1.2em; margin: 20px 0; }
+    .search-box {
+      position: relative;
+      max-width: 400px;
+      margin: 20px auto;
+    }
+    .search-box input {
+      width: 100%;
+      padding: 12px 40px 12px 20px;
+      font-size: 1.1em;
+      border-radius: 25px;
+      border: 2px solid #0f0;
+      background: rgba(0, 255, 0, 0.1);
+      color: #fff;
+      outline: none;
+    }
+    .search-box input::placeholder { color: #0f0; }
+    .search-box i { position: absolute; right: 20px; top: 50%; transform: translateY(-50%); color: #0f0; font-size: 1.2em; }
+    .section-title { color: #ff0; font-size: 1.5em; margin: 30px 0 20px; }
+    #channels-content p {
+      margin: 10px 0;
+      font-size: 1.3em;
+    }
+    #channels-content a {
+      color: #0f0;
+      text-decoration: none;
+    }
+    #channels-content a:hover { text-decoration: underline; }
+    @media (min-width: 1200px) {
+      body { font-size: 1.5em; padding: 40px; }
+      .header { font-size: 1.8em; }
+      .section-title { font-size: 2em; }
+      #channels-content p { font-size: 1.8em; }
+    }
+  </style>
+  <!-- Font Awesome para ícone de busca -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.6.0/css/all.min.css">
 </head>
 <body>
 
-    <div id="donation-overlay"></div>
-    <div id="donation-popup" role="dialog" aria-labelledby="popup-title" aria-modal="true">
-        <span id="close-popup" role="button" tabindex="0" aria-label="Fechar janela de apoio">×</span>
-        <h2 id="popup-title">Apoie o Projeto!</h2>
-        <p>✅ <strong>Há 3 anos</strong> compartilhando conteúdo <strong>gratuito</strong> para todos!</p>
-        <p>💰 Feito por paixão, sem fins lucrativos.</p>
-        <p>☕ Ajude com <strong>R$ 5,00</strong> (um cafezinho por mês)!</p>
-        <div id="pix-box">
-            <p style="font-size:1.25em; font-weight:bold; color:#04ff00; margin:0 0 6px;">Pix:</p>
-            <p id="pix-key">xtreambr@gmail.com</p>
-            <button id="copy-pix-btn">Copiar Chave</button>
-            <div id="copy-feedback"></div>
-        </div>
-        <p style="font-size:0.95em; color:#b6ffb3; margin-top:10px; text-align:center;">
-            💚 Obrigado pela força!
-        </p>
-    </div>
+  <p class="header">ABRA-O EM QUALQUER LUGAR</p>
 
-    <div class="container">
-        <header class="header">
-            <div style="text-align:center; font-size:26px; font-weight:900; text-transform:uppercase; letter-spacing:1px; margin:8px 0; background:linear-gradient(90deg,#00f2ff,#00ff99,#00f2ff); -webkit-background-clip:text; -webkit-text-fill-color:transparent; text-shadow:0 0 8px rgba(0,255,180,.8), 0 0 15px rgba(0,200,255,.5);">
-                TV ONLINE GRÁTIS XTREAM BR
-            </div>
-            <p class="subtitle"><strong>ABRA-O EM QUALQUER LUGAR</strong></p>
-        </header>
+  <div class="search-box">
+    <input type="text" id="search-input" placeholder="Buscar canais...">
+    <i class="fas fa-search"></i>
+  </div>
 
-        <div class="search-wrapper">
-            <div class="search-box">
-                <input type="search" id="search-input" placeholder="Buscar canais..." autocomplete="off" aria-label="Buscar canais">
-                <i class="fas fa-search" aria-hidden="true"></i>
-            </div>
-        </div>
+  <p class="section-title">CANAIS:</p>
 
-        <p class="section-title main-title">CANAIS:</p>
+  <div id="channels-content">
+    <p><a href="https://futemais.eu/app2/" target="_blank">FUTEBOL</a></p>
+    <p><a href="https://redecanais.bh/player3/ch.php?canal=sportv1" target="_blank">SPORTV 1</a></p>
+    <p><a href="https://rdcanais.top/sportvalternativo" target="_blank">SPORTV 1 ❪OP2❫</a></p>
+    <p><a href="https://redecanais.bh/player3/ch.php?canal=sportv2" target="_blank">SPORTV 2</a></p>
+    <p><a href="https://rdcanais.top/sportv2alternativo" target="_blank">SPORTV 2 ❪OP2❫</a></p>
+    <p><a href="https://redecanais.bh/player3/ch.php?canal=sportv3" target="_blank">SPORTV 3</a></p>
+    <p><a href="https://rdcanais.top/sportv3alternativo" target="_blank">SPORTV 3 ❪OP2❫</a></p>
+    <p><a href="https://redecanais.bh/player3/ch.php?canal=espn" target="_blank">ESPN 1</a></p>
+    <p><a href="https://rdcanais.top/espn" target="_blank">ESPN 1 ❪OP2❫</a></p>
+    <p><a href="https://redecanais.bh/player3/ch.php?canal=espn2" target="_blank">ESPN 2</a></p>
+    <p><a href="https://rdcanais.top/espn2" target="_blank">ESPN 2 ❪OP2❫</a></p>
+    <p><a href="https://redecanais.bh/player3/ch.php?canal=espn3" target="_blank">ESPN 3</a></p>
+    <p><a href="https://rdcanais.top/espn3" target="_blank">ESPN 3 ❪OP2❫</a></p>
+    <p><a href="https://redecanais.bh/player3/ch.php?canal=espn4" target="_blank">ESPN 4</a></p>
+    <p><a href="https://rdcanais.top/espn4" target="_blank">ESPN 4 ❪OP2❫</a></p>
+    <p><a href="https://redecanais.bh/player3/ch.php?canal=espn5" target="_blank">ESPN 5</a></p>
+    <p><a href="https://rdcanais.top/espn5" target="_blank">ESPN 5 ❪OP2❫</a></p>
+    <p><a href="https://redecanais.bh/player3/ch.php?canal=espn6" target="_blank">ESPN 6</a></p>
+    <p><a href="https://rdcanais.top/espn6" target="_blank">ESPN 6 ❪OP2❫</a></p>
+    <p><a href="https://redecanais.bh/player3/ch.php?canal=premiereclubes" target="_blank">PREMIERE CLUBES</a></p>
+    <p><a href="https://rdcanais.top/premiereclubes" target="_blank">PREMIERE CLUBES ❪OP2❫</a></p>
+    <p><a href="https://redecanais.bh/player3/ch.php?canal=premiere2" target="_blank">PREMIERE 2</a></p>
+    <p><a href="https://rdcanais.top/premiere2" target="_blank">PREMIERE 2 ❪OP2❫</a></p>
+    <p><a href="https://redecanais.bh/player3/ch.php?canal=premiere3" target="_blank">PREMIERE 3</a></p>
+    <p><a href="https://rdcanais.top/premiere3alternativo" target="_blank">PREMIERE 3 ❪OP2❫</a></p>
+    <p><a href="https://redecanais.bh/player3/ch.php?canal=premiere4" target="_blank">PREMIERE 4</a></p>
+    <p><a href="https://rdcanais.top/premiere4alternativo" target="_blank">PREMIERE 4 ❪OP2❫</a></p>
+    <p><a href="https://redecanais.bh/player3/ch.php?canal=premiere5" target="_blank">PREMIERE 5</a></p>
+    <p><a href="https://rdcanais.top/premiere5alternativo" target="_blank">PREMIERE 5 ❪OP2❫</a></p>
+    <p><a href="https://redecanais.bh/player3/ch.php?canal=premiere5" target="_blank">PREMIERE 6</a></p>
+    <p><a href="https://rdcanais.top/premiere6alternativo" target="_blank">PREMIERE 6 ❪OP2❫</a></p>
+    <p><a href="https://redecanais.bh/player3/ch.php?canal=premiere7" target="_blank">PREMIERE 7</a></p>
+    <p><a href="https://rdcanais.top/premiere7alternativo" target="_blank">PREMIERE 7 ❪OP2❫</a></p>
+    <p><a href="https://redecanais.bh/player3/ch.php?canal=premiere8" target="_blank">PREMIERE 8</a></p>
+    <p><a href="https://rdcanais.top/premiere8alternativo" target="_blank">PREMIERE 8 ❪OP2❫</a></p>
+    <p><a href="https://redecanais.bh/player3/ch.php?canal=combate" target="_blank">COMBATE</a></p>
+    <p><a href="https://rdcanais.top/combate" target="_blank">COMBATE ❪OP2❫</a></p>
+    <p><a href="https://tvacabo.pages.dev/player/nsports.html" target="_blank">NSPORTS</a></p>
+    <p><a href="https://redecanais.bh/player3/ch.php?canal=xsports" target="_blank">XSPORTS</a></p>
+    <p><a href="https://redecanais.bh/player3/ch.php?canal=ufcfightpass" target="_blank">UFC FIGHT PASS</a></p>
+    <p><a href="https://rdcanais.top/ufcfightpass" target="_blank">UFC FIGHT PASS ❪OP2❫</a></p>
+    <p><a href="https://tvacabo.pages.dev/player/globo.html" target="_blank">GLOBO SP</a></p>
+    <p><a href="https://rdcanais.top/globosp" target="_blank">GLOBO SP ❪OP2❫</a></p>
+    <p><a href="https://redecanais.bh/player3/ch.php?canal=bobosp" target="_blank">GLOBO SP ❪OP3❫</a></p>
+    <p><a href="https://rdcanais.top/globorj" target="_blank">GLOBO RJ</a></p>
+    <p><a href="https://redecanais.bh/player3/ch.php?canal=boborj" target="_blank">GLOBO RJ ❪OP2❫</a></p>
+    <p><a href="https://sinalpublico.vercel.app/play/dtv.html?id=globorj" target="_blank">GLOBO RJ ❪OP3❫</a></p>
+    <p><a href="https://redecanais.bh/player3/ch.php?canal=bobomg" target="_blank">GLOBO MG</a></p>
+    <p><a href="https://sinalpublico.vercel.app/play/dtv.html?id=globomg" target="_blank">GLOBO MG ❪OP2❫</a></p>
+    <p><a href="https://canais.free.nf/globomg.html" target="_blank">GLOBO MG ❪OP3❫</a></p>
+    <p><a href="https://redecanais.bh/player3/ch.php?canal=bobonordeste" target="_blank">GLOBO NORDESTE</a></p>
+    <p><a href="https://tvacabo.pages.dev/player/sbt.html" target="_blank">SBT</a></p>
+    <p><a href="https://tvacabo.pages.dev/player/sbt2.html" target="_blank">SBT ❪OP2❫</a></p>
+    <p><a href="https://redecanais.bh/player3/ch.php?canal=sbt" target="_blank">SBT ❪OP3❫</a></p>
+    <p><a href="https://tvacabo.pages.dev/player/sbtnews.html" target="_blank">SBT NEWS</a></p>
+    <p><a href="https://tvacabo.pages.dev/player/band.html" target="_blank">BAND</a></p>
+    <p><a href="https://beyond.spalla.io/player/?live=0195cdf3-d8d8-74b6-9516-6c79c06bcec8" target="_blank">BAND ❪OP2❫</a></p>
+    <p><a href="https://redecanais.bh/player3/ch.php?canal=band" target="_blank">BAND ❪OP3❫</a></p>
+    <p><a href="https://tvacabo.pages.dev/player/bandnews.html" target="_blank">BAND NEWS</a></p>
+    <p><a href="https://redecanais.bh/player3/ch.php?canal=bandsports" target="_blank">BAND SPORTS</a></p>
+    <p><a href="https://tvacabo.pages.dev/player/record.html" target="_blank">RECORD TV</a></p>
+    <p><a href="https://canais.free.nf/recordmg.html" target="_blank">RECORD TV ❪OP2❫</a></p>
+    <p><a href="https://redecanais.bh/player3/ch.php?canal=record" target="_blank">RECORD TV ❪OP3❫</a></p>
+    <p><a href="https://tvacabo.pages.dev/player/recordnews.html" target="_blank">RECORD NEWS</a></p>
+    <p><a href="https://tvacabo.pages.dev/player/redetv.html" target="_blank">REDE TV</a></p>
+    <p><a href="https://rdcanais.top/redetv" target="_blank">REDE TV ❪OP2❫</a></p>
+    <p><a href="https://redecanais.bh/player3/ch.php?canal=redetv" target="_blank">REDE TV ❪OP3❫</a></p>
+    <p><a href="https://redecanais.bh/player3/ch.php?canal=cnnbrasil" target="_blank">CNN BRASIL</a></p>
+    <p><a href="https://www.youtube.com/c/CNNBrasil/live" target="_blank">CNN BRASIL ❪OP2❫</a></p>
+    <p><a href="https://tvacabo.pages.dev/player/cnnmoney.html" target="_blank">CNN MONEY</a></p>
+    <p><a href="https://redecanais.bh/player3/ch.php?canal=cnnbrasilmoney" target="_blank">CNN MONEY ❪OP2❫</a></p>
+    <p><a href="https://redecanais.bh/player3/ch.php?canal=globonews" target="_blank">GLOBO NEWS</a></p>
+    <p><a href="https://rdcanais.top/globonews" target="_blank">GLOBO NEWS ❪OP2❫</a></p>
+    <p><a href="https://redecanais.bh/player3/ch.php?canal=hbo" target="_blank">HBO</a></p>
+    <p><a href="https://rdcanais.top/hbo" target="_blank">HBO ❪OP2❫</a></p>
+    <p><a href="https://redecanais.bh/player3/ch.php?canal=hbo2" target="_blank">HBO 2</a></p>
+    <p><a href="https://rdcanais.top/hbo2" target="_blank">HBO 2 ❪OP2❫</a></p>
+    <p><a href="https://redecanais.bh/player3/ch.php?canal=hbofamily" target="_blank">HBO FAMILY</a></p>
+    <p><a href="https://rdcanais.top/hbofamily" target="_blank">HBO FAMILY ❪OP2❫</a></p>
+    <p><a href="https://redecanais.bh/player3/ch.php?canal=hboplus" target="_blank">HBO PLUS</a></p>
+    <p><a href="https://rdcanais.top/hboplus" target="_blank">HBO PLUS ❪OP2❫</a></p>
+    <p><a href="https://redecanais.bh/player3/ch.php?canal=hboxtreme" target="_blank">HBO XTREME</a></p>
+    <p><a href="https://rdcanais.top/hboxtreme" target="_blank">HBO XTREME ❪OP2❫</a></p>
+    <p><a href="https://redecanais.bh/player3/ch.php?canal=hbomundi" target="_blank">HBO MUNDI</a></p>
+    <p><a href="https://canais.free.nf/hbomundi.html" target="_blank">HBO MUNDI ❪OP2❫</a></p>
+    <p><a href="https://redecanais.bh/player3/ch.php?canal=hbopop" target="_blank">HBO POP</a></p>
+    <p><a href="https://rdcanais.top/hbopop" target="_blank">HBO POP ❪OP2❫</a></p>
+    <p><a href="https://rdcanais.top/hbosignature" target="_blank">HBO SIGNATURE</a></p>
+    <p><a href="https://rdcanais.top/hbosignature" target="_blank">HBO SIGNATURE ❪OP2❫</a></p>
+    <p><a href="https://redecanais.bh/player3/ch.php?canal=hbomax1" target="_blank">HBO MAX 1</a></p>
+    <p><a href="https://redecanais.bh/player3/ch.php?canal=hbomax2" target="_blank">HBO MAX 2</a></p>
+    <p><a href="https://redecanais.bh/player3/ch.php?canal=hbomax3" target="_blank">HBO MAX 3</a></p>
+    <p><a href="https://redecanais.bh/player3/ch.php?canal=hbomax4" target="_blank">HBO MAX 4</a></p>
+    <p><a href="https://redecanais.bh/player3/ch.php?canal=hbomax5" target="_blank">HBO MAX 5</a></p>
+    <p><a href="https://redecanais.bh/player3/ch.php?canal=hbomax6" target="_blank">HBO MAX 6</a></p>
+    <p><a href="https://redecanais.bh/player3/ch.php?canal=hbomax7" target="_blank">HBO MAX 7</a></p>
+    <p><a href="https://redecanais.bh/player3/ch.php?canal=hbomax8" target="_blank">HBO MAX 8</a></p>
+    <p><a href="https://redecanais.bh/player3/ch.php?canal=telecineaction" target="_blank">TELECINE ACTION</a></p>
+    <p><a href="https://rdcanais.top/telecineaction" target="_blank">TELECINE ACTION ❪OP2❫</a></p>
+    <p><a href="https://redecanais.bh/player3/ch.php?canal=telecinepipoca" target="_blank">TELECINE PIPOCA</a></p>
+    <p><a href="https://rdcanais.top/telecinepipoca" target="_blank">TELECINE PIPOCA ❪OP2❫</a></p>
+    <p><a href="https://redecanais.bh/player3/ch.php?canal=telecinepremium" target="_blank">TELECINE PREMIUM</a></p>
+    <p><a href="https://rdcanais.top/telecinepremium" target="_blank">TELECINE PREMIUM ❪OP2❫</a></p>
+    <p><a href="https://redecanais.bh/player3/ch.php?canal=telecinetouch" target="_blank">TELECINE TOUCH</a></p>
+    <p><a href="https://rdcanais.top/telecinetouch" target="_blank">TELECINE TOUCH ❪OP2❫</a></p>
+    <p><a href="https://redecanais.bh/player3/ch.php?canal=telecinefun" target="_blank">TELECINE FUN</a></p>
+    <p><a href="https://rdcanais.top/telecinefun" target="_blank">TELECINE FUN ❪OP2❫</a></p>
+    <p><a href="https://redecanais.bh/player3/ch.php?canal=telecinecult" target="_blank">TELECINE CULT</a></p>
+    <p><a href="https://rdcanais.top/telecinecult" target="_blank">TELECINE CULT ❪OP2❫</a></p>
+    <p><a href="https://redecanais.bh/player3/ch.php?canal=megapix" target="_blank">MEGAPIX</a></p>
+    <p><a href="https://rdcanais.top/megapix" target="_blank">MEGAPIX ❪OP2❫</a></p>
+    <p><a href="https://tvacabo.pages.dev/player/cartoon.html" target="_blank">CARTOON NETWORK</a></p>
+    <p><a href="https://redecanais.bh/player3/ch.php?canal=cartoon" target="_blank">CARTOON NETWORK ❪OP2❫</a></p>
+    <p><a href="https://tvacabo.pages.dev/player/dreamworks.html" target="_blank">DREAMWORKS</a></p>
+    <p><a href="https://tvacabo.pages.dev/player/ratimbum.html" target="_blank">TV RÁ-TIM-BUM</a></p>
+    <p><a href="https://redecanais.bh/player3/ch.php?canal=boxkidstv" target="_blank">BOX KIDS TV</a></p>
+    <p><a href="https://tvacabo.pages.dev/player/retro.html" target="_blank">RETRÔ CARTOON</a></p>
+    <p><a href="https://tvacabo.pages.dev/player/gospel.html" target="_blank">GOSPEL CARTOON</a></p>
+    <p><a href="https://redecanais.bh/player3/ch.php?canal=discoverykids" target="_blank">DISCOVERY KIDS</a></p>
+    <p><a href="https://redecanais.bh/player3/ch.php?canal=gloob" target="_blank">GLOOB</a></p>
+    <p><a href="https://redecanais.bh/player3/ch.php?canal=gloobinho" target="_blank">GLOOBINHO</a></p>
+    <p><a href="https://redecanais.bh/player3/ch.php?canal=tooncast" target="_blank">TOONCAST</a></p>
+    <p><a href="https://redecanais.bh/player3/ch.php?canal=cartoonito" target="_blank">CARTOONITO</a></p>
+    <p><a href="https://redecanais.bh/player3/ch.php?canal=discovery" target="_blank">DISCOVERY CHANNEL</a></p>
+    <p><a href="https://tvacabo.pages.dev/player/discovery" target="_blank">DISCOVERY CHANNEL ❪OP2❫</a></p>
+    <p><a href="https://rdcanais.top/discoveryscience" target="_blank">DISCOVERY SCIENCE</a></p>
+    <p><a href="https://redecanais.bh/player3/ch.php?canal=discoveryturbo" target="_blank">DISCOVERY TURBO</a></p>
+    <p><a href="https://rdcanais.top/discoveryturbo" target="_blank">DISCOVERY TURBO ❪OP2❫</a></p>
+    <p><a href="https://redecanais.bh/player3/ch.php?canal=discoverytheater" target="_blank">DISCOVERY THEATER</a></p>
+    <p><a href="https://redecanais.bh/player3/ch.php?canal=discoveryworld" target="_blank">DISCOVERY WORLD</a></p>
+    <p><a href="https://redecanais.bh/player3/ch.php?canal=discoveryhomeihealth" target="_blank">DISCOVERY HOME & HEALTH</a></p>
+    <p><a href="https://redecanais.bh/player3/ch.php?canal=investigacaodiscovery" target="_blank">DISCOVERY ID</a></p>
+    <p><a href="https://tvacabo.pages.dev/player/discoveryid" target="_blank">DISCOVERY ID ❪OP2❫</a></p>
+    <p><a href="https://redecanais.bh/player3/ch.php?canal=history" target="_blank">HISTORY CHANNEL</a></p>
+    <p><a href="https://tvacabo.pages.dev/player/history.html" target="_blank">HISTORY CHANNEL ❪OP2❫</a></p>
+    <p><a href="https://redecanais.bh/player3/ch.php?canal=history2" target="_blank">HISTORY 2</a></p>
+    <p><a href="https://tvacabo.pages.dev/player/history2.html" target="_blank">HISTORY 2 ❪OP2❫</a></p>
+    <p><a href="https://tvacabo.pages.dev/player/natgeo.html" target="_blank">NAT GEO ANIMALS</a></p>
+    <p><a href="https://redecanais.bh/player3/ch.php?canal=animalplanet" target="_blank">ANIMAL PLANET</a></p>
+    <p><a href="https://rdcanais.top/animalplanet" target="_blank">ANIMAL PLANET ❪OP2❫</a></p>
+    <p><a href="https://tvacabo.pages.dev/player/getv.html" target="_blank">GE TV</a></p>
+    <p><a href="https://redecanais.bh/player3/ch.php?canal=cazetv1" target="_blank">CAZE TV 1</a></p>
+    <p><a href="https://redecanais.bh/player3/ch.php?canal=cazetv2" target="_blank">CAZE TV 2</a></p>
+    <p><a href="https://redecanais.bh/player3/ch.php?canal=cazetv3" target="_blank">CAZE TV 3</a></p>
+    <p><a href="https://redecanais.bh/player3/ch.php?canal=dazn1" target="_blank">DAZN 1</a></p>
+    <p><a href="https://redecanais.bh/player3/ch.php?canal=dazn2" target="_blank">DAZN 2</a></p>
+    <p><a href="https://redecanais.bh/player3/ch.php?canal=dazn3" target="_blank">DAZN 3</a></p>
+    <p><a href="https://redecanais.bh/player3/ch.php?canal=dazn4" target="_blank">DAZN 4</a></p>
+    <p><a href="https://redecanais.bh/player3/ch.php?canal=paramountplus1" target="_blank">PARAMOUNT PLUS 1</a></p>
+    <p><a href="https://redecanais.bh/player3/ch.php?canal=paramountplus2" target="_blank">PARAMOUNT PLUS 2</a></p>
+    <p><a href="https://redecanais.bh/player3/ch.php?canal=paramountplus3" target="_blank">PARAMOUNT PLUS 3</a></p>
+    <p><a href="https://redecanais.bh/player3/ch.php?canal=paramountplus4" target="_blank">PARAMOUNT PLUS 4</a></p>
+    <p><a href="https://redecanais.bh/player3/ch.php?canal=primevideo1" target="_blank">PRIME VIDEO 1</a></p>
+    <p><a href="https://redecanais.bh/player3/ch.php?canal=primevideo2" target="_blank">PRIME VIDEO 2</a></p>
+    <p><a href="https://redecanais.bh/player3/ch.php?canal=primevideo3" target="_blank">PRIME VIDEO 3</a></p>
+    <p><a href="https://redecanais.bh/player3/ch.php?canal=canalbrasil" target="_blank">CANAL BRASIL</a></p>
+    <p><a href="https://redecanais.bh/player3/ch.php?canal=canalrural" target="_blank">CANAL RURAL</a></p>
+    <p><a href="https://redecanais.bh/player3/ch.php?canal=musicboxbrazil" target="_blank">MUSIC BOX BRAZIL</a></p>
+    <p><a href="https://tvacabo.pages.dev/player/arts.html" target="_blank">FILM&ARTS</a></p>
+    <p><a href="https://tvacabo.pages.dev/player/sabor.html" target="_blank">SABOR & ARTE</a></p>
+    <p><a href="https://tvacabo.pages.dev/player/rm.html" target="_blank">RETRO MUSIC</a></p>
+    <p><a href="https://tvacabo.pages.dev/adulto" target="_blank">ADULTOS</a></p>
+    <p><a href="https://tvacabo.pages.dev/player/toptv.html" target="_blank">TOP TV</a></p>
+    <p><a href="https://tvacabo.pages.dev/player/agito.html" target="_blank">AGITOMAX</a></p>
+    <p><a href="https://tvacabo.pages.dev/bbb26" target="_blank">BBB 26</a></p>
+  </div>
 
-        <div id="channels-content" class="channel-link">
-            <p><a href="COLOQUE_SUA_URL_AQUI" target="_blank">FUTEBOL</a></p>
-            <p><a href="COLOQUE_SUA_URL_AQUI" target="_blank">TOP TV</a></p>
-            <p><a href="COLOQUE_SUA_URL_AQUI" target="_blank">AGITOMAX</a></p>
-            <p><a href="COLOQUE_SUA_URL_AQUI" target="_blank">BBB 26</a></p>
-            <p><a href="COLOQUE_SUA_URL_AQUI" target="_blank">CNN BRASIL</a></p>
-            <p><a href="COLOQUE_SUA_URL_AQUI" target="_blank">CNN BRASIL ❪OP2❫</a></p>
-            <p><a href="COLOQUE_SUA_URL_AQUI" target="_blank">CNN MONEY</a></p>
-            <p><a href="COLOQUE_SUA_URL_AQUI" target="_blank">CNN MONEY ❪OP2❫</a></p>
-            <p><a href="COLOQUE_SUA_URL_AQUI" target="_blank">GLOBO NEWS</a></p>
-            <p><a href="COLOQUE_SUA_URL_AQUI" target="_blank">GLOBO NEWS ❪OP2❫</a></p>
-            <p><a href="COLOQUE_SUA_URL_AQUI" target="_blank">GLOBO NEWS ❪OP3❫</a></p>
-            <p><a href="COLOQUE_SUA_URL_AQUI" target="_blank">GLOBO SP</a></p>
-            <p><a href="COLOQUE_SUA_URL_AQUI" target="_blank">GLOBO SP ❪OP2❫</a></p>
-            <p><a href="COLOQUE_SUA_URL_AQUI" target="_blank">GLOBO SP ❪OP3❫</a></p>
-            <p><a href="COLOQUE_SUA_URL_AQUI" target="_blank">GLOBO RJ</a></p>
-            <p><a href="COLOQUE_SUA_URL_AQUI" target="_blank">GLOBO RJ ❪OP2❫</a></p>
-            <p><a href="COLOQUE_SUA_URL_AQUI" target="_blank">GLOBO RJ ❪OP3❫</a></p>
-            <p><a href="COLOQUE_SUA_URL_AQUI" target="_blank">GLOBO MG</a></p>
-            <p><a href="COLOQUE_SUA_URL_AQUI" target="_blank">GLOBO MG ❪OP2❫</a></p>
-            <p><a href="COLOQUE_SUA_URL_AQUI" target="_blank">GLOBO MG ❪OP3❫</a></p>
-            <p><a href="COLOQUE_SUA_URL_AQUI" target="_blank">GLOBO NORDESTE</a></p>
-            <p><a href="COLOQUE_SUA_URL_AQUI" target="_blank">SBT</a></p>
-            <p><a href="COLOQUE_SUA_URL_AQUI" target="_blank">SBT ❪OP2❫</a></p>
-            <p><a href="COLOQUE_SUA_URL_AQUI" target="_blank">SBT ❪OP3❫</a></p>
-            <p><a href="COLOQUE_SUA_URL_AQUI" target="_blank">SBT NEWS</a></p>
-            <p><a href="COLOQUE_SUA_URL_AQUI" target="_blank">BAND</a></p>
-            <p><a href="COLOQUE_SUA_URL_AQUI" target="_blank">BAND ❪OP2❫</a></p>
-            <p><a href="COLOQUE_SUA_URL_AQUI" target="_blank">BAND ❪OP3❫</a></p>
-            <p><a href="COLOQUE_SUA_URL_AQUI" target="_blank">BAND NEWS</a></p>
-            <p><a href="COLOQUE_SUA_URL_AQUI" target="_blank">BAND SPORTS</a></p>
-            <p><a href="COLOQUE_SUA_URL_AQUI" target="_blank">RECORD TV</a></p>
-            <p><a href="COLOQUE_SUA_URL_AQUI" target="_blank">RECORD TV ❪OP2❫</a></p>
-            <p><a href="COLOQUE_SUA_URL_AQUI" target="_blank">RECORD TV ❪OP3❫</a></p>
-            <p><a href="COLOQUE_SUA_URL_AQUI" target="_blank">RECORD NEWS</a></p>
-            <p><a href="COLOQUE_SUA_URL_AQUI" target="_blank">REDE TV</a></p>
-            <p><a href="COLOQUE_SUA_URL_AQUI" target="_blank">REDE TV ❪OP2❫</a></p>
-            <p><a href="COLOQUE_SUA_URL_AQUI" target="_blank">REDE TV ❪OP3❫</a></p>
-            <p><a href="COLOQUE_SUA_URL_AQUI" target="_blank">PLAYTV</a></p>
-            <p><a href="COLOQUE_SUA_URL_AQUI" target="_blank">LOADING TV</a></p>
-            <p><a href="COLOQUE_SUA_URL_AQUI" target="_blank">CARTOON NETWORK</a></p>
-            <p><a href="COLOQUE_SUA_URL_AQUI" target="_blank">CARTOON NETWORK ❪OP2❫</a></p>
-            <p><a href="COLOQUE_SUA_URL_AQUI" target="_blank">DREAMWORKS</a></p>
-            <p><a href="COLOQUE_SUA_URL_AQUI" target="_blank">TV RÁ-TIM-BUM</a></p>
-            <p><a href="COLOQUE_SUA_URL_AQUI" target="_blank">BOX KIDS TV</a></p>
-            <p><a href="COLOQUE_SUA_URL_AQUI" target="_blank">RETRÔ CARTOON</a></p>
-            <p><a href="COLOQUE_SUA_URL_AQUI" target="_blank">GOSPEL CARTOON</a></p>
-            <p><a href="COLOQUE_SUA_URL_AQUI" target="_blank">SPORTV 1</a></p>
-            <p><a href="COLOQUE_SUA_URL_AQUI" target="_blank">SPORTV 1 ❪OP2❫</a></p>
-            <p><a href="COLOQUE_SUA_URL_AQUI" target="_blank">SPORTV 2</a></p>
-            <p><a href="COLOQUE_SUA_URL_AQUI" target="_blank">SPORTV 2 ❪OP2❫</a></p>
-            <p><a href="COLOQUE_SUA_URL_AQUI" target="_blank">SPORTV 3</a></p>
-            <p><a href="COLOQUE_SUA_URL_AQUI" target="_blank">SPORTV 3 ❪OP2❫</a></p>
-            <p><a href="COLOQUE_SUA_URL_AQUI" target="_blank">ESPN 1 ❪OP2❫</a></p>
-            <p><a href="COLOQUE_SUA_URL_AQUI" target="_blank">ESPN 2</a></p>
-            <p><a href="COLOQUE_SUA_URL_AQUI" target="_blank">ESPN 2 ❪OP2❫</a></p>
-            <p><a href="COLOQUE_SUA_URL_AQUI" target="_blank">ESPN 3</a></p>
-            <p><a href="COLOQUE_SUA_URL_AQUI" target="_blank">ESPN 3 ❪OP2❫</a></p>
-            <p><a href="COLOQUE_SUA_URL_AQUI" target="_blank">TV FUTURA</a></p>
-            <p><a href="COLOQUE_SUA_URL_AQUI" target="_blank">TV APARECIDA</a></p>
-            <p><a href="COLOQUE_SUA_URL_AQUI" target="_blank">REDE VIDA</a></p>
-            <p><a href="COLOQUE_SUA_URL_AQUI" target="_blank">TV PAI ETERNO</a></p>
-            <p><a href="COLOQUE_SUA_URL_AQUI" target="_blank">CANÇÃO NOVA</a></p>
-            <p><a href="COLOQUE_SUA_URL_AQUI" target="_blank">TV EVANGELIZAR</a></p>
-            <p><a href="COLOQUE_SUA_URL_AQUI" target="_blank">REDE GOSPEL</a></p>
-            <p><a href="COLOQUE_SUA_URL_AQUI" target="_blank">TV NOVO TEMPO</a></p>
-            <p><a href="COLOQUE_SUA_URL_AQUI" target="_blank">TV SÉCULO 21</a></p>
-            <p><a href="COLOQUE_SUA_URL_AQUI" target="_blank">AXN</a></p>
-            <p><a href="COLOQUE_SUA_URL_AQUI" target="_blank">AXN ❪OP2❫</a></p>
-            <p><a href="COLOQUE_SUA_URL_AQUI" target="_blank">TV GAZETA</a></p>
-            <p><a href="COLOQUE_SUA_URL_AQUI" target="_blank">CINEMAX</a></p>
-            <p><a href="COLOQUE_SUA_URL_AQUI" target="_blank">CINEMAX ❪OP2❫</a></p>
-            <p><a href="COLOQUE_SUA_URL_AQUI" target="_blank">TNT SERIES</a></p>
-            <p><a href="COLOQUE_SUA_URL_AQUI" target="_blank">TNT NOVELAS</a></p>
-            <p><a href="COLOQUE_SUA_URL_AQUI" target="_blank">TNT</a></p>
-            <p><a href="COLOQUE_SUA_URL_AQUI" target="_blank">TNT ❪OP2❫</a></p>
-            <p><a href="COLOQUE_SUA_URL_AQUI" target="_blank">SPACE</a></p>
-            <p><a href="COLOQUE_SUA_URL_AQUI" target="_blank">SPACE ❪OP2❫</a></p>
-            <p><a href="COLOQUE_SUA_URL_AQUI" target="_blank">WARNER TV</a></p>
-            <p><a href="COLOQUE_SUA_URL_AQUI" target="_blank">WARNER TV ❪OP2❫</a></p>
-            <p><a href="COLOQUE_SUA_URL_AQUI" target="_blank">HBO</a></p>
-            <p><a href="COLOQUE_SUA_URL_AQUI" target="_blank">HBO ❪OP2❫</a></p>
-            <p><a href="COLOQUE_SUA_URL_AQUI" target="_blank">HBO 2</a></p>
-            <p><a href="COLOQUE_SUA_URL_AQUI" target="_blank">HBO 2 ❪OP2❫</a></p>
-            <p><a href="COLOQUE_SUA_URL_AQUI" target="_blank">HBO FAMILY</a></p>
-            <p><a href="COLOQUE_SUA_URL_AQUI" target="_blank">HBO FAMILY ❪OP2❫</a></p>
-            <p><a href="COLOQUE_SUA_URL_AQUI" target="_blank">HBO PLUS</a></p>
-            <p><a href="COLOQUE_SUA_URL_AQUI" target="_blank">HBO PLUS ❪OP2❫</a></p>
-            <p><a href="COLOQUE_SUA_URL_AQUI" target="_blank">HBO XTREME</a></p>
-            <p><a href="COLOQUE_SUA_URL_AQUI" target="_blank">HBO XTREME ❪OP2❫</a></p>
-            <p><a href="COLOQUE_SUA_URL_AQUI" target="_blank">HBO MUNDI</a></p>
-            <p><a href="COLOQUE_SUA_URL_AQUI" target="_blank">HBO MUNDI ❪OP2❫</a></p>
-            <p><a href="COLOQUE_SUA_URL_AQUI" target="_blank">HBO POP</a></p>
-            <p><a href="COLOQUE_SUA_URL_AQUI" target="_blank">HBO POP ❪OP2❫</a></p>
-            <p><a href="COLOQUE_SUA_URL_AQUI" target="_blank">HBO SIGNATURE</a></p>
-            <p><a href="COLOQUE_SUA_URL_AQUI" target="_blank">HBO SIGNATURE ❪OP2❫</a></p>
-            <p><a href="COLOQUE_SUA_URL_AQUI" target="_blank">CLASSIQUE TV FAROESTE</a></p>
-            <p><a href="COLOQUE_SUA_URL_AQUI" target="_blank">DISCOVERY CHANNEL</a></p>
-            <p><a href="COLOQUE_SUA_URL_AQUI" target="_blank">DISCOVERY CHANNEL ❪OP2❫</a></p>
-            <p><a href="COLOQUE_SUA_URL_AQUI" target="_blank">DISCOVERY SCIENCE</a></p>
-            <p><a href="COLOQUE_SUA_URL_AQUI" target="_blank">DISCOVERY TURBO</a></p>
-            <p><a href="COLOQUE_SUA_URL_AQUI" target="_blank">DISCOVERY TURBO ❪OP2❫</a></p>
-            <p><a href="COLOQUE_SUA_URL_AQUI" target="_blank">DISCOVERY THEATER</a></p>
-            <p><a href="COLOQUE_SUA_URL_AQUI" target="_blank">DISCOVERY WORLD</a></p>
-            <p><a href="COLOQUE_SUA_URL_AQUI" target="_blank">DISCOVERY HOME & HEALTH</a></p>
-            <p><a href="COLOQUE_SUA_URL_AQUI" target="_blank">DISCOVERY ID</a></p>
-            <p><a href="COLOQUE_SUA_URL_AQUI" target="_blank">DISCOVERY ID ❪OP2❫</a></p>
-            <p><a href="COLOQUE_SUA_URL_AQUI" target="_blank">TV BRASIL</a></p>
-            <p><a href="COLOQUE_SUA_URL_AQUI" target="_blank">MULTISHOW</a></p>
-            <p><a href="COLOQUE_SUA_URL_AQUI" target="_blank">MULTISHOW ❪OP2❫</a></p>
-            <p><a href="COLOQUE_SUA_URL_AQUI" target="_blank">GLOBOPLAY NOVELAS</a></p>
-            <p><a href="COLOQUE_SUA_URL_AQUI" target="_blank">GLOBOPLAY NOVELAS ❪OP2❫</a></p>
-            <p><a href="COLOQUE_SUA_URL_AQUI" target="_blank">PREMIERE CLUBES</a></p>
-            <p><a href="COLOQUE_SUA_URL_AQUI" target="_blank">PREMIERE CLUBES ❪OP2❫</a></p>
-            <p><a href="COLOQUE_SUA_URL_AQUI" target="_blank">PREMIERE 2</a></p>
-            <p><a href="COLOQUE_SUA_URL_AQUI" target="_blank">PREMIERE 2 ❪OP2❫</a></p>
-            <p><a href="COLOQUE_SUA_URL_AQUI" target="_blank">PREMIERE 3</a></p>
-            <p><a href="COLOQUE_SUA_URL_AQUI" target="_blank">PREMIERE 3 ❪OP2❫</a></p>
-            <p><a href="COLOQUE_SUA_URL_AQUI" target="_blank">PREMIERE 4</a></p>
-            <p><a href="COLOQUE_SUA_URL_AQUI" target="_blank">PREMIERE 4 ❪OP2❫</a></p>
-            <p><a href="COLOQUE_SUA_URL_AQUI" target="_blank">PREMIERE 5</a></p>
-            <p><a href="COLOQUE_SUA_URL_AQUI" target="_blank">PREMIERE 5 ❪OP2❫</a></p>
-            <p><a href="COLOQUE_SUA_URL_AQUI" target="_blank">PREMIERE 6</a></p>
-            <p><a href="COLOQUE_SUA_URL_AQUI" target="_blank">PREMIERE 6 ❪OP2❫</a></p>
-            <p><a href="COLOQUE_SUA_URL_AQUI" target="_blank">PREMIERE 7</a></p>
-            <p><a href="COLOQUE_SUA_URL_AQUI" target="_blank">PREMIERE 7 ❪OP2❫</a></p>
-            <p><a href="COLOQUE_SUA_URL_AQUI" target="_blank">PREMIERE 8</a></p>
-            <p><a href="COLOQUE_SUA_URL_AQUI" target="_blank">PREMIERE 8 ❪OP2❫</a></p>
-            <p><a href="COLOQUE_SUA_URL_AQUI" target="_blank">SPORTYNET</a></p>
-            <p><a href="COLOQUE_SUA_URL_AQUI" target="_blank">NSPORTS</a></p>
-            <p><a href="COLOQUE_SUA_URL_AQUI" target="_blank">XSPORTS</a></p>
-            <p><a href="COLOQUE_SUA_URL_AQUI" target="_blank">COMBATE</a></p>
-            <p><a href="COLOQUE_SUA_URL_AQUI" target="_blank">COMBATE ❪OP2❫</a></p>
-            <p><a href="COLOQUE_SUA_URL_AQUI" target="_blank">HISTORY CHANNEL</a></p>
-            <p><a href="COLOQUE_SUA_URL_AQUI" target="_blank">HISTORY CHANNEL ❪OP2❫</a></p>
-            <p><a href="COLOQUE_SUA_URL_AQUI" target="_blank">HISTORY 2</a></p>
-            <p><a href="COLOQUE_SUA_URL_AQUI" target="_blank">HISTORY 2 ❪OP2❫</a></p>
-            <p><a href="COLOQUE_SUA_URL_AQUI" target="_blank">TELECINE ACTION</a></p>
-            <p><a href="COLOQUE_SUA_URL_AQUI" target="_blank">TELECINE ACTION ❪OP2❫</a></p>
-            <p><a href="COLOQUE_SUA_URL_AQUI" target="_blank">TELECINE PIPOCA</a></p>
-            <p><a href="COLOQUE_SUA_URL_AQUI" target="_blank">TELECINE PIPOCA ❪OP2❫</a></p>
-            <p><a href="COLOQUE_SUA_URL_AQUI" target="_blank">TELECINE PREMIUM</a></p>
-            <p><a href="COLOQUE_SUA_URL_AQUI" target="_blank">TELECINE PREMIUM ❪OP2❫</a></p>
-            <p><a href="COLOQUE_SUA_URL_AQUI" target="_blank">TELECINE TOUCH</a></p>
-            <p><a href="COLOQUE_SUA_URL_AQUI" target="_blank">TELECINE TOUCH ❪OP2❫</a></p>
-            <p><a href="COLOQUE_SUA_URL_AQUI" target="_blank">TELECINE FUN</a></p>
-            <p><a href="COLOQUE_SUA_URL_AQUI" target="_blank">TELECINE FUN ❪OP2❫</a></p>
-            <p><a href="COLOQUE_SUA_URL_AQUI" target="_blank">TELECINE CULT</a></p>
-            <p><a href="COLOQUE_SUA_URL_AQUI" target="_blank">TELECINE CULT ❪OP2❫</a></p>
-            <p><a href="COLOQUE_SUA_URL_AQUI" target="_blank">TLC</a></p>
-            <p><a href="COLOQUE_SUA_URL_AQUI" target="_blank">AMC</a></p>
-            <p><a href="COLOQUE_SUA_URL_AQUI" target="_blank">AMC ❪OP2❫</a></p>
-            <p><a href="COLOQUE_SUA_URL_AQUI" target="_blank">AMC SERIES</a></p>
-            <p><a href="COLOQUE_SUA_URL_AQUI" target="_blank">MEGAPIX</a></p>
-            <p><a href="COLOQUE_SUA_URL_AQUI" target="_blank">MEGAPIX ❪OP2❫</a></p>
-            <p><a href="COLOQUE_SUA_URL_AQUI" target="_blank">STUDIO UNIVERSAL</a></p>
-            <p><a href="COLOQUE_SUA_URL_AQUI" target="_blank">STUDIO UNIVERSAL ❪OP2❫</a></p>
-            <p><a href="COLOQUE_SUA_URL_AQUI" target="_blank">ANIMAL PLANET</a></p>
-            <p><a href="COLOQUE_SUA_URL_AQUI" target="_blank">ANIMAL PLANET ❪OP2❫</a></p>
-            <p><a href="COLOQUE_SUA_URL_AQUI" target="_blank">CARTOONITO</a></p>
-            <p><a href="COLOQUE_SUA_URL_AQUI" target="_blank">SONY</a></p>
-            <p><a href="COLOQUE_SUA_URL_AQUI" target="_blank">SONY ❪OP2❫</a></p>
-            <p><a href="COLOQUE_SUA_URL_AQUI" target="_blank">SONY MOVIES</a></p>
-            <p><a href="COLOQUE_SUA_URL_AQUI" target="_blank">BIS</a></p>
-            <p><a href="COLOQUE_SUA_URL_AQUI" target="_blank">GLOOB</a></p>
-            <p><a href="COLOQUE_SUA_URL_AQUI" target="_blank">GLOOBINHO</a></p>
-            <p><a href="COLOQUE_SUA_URL_AQUI" target="_blank">DISCOVERY KIDS</a></p>
-            <p><a href="COLOQUE_SUA_URL_AQUI" target="_blank">TOONCAST</a></p>
-            <p><a href="COLOQUE_SUA_URL_AQUI" target="_blank">A&amp;E</a></p>
-            <p><a href="COLOQUE_SUA_URL_AQUI" target="_blank">A&amp;E ❪OP2❫</a></p>
-            <p><a href="COLOQUE_SUA_URL_AQUI" target="_blank">GNT</a></p>
-            <p><a href="COLOQUE_SUA_URL_AQUI" target="_blank">ADULT SWIM</a></p>
-            <p><a href="COLOQUE_SUA_URL_AQUI" target="_blank">ADULT SWIM ❪OP2❫</a></p>
-            <p><a href="COLOQUE_SUA_URL_AQUI" target="_blank">USA</a></p>
-            <p><a href="COLOQUE_SUA_URL_AQUI" target="_blank">UNIVERSAL TV</a></p>
-            <p><a href="COLOQUE_SUA_URL_AQUI" target="_blank">UNIVERSAL TV ❪OP2❫</a></p>
-            <p><a href="COLOQUE_SUA_URL_AQUI" target="_blank">UFC FIGHT PASS</a></p>
-            <p><a href="COLOQUE_SUA_URL_AQUI" target="_blank">UFC FIGHT PASS ❪OP2❫</a></p>
-            <p><a href="COLOQUE_SUA_URL_AQUI" target="_blank">PRIME BOX BRAZIL</a></p>
-            <p><a href="COLOQUE_SUA_URL_AQUI" target="_blank">LIFETIME</a></p>
-            <p><a href="COLOQUE_SUA_URL_AQUI" target="_blank">LIFETIME ❪OP2❫</a></p>
-            <p><a href="COLOQUE_SUA_URL_AQUI" target="_blank">FISH TV</a></p>
-            <p><a href="COLOQUE_SUA_URL_AQUI" target="_blank">MODO VIAGEM</a></p>
-            <p><a href="COLOQUE_SUA_URL_AQUI" target="_blank">MODO VIAGEM ❪OP2❫</a></p>
-            <p><a href="COLOQUE_SUA_URL_AQUI" target="_blank">CANAL OFF</a></p>
-            <p><a href="COLOQUE_SUA_URL_AQUI" target="_blank">TRAVEL BOX BRAZIL</a></p>
-            <p><a href="COLOQUE_SUA_URL_AQUI" target="_blank">CURTA!</a></p>
-            <p><a href="COLOQUE_SUA_URL_AQUI" target="_blank">ARTE 1</a></p>
-            <p><a href="COLOQUE_SUA_URL_AQUI" target="_blank">FOOD NETWORK</a></p>
-            <p><a href="COLOQUE_SUA_URL_AQUI" target="_blank">HGTV</a></p>
-            <p><a href="COLOQUE_SUA_URL_AQUI" target="_blank">TV CLÁSSICOS</a></p>
-            <p><a href="COLOQUE_SUA_URL_AQUI" target="_blank">TV CULTURA</a></p>
-            <p><a href="COLOQUE_SUA_URL_AQUI" target="_blank">TERRAVIVA</a></p>
-            <p><a href="COLOQUE_SUA_URL_AQUI" target="_blank">NOW ROCK</a></p>
-            <p><a href="COLOQUE_SUA_URL_AQUI" target="_blank">MOVIESPHERE BRAZIL</a></p>
-            <p><a href="COLOQUE_SUA_URL_AQUI" target="_blank">RUNTIME AÇÃO</a></p>
-            <p><a href="COLOQUE_SUA_URL_AQUI" target="_blank">SONY ONE CLASSICS</a></p>
-            <p><a href="COLOQUE_SUA_URL_AQUI" target="_blank">OS SIMPSONS 24H</a></p>
-            <p><a href="COLOQUE_SUA_URL_AQUI" target="_blank">CNBC BRASIL</a></p>
-            <p><a href="COLOQUE_SUA_URL_AQUI" target="_blank">CAZE TV 1</a></p>
-            <p><a href="COLOQUE_SUA_URL_AQUI" target="_blank">CAZE TV 2</a></p>
-            <p><a href="COLOQUE_SUA_URL_AQUI" target="_blank">CAZE TV 3</a></p>
-            <p><a href="COLOQUE_SUA_URL_AQUI" target="_blank">DAZN 1</a></p>
-            <p><a href="COLOQUE_SUA_URL_AQUI" target="_blank">DAZN 2</a></p>
-            <p><a href="COLOQUE_SUA_URL_AQUI" target="_blank">DAZN 3</a></p>
-            <p><a href="COLOQUE_SUA_URL_AQUI" target="_blank">DAZN 4</a></p>
-            <p><a href="COLOQUE_SUA_URL_AQUI" target="_blank">PARAMOUNT PLUS 1</a></p>
-            <p><a href="COLOQUE_SUA_URL_AQUI" target="_blank">PARAMOUNT PLUS 2</a></p>
-            <p><a href="COLOQUE_SUA_URL_AQUI" target="_blank">PARAMOUNT PLUS 3</a></p>
-            <p><a href="COLOQUE_SUA_URL_AQUI" target="_blank">PARAMOUNT PLUS 4</a></p>
-            <p><a href="COLOQUE_SUA_URL_AQUI" target="_blank">PRIME VIDEO 1</a></p>
-            <p><a href="COLOQUE_SUA_URL_AQUI" target="_blank">PRIME VIDEO 2</a></p>
-            <p><a href="COLOQUE_SUA_URL_AQUI" target="_blank">PRIME VIDEO 3</a></p>
-            <p><a href="COLOQUE_SUA_URL_AQUI" target="_blank">HBO MAX 1</a></p>
-            <p><a href="COLOQUE_SUA_URL_AQUI" target="_blank">HBO MAX 2</a></p>
-            <p><a href="COLOQUE_SUA_URL_AQUI" target="_blank">HBO MAX 3</a></p>
-            <p><a href="COLOQUE_SUA_URL_AQUI" target="_blank">HBO MAX 4</a></p>
-            <p><a href="COLOQUE_SUA_URL_AQUI" target="_blank">HBO MAX 5</a></p>
-            <p><a href="COLOQUE_SUA_URL_AQUI" target="_blank">HBO MAX 6</a></p>
-            <p><a href="COLOQUE_SUA_URL_AQUI" target="_blank">HBO MAX 7</a></p>
-            <p><a href="COLOQUE_SUA_URL_AQUI" target="_blank">HBO MAX 8</a></p>
-            <p><a href="COLOQUE_SUA_URL_AQUI" target="_blank">GE TV</a></p>
-            <p><a href="COLOQUE_SUA_URL_AQUI" target="_blank">CANAL BRASIL</a></p>
-            <p><a href="COLOQUE_SUA_URL_AQUI" target="_blank">CANAL RURAL</a></p>
-            <p><a href="COLOQUE_SUA_URL_AQUI" target="_blank">NAT GEO ANIMALS</a></p>
-            <p><a href="COLOQUE_SUA_URL_AQUI" target="_blank">MUSIC BOX BRAZIL</a></p>
-            <p><a href="COLOQUE_SUA_URL_AQUI" target="_blank">FILM&amp;ARTS</a></p>
-            <p><a href="COLOQUE_SUA_URL_AQUI" target="_blank">SABOR &amp; ARTE</a></p>
-            <p><a href="COLOQUE_SUA_URL_AQUI" target="_blank">RETRO MUSIC</a></p>
-            <p><a href="COLOQUE_SUA_URL_AQUI" target="_blank">ADULTOS</a></p>
-        </div>
+  <script>
+    const searchInput = document.getElementById('search-input');
+    const channelsContent = document.getElementById('channels-content');
+    let timeout;
 
-        <footer class="footer">
-            <p class="subtitle"><strong>NOVOS CANAIS</strong></p>
-            <p class="subtitle"><strong>TODOS OS DIAS...</strong></p>
-            <p class="divider">-------///-------///------</p>
-            <p class="subtitle"><strong>📺 ASSINATURA IPTV</strong></p>
-
-            <p class="disclaimer">Todos os canais fechados</p>
-            <p class="disclaimer">R$ 25,00 mensal — todos os aparelhos</p>
-            <p class="disclaimer">Smart TV • TV Box • Celulares • PC</p>
-
-            <p class="divider">-----------------------------</p>
-
-            <p class="disclaimer">AQUi: Projeto sobrevive apenas de doação no Pix: xtreambr@gmail.com</p>
-            <p class="disclaimer">Somos responsáveis pelos canais</p>
-            <p class="disclaimer">Capturamos, separamos e indexamos para você</p>
-
-            <p class="contact"><a href="mailto:xtreambr@gmail.com">xtreambr@gmail.com</a></p>
-            <p class="contact"><a href="https://wa.link/nxs1wq" target="_blank" rel="noopener">WhatsApp: +351 939799936</a></p>
-        </footer>
-    </div>
-
-    <script>
-    document.addEventListener('DOMContentLoaded', () => {
-        const popup = document.getElementById('donation-popup');
-        const overlay = document.getElementById('donation-overlay');
-        const closeBtn = document.getElementById('close-popup');
-        const copyBtn = document.getElementById('copy-pix-btn');
-        const feedback = document.getElementById('copy-feedback');
-        const pixKey = 'xtreambr@gmail.com';
-
-        popup.style.display = 'block';
-        overlay.style.display = 'block';
-
-        const closePopup = () => {
-            popup.style.display = 'none';
-            overlay.style.display = 'none';
-        };
-
-        closeBtn.addEventListener('click', closePopup);
-        overlay.addEventListener('click', closePopup);
-        document.addEventListener('keydown', e => { if (e.key === 'Escape') closePopup(); });
-
-        copyBtn.addEventListener('click', async () => {
-            try {
-                await navigator.clipboard.writeText(pixKey);
-                feedback.textContent = 'Copiado! Cola e manda os R$ 5,00! ❤️';
-                feedback.style.opacity = '1';
-                setTimeout(() => {
-                    feedback.style.opacity = '0';
-                    setTimeout(() => feedback.textContent = '', 400);
-                }, 4000);
-            } catch {
-                feedback.textContent = 'Erro. Copie manual: ' + pixKey;
-                feedback.style.opacity = '1';
-                feedback.style.color = '#ff4d4d';
-            }
+    searchInput.addEventListener('input', function() {
+      clearTimeout(timeout);
+      timeout = setTimeout(function() {
+        const term = searchInput.value.toLowerCase().trim();
+        const channels = channelsContent.querySelectorAll('p');
+        channels.forEach(function(p) {
+          const text = p.textContent.toLowerCase();
+          p.style.display = text.includes(term) ? 'block' : 'none';
         });
+      }, 200);
     });
-    </script>
-
-    <script>
-    (function() {
-        const searchInput = document.getElementById('search-input');
-        const channelsContent = document.getElementById('channels-content');
-        let timeout;
-        let origin = channelsContent.innerHTML;
-
-        if (searchInput) {
-            searchInput.addEventListener('input', () => {
-                clearTimeout(timeout);
-                timeout = setTimeout(() => {
-                    const term = searchInput.value.toLowerCase().trim();
-                    Array.from(channelsContent.querySelectorAll('p')).forEach(p => {
-                        p.style.display = p.textContent.toLowerCase().includes(term) ? 'block' : 'none';
-                    });
-                }, 200);
-            });
-        }
-    })();
-    </script>
+  </script>
 
 </body>
-</html>
+    </html>
