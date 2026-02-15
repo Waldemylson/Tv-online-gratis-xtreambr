@@ -139,8 +139,13 @@
     <div id="channels-content">
 
       <!-- Canais originais do arquivo 2 (mantidos no topo) -->
+       <p>
+  <a href="#" onclick="abrirCanal('https://raw.githubusercontent.com/Waldemylson/Arte-iptv/main/InShot_20260210_213102635.mp4')">
+    CANAL DO CLIENTE (DÊ)
+  </a>
+</p>
+
       <p><a href="https://futemais.eu/app2/" target="_blank">FUTEBOL</a></p>
-           <p><a href="https://arte-iptv1.pages.dev/InShot_20260210_213102635.mp4" target="_blank">CANAL DO CLIENTA (DÊ)</a></p>
       <p><a href="https://redecanais.bh/player3/ch.php?canal=sportv1" target="_blank">SPORTV 1</a></p>
       <p><a href="https://rdcanais.top/sportvalternativo" target="_blank">SPORTV 1 ❪OP2❫</a></p>
       <p><a href="https://redecanais.bh/player3/ch.php?canal=sportv2" target="_blank">SPORTV 2</a></p>
@@ -228,7 +233,7 @@
       <p><a href="https://redecanais.bh/player3/ch.php?canal=cnnbrasilmoney" target="_blank">CNN MONEY ❪OP2❫</a></p>
       <p><a href="https://redecanais.bh/player3/ch.php?canal=globonews" target="_blank">GLOBO NEWS</a></p>
       <p><a href="https://rdcanais.top/globonews" target="_blank">GLOBO NEWS ❪OP2❫</a></p>
-      <p><a href="https://video30.mais.uol.com.br/live/6146-3.m3u8" target="_blank">UOL NEWS (Dê)</a></p>
+  <p><a href="https://video30.mais.uol.com.br/live/6146-3.m3u8" target="_blank">UOL NEWS (Dê)</a></p>
       <p><a href="https://d6yfbj4xxtrod.cloudfront.net/out/v1/7836eb391ec24452b149f3dc6df15bbd/index_4.m3u8" target="_blank">JOVEM PAN (Dê)</a></p>
       <p><a href="https://redecanais.bh/player3/ch.php?canal=hbo" target="_blank">HBO</a></p>
       <p><a href="https://rdcanais.top/hbo" target="_blank">HBO ❪OP2❫</a></p>
@@ -450,7 +455,26 @@
         document.getElementById("adult-modal-overlay").style.display = "none";
       };
     }
-  </script>
+  </script><div id="playerBox" style="display:none; position:fixed; inset:0; background:black; z-index:999999;">
+  <video id="tvPlayer" controls autoplay playsinline
+    style="width:100%;height:100%;background:black"></video>
+</div>
+
+<script>
+function abrirCanal(url){
+  const box = document.getElementById("playerBox");
+  const player = document.getElementById("tvPlayer");
+  box.style.display = "block";
+  player.src = url;
+  player.play();
+  box.onclick = function(){
+    player.pause();
+    player.src = "";
+    box.style.display = "none";
+  }
+}
+</script>
+
 
 </body>
 </html>
