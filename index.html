@@ -49,16 +49,15 @@
     .search-box i { position: absolute; right: 20px; top: 50%; transform: translateY(-50%); color: #0f0; font-size: 1.2em; }
     .section-title { color: #ff0; font-size: 1.5em; margin: 30px 0 20px; }
     
-}
-     p {
+    p {
       margin: 10px 0;
       font-size: 1.3em;
     }
-     a {
+    a {
       color: #0f0;
       text-decoration: none;
     }
-     a:hover { text-decoration: underline; }
+    a:hover { text-decoration: underline; }
 
     .free-tag {
       background: #0a3;
@@ -117,20 +116,6 @@
       border-radius: 8px;
       cursor: pointer;
     }
-
-    /* Adult modal */
-    #adult-modal-overlay { position: fixed; inset: 0; background: rgba(0,0,0,0.8); z-index: 9999; display: none; }
-    #adult-modal {
-      position: fixed; top: 50%; left: 50%; transform: translate(-50%, -50%);
-      background: #0b0b0b; border: 2px solid #0f0; border-radius: 10px; padding: 20px;
-      width: 90%; max-width: 320px; color: #fff; text-align: center;
-      box-shadow: 0 0 20px #0f0; display: none;
-    }
-    #adult-modal h2 { margin: 0 0 15px; color: #ff0044; font-size: 20px; }
-    #adult-modal input { width: 100%; padding: 12px; margin: 10px 0; background: #111; color: #fff; border: 1px solid #0f0; border-radius: 6px; font-size: 18px; text-align: center; }
-    #adult-modal button { background: #0f0; color: #000; border: none; padding: 10px 20px; margin: 5px; border-radius: 6px; cursor: pointer; font-weight: bold; font-size: 16px; }
-    #adult-modal button.cancel { background: #444; color: #fff; }
-    #adult-modal .error { color: #ff0044; margin: 10px 0; font-size: 14px; }
 
     footer {
       position: fixed; bottom: 0; left: 0; width: 100%; background: #000;
@@ -215,7 +200,7 @@ Notícias
 <p><span class="free-tag">Free</span><a href="https://video30.mais.uol.com.br/live/6146-3.m3u8" target="_blank">UOL NEWS (Dê)</a></p>
 <p><span class="free-tag">Free</span><a href="https://f593663c.wurl.com/manifest/f36d25e7e52f1ba8d7e56eb859c636563214f541/TEctYnJfVGltZXNCcmFzaWxsaWNlbmNpYWRvZXhjbHVzaXZvQ05CQ19ITFM/f95f4e79-facd-4420-bdcf-bb021337f02a/0.m3u8" target="_blank">TIMES BRASIL (DÊ)</a></p>
 
-<h2 style="; margin:30px 0;">
+<h2 style="margin:30px 0;">
 Esportes
 </h2>
 <p><a href="#" class="premium" onclick="checkPremiumPass('https://futemais.eu/app2/'); return false;">FUTEBOL</a></p>
@@ -233,8 +218,8 @@ Esportes
 <p><a href="#" class="premium" onclick="checkPremiumPass('https://tvacabo.pages.dev/player/getv.html'); return false;">GE TV</a></p>
 <p><a href="#" class="premium" onclick="checkPremiumPass('https://hrm-sftc.otteravision.com/hrm/sftc/sftc_720p_high.m3u8'); return false;">SFT COMBAT (Dê)</a></p>
 <p><a href="#" class="premium" onclick="checkPremiumPass('https://rdcanais.top/sportv'); return false;">SPORTV 1</a></p>
-<p><a href="#" class="premium" onclick="checkPremiumPass('https://rdcanais.top/sportv2 '); return false;">SPORTV 2</a></p>
-<p><a href="#" class="premium" onclick="checkPremiumPass('https://rdcanais.top/sportv3 '); return false;">SPORTV 3</a></p>
+<p><a href="#" class="premium" onclick="checkPremiumPass('https://rdcanais.top/sportv2'); return false;">SPORTV 2</a></p>
+<p><a href="#" class="premium" onclick="checkPremiumPass('https://rdcanais.top/sportv3'); return false;">SPORTV 3</a></p>
 <p><span class="free-tag">Free</span><a href="https://ogc-nsprt-tcl-roku-syndication.otteravision.com/ogc/nsprt/nsprt_720p.m3u8" target="iframe">NSPORTS (DÊ)</a></p>
 <p><a href="#" class="premium" onclick="checkPremiumPass('https://tvacabo.pages.dev/player/nsports.html'); return false;">NSPORTS</a></p>
 <p><a href="#" class="premium" onclick="checkPremiumPass('https://rdcanais.top/premiereclubes'); return false;">PREMIERE CLUBES </a></p>
@@ -247,7 +232,7 @@ Esportes
 <p><a href="#" class="premium" onclick="checkPremiumPass('https://rdcanais.top/premiere8alternativo'); return false;">PREMIERE 8 </a></p>
 <p><a href="#" class="premium" onclick="checkPremiumPass('https://rdcanais.top/ufcfightpass'); return false;">UFC FIGHT PASS ❪OP2❫</a></p>
 
-<h2 style="; margin:30px 0;">
+<h2 style="margin:30px 0;">
 Filmes e Séries
 </h2>
 <p><a href="#" class="premium" onclick="checkPremiumPass('https://tvacabo.pages.dev/player/ae'); return false;">A&E</a></p>
@@ -278,19 +263,20 @@ Filmes e Séries
 <p><a href="#" class="premium" onclick="checkPremiumPass('https://rdcanais.top/universaltv'); return false;">UNIVERSAL TV</a></p>
 <p><a href="#" class="premium" onclick="checkPremiumPass('https://rdcanais.top/warnertv'); return false;">WARNER TV</a></p>
 
-<h2 style="; margin:30px 0;">
+<h2 style="margin:30px 0;">
 Variedades / Entretenimento / Música / Outros
 </h2>
 <p><a href="#" class="premium" onclick="checkPremiumPass('https://tvacabo.pages.dev/player/agito.html'); return false;">AGITOMAX</a></p>
 <p><a href="#" class="premium" onclick="checkPremiumPass('https://rdcanais.top/gnt'); return false;">GNT (DE)</a></p>
 <p><a href="#" class="premium" onclick="checkPremiumPass('https://tvacabo.pages.dev/player/arts.html'); return false;">FILM&ARTS</a></p>
-<p><a href="#" class="premium" onclick="checkPremiumPass('https://tvacabo.pages.dev/player/sabor.html'); return false;">SABOR & ARTE</a></p><p><a href="#" class="premium" onclick="checkPremiumPass('https://canais.free.nf/multishow.html?i=1'); return false;">MULTISHOW (DÊ)</a></p>
+<p><a href="#" class="premium" onclick="checkPremiumPass('https://tvacabo.pages.dev/player/sabor.html'); return false;">SABOR & ARTE</a></p>
+<p><a href="#" class="premium" onclick="checkPremiumPass('https://canais.free.nf/multishow.html?i=1'); return false;">MULTISHOW (DÊ)</a></p>
 <p><a href="#" class="premium" onclick="checkPremiumPass('https://tvacabo.pages.dev/player/rm.html'); return false;">RETRO MUSIC</a></p>
 <p><a href="#" class="premium" onclick="checkPremiumPass('https://tvacabo.pages.dev/player/toptv.html'); return false;">TOP TV</a></p>
 <p><a href="#" class="premium" onclick="checkPremiumPass('https://geo.dailymotion.com/player.html?video=x8ttlxm'); return false;">TV GAZETA</a></p>
 <p><a href="#" class="premium" onclick="checkPremiumPass('https://rdcanais.top/globoplaynovelas'); return false;">GLOBOPLAY NOVELAS (OP2)</a></p>
 
-<h2 style="; margin:30px 0;">
+<h2 style="margin:30px 0;">
 Religiosos /Documentários / Infantis
 </h2>
 <p><a href="#" class="premium" onclick="checkPremiumPass('https://rdcanais.top/adultswim'); return false;">ADULT SWIM</a></p>
@@ -319,7 +305,6 @@ Religiosos /Documentários / Infantis
 <p><a href="#" class="premium" onclick="checkPremiumPass('https://tvacabo.pages.dev/player/ratimbum.html'); return false;">TV RÁ-TIM-BUM</a></p>
 <p><a href="#" class="premium" onclick="checkPremiumPass('https://tvacabo.pages.dev/player/runtime.html'); return false;">RUNTIME AÇÃO</a></p>
 <p><a href="#" class="premium" onclick="checkPremiumPass('https://tvacabo.pages.dev/player/rock.html'); return false;">NOW ROCK</a></p>
-<p><a href="#" class="premium" onclick="checkPremiumPass('https://tvacabo.pages.dev/player/retro.html'); return false;">RETRÔ CARTOON</a></p>
 <p><a href="#" class="premium" onclick="checkPremiumPass('https://tvacabo.pages.dev/player/sony.html'); return false;">SONY ONE CLASSICS</a></p>
 <p><a href="#" class="premium" onclick="checkPremiumPass('https://geo.dailymotion.com/player.html?video=x8qceqq'); return false;">TERRAVIVA</a></p>
 <p><span class="free-tag">Free</span><a href="https://cdn-3.nxplay.com.br/VEJA_PLUS_FAST/tracks-v1a1/mono.ts.m3u8?remote=45.177.139.52&token=fr0nt-t3st" target="_blank">VEJA+ (DÊ)</a></p>
@@ -357,7 +342,7 @@ Religiosos /Documentários / Infantis
 
   <!-- Paywall script -->
   <script>
-    const SENHA_MENSAL = "xtreambrtv1725";  // ← sua senha do paywall
+    const SENHA_MENSAL = "xtreambrtv1725";  // senha paywall principal
     const PAYWALL_KEY = "xtreambr_access";
 
     if (localStorage.getItem(PAYWALL_KEY) === SENHA_MENSAL) {
@@ -377,58 +362,21 @@ Religiosos /Documentários / Infantis
     }
   </script>
 
-  <!-- Script para senha dos canais premium -->
+  <!-- Script canais premium - CORRIGIDO -->
   <script>
-    const SENHA_PREMIUM = "1725";   // ← MUDE AQUI A SENHA DOS CANAIS PAGOS
+    const SENHA_PREMIUM = "1725";   // ← mude aqui se quiser outra senha
 
     function checkPremiumPass(url) {
-      const senha = prompt("Este é um canal PREMIUM.\nDigite a senha premium:");
+      const senha = prompt("Canal PREMIUM\nDigite a senha:");
       if (senha === SENHA_PREMIUM) {
-        window.open(url, "_blank");
+        window.open(url.trim(), "_blank");   // .trim() garante que não tem espaço sobrando
       } else if (senha !== null) {
-        alert("Senha incorreta!\nContate via WhatsApp para adquirir a senha premium.");
+        alert("Senha errada! Contate o WhatsApp.");
       }
     }
   </script>
 
-  <!-- Adult modal -->
-  <div id="adult-modal-overlay"></div>
-  <div id="adult-modal">
-    <h2>Conteúdo +18</h2>
-    <p>Digite a senha para acessar</p>
-    <input type="password" id="adult-password" placeholder="Senha (0000)" autocomplete="off">
-    <div id="adult-error" class="error"></div>
-    <button id="adult-confirm">Confirmar</button>
-    <button class="cancel" id="adult-cancel">Cancelar</button>
-  </div>
-
-  <script>
-    const PASSWORD_ADULT = "0000";
-
-    function showAdultModal(url) {
-      document.getElementById("adult-modal-overlay").style.display = "block";
-      document.getElementById("adult-modal").style.display = "block";
-      document.getElementById("adult-error").innerText = "";
-
-      document.getElementById("adult-confirm").onclick = function() {
-        const pass = document.getElementById("adult-password").value;
-        if (pass === PASSWORD_ADULT) {
-          document.getElementById("adult-modal").style.display = "none";
-          document.getElementById("adult-modal-overlay").style.display = "none";
-          window.open(url, "_blank");
-        } else {
-          document.getElementById("adult-error").innerText = "Senha incorreta!";
-        }
-      };
-
-      document.getElementById("adult-cancel").onclick = function() {
-        document.getElementById("adult-modal").style.display = "none";
-        document.getElementById("adult-modal-overlay").style.display = "none";
-      };
-    }
-  </script>
-
-  <!-- Player -->
+  <!-- Player para mp4 etc -->
   <div id="playerBox" style="display:none; position:fixed; inset:0; background:black; z-index:999999;">
     <video id="tvPlayer" controls autoplay playsinline style="width:100%;height:100%;background:black"></video>
   </div>
@@ -461,10 +409,7 @@ Religiosos /Documentários / Infantis
         box.style.display = "none";
       }
     }
-  
   </script>
-<script data-goatcounter="https://xtreambrtv.goatcounter.com/count"
-async src="//gc.zgo.at/count.js"></script>
 
 </body>
-</html>
+  </html>
