@@ -322,7 +322,7 @@ Religiosos /Documentários / Infantis
       let timeout;
 
       searchInput.addEventListener('input', function() {
-        clearTimeout(timeout);
+        clearTimeout(timeout);o
         timeout = setTimeout(function() {
           const term = searchInput.value.toLowerCase().trim();
           const channels = channelsContent.querySelectorAll('p');
@@ -362,19 +362,30 @@ Religiosos /Documentários / Infantis
     }
   </script>
 
-  <!-- Script canais premium - CORRIGIDO -->
-  <script>
-    const SENHA_PREMIUM = "1725";   // ← mude aqui se quiser outra senha
+  <!-- Script canais premium - VERSÃO MELHORADA: senha pedida só uma vez -->
+<script>
+  const SENHA_PREMIUM = "1725";          // ← mude aqui se quiser outra senha
+  const PREMIUM_KEY = "premium_access";  // chave para guardar no navegador
 
-    function checkPremiumPass(url) {
-      const senha = prompt("Canal PREMIUM\nDigite a senha:");
-      if (senha === SENHA_PREMIUM) {
-        window.open(url.trim(), "_blank");   // .trim() garante que não tem espaço sobrando
-      } else if (senha !== null) {
-        alert("Senha errada! Contate o WhatsApp.");
-      }
+  function checkPremiumPass(url) {
+    // Verifica se já tem acesso salvo
+    if (localStorage.getItem(PREMIUM_KEY) === SENHA_PREMIUM) {
+      window.open(url.trim(), "_blank");  // abre direto sem pedir senha
+      return;
     }
-  </script>
+
+    // Pede senha (só na primeira vez)
+    const senha = prompt("Canal PREMIUM\nDigite a senha (só uma vez por sessão):");
+    
+    if (senha === SENHA_PREMIUM) {
+      // Salva a senha no navegador (dura até limpar cache ou modo anônimo)
+      localStorage.setItem(PREMIUM_KEY, SENHA_PREMIUM);
+      window.open(url.trim(), "_blank");  // abre o canal
+    } else if (senha !== null) {
+      alert("Senha incorreta! Contate o WhatsApp para adquirir.");
+    }
+  }
+</script>
 
   <!-- Player para mp4 etc -->
   <div id="playerBox" style="display:none; position:fixed; inset:0; background:black; z-index:999999;">
