@@ -1,167 +1,140 @@
 <!DOCTYPE html>
 <html lang="pt-BR">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <meta name="theme-color" content="#000000">
-  <title>🔞 Área Adultos +18 | Waldemylson TV</title>
-  <style>
-    :root {
-      --bg: #0d0015;
-      --text: #f0e0ff;
-      --accent: #ff3366;
-      --accent-dark: #c41e5a;
-      --card: #1a0033;
-      --border: #4d0066;
-      --hover: #2a004d;
-    }
-    * { margin:0; padding:0; box-sizing:border-box; }
-    body {
-      background: var(--bg);
-      color: var(--text);
-      font-family: system-ui, -apple-system, sans-serif;
-      min-height: 100vh;
-      padding: 20px 15px;
-      line-height: 1.6;
-    }
-    header {
-      text-align: center;
-      padding: 30px 0 20px;
-      border-bottom: 1px solid var(--border);
-      margin-bottom: 30px;
-    }
-    h1 {
-      font-size: 2.2rem;
-      color: var(--accent);
-      text-shadow: 0 0 15px rgba(255,51,102,0.5);
-      margin-bottom: 10px;
-    }
-    .warning {
-      background: rgba(255,51,102,0.15);
-      border: 1px solid var(--accent);
-      padding: 15px;
-      border-radius: 12px;
-      margin: 20px auto;
-      max-width: 700px;
-      font-size: 1.1rem;
-    }
-    #login {
-      max-width: 400px;
-      margin: 80px auto 0;
-      text-align: center;
-    }
-    #login input {
-      width: 100%;
-      padding: 16px;
-      font-size: 1.2rem;
-      background: var(--card);
-      border: 2px solid var(--border);
-      color: white;
-      border-radius: 10px;
-      margin: 15px 0;
-    }
-    #login button {
-      padding: 16px 40px;
-      font-size: 1.2rem;
-      background: var(--accent);
-      color: white;
-      border: none;
-      border-radius: 10px;
-      cursor: pointer;
-      transition: all 0.3s;
-    }
-    #login button:hover { background: var(--accent-dark); transform: scale(1.05); }
-    #canais { display: none; max-width: 800px; margin: 0 auto; }
-    section { margin: 40px 0; }
-    h3 {
-      color: var(--accent);
-      font-size: 1.6rem;
-      margin: 20px 0 15px;
-      border-left: 5px solid var(--accent);
-      padding-left: 12px;
-    }
-    a {
-      display: block;
-      background: var(--card);
-      color: var(--text);
-      text-decoration: none;
-      padding: 18px 24px;
-      margin: 12px 0;
-      border-radius: 12px;
-      border: 1px solid var(--border);
-      transition: all 0.3s ease;
-      font-size: 1.15rem;
-    }
-    a:hover {
-      background: var(--hover);
-      border-color: var(--accent);
-      transform: translateY(-3px);
-      box-shadow: 0 10px 25px rgba(255,51,102,0.2);
-    }
-    .voltar {
-      text-align: center;
-      margin: 50px 0 30px;
-      font-size: 1.1rem;
-    }
-    .voltar a { color: #aaa; }
-    .voltar a:hover { color: var(--accent); }
-    @media (max-width: 600px) {
-      h1 { font-size: 1.8rem; }
-      a { padding: 16px 20px; font-size: 1rem; }
-    }
-  </style>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="theme-color" content="#000000">
+<title>🔞 Área Adultos +18 | Waldemylson TV</title>
+
+<style>
+:root {
+--bg:#0d0015;
+--text:#f0e0ff;
+--accent:#ff3366;
+--accent-dark:#c41e5a;
+--card:#1a0033;
+--border:#4d0066;
+--hover:#2a004d;
+}
+
+*{margin:0;padding:0;box-sizing:border-box;}
+
+body{
+background:var(--bg);
+color:var(--text);
+font-family:system-ui,-apple-system,sans-serif;
+min-height:100vh;
+padding:20px 15px;
+line-height:1.6;
+}
+
+header{
+text-align:center;
+padding:30px 0 20px;
+border-bottom:1px solid var(--border);
+margin-bottom:30px;
+}
+
+h1{
+font-size:2.2rem;
+color:var(--accent);
+text-shadow:0 0 15px rgba(255,51,102,0.5);
+margin-bottom:10px;
+}
+
+.warning{
+background:rgba(255,51,102,0.15);
+border:1px solid var(--accent);
+padding:15px;
+border-radius:12px;
+margin:20px auto;
+max-width:700px;
+font-size:1.1rem;
+}
+
+#login{
+max-width:400px;
+margin:80px auto 0;
+text-align:center;
+}
+
+#login input{
+width:100%;
+padding:16px;
+font-size:1.2rem;
+background:var(--card);
+border:2px solid var(--border);
+color:white;
+border-radius:10px;
+margin:15px 0;
+}
+
+#login button{
+padding:16px 40px;
+font-size:1.2rem;
+background:var(--accent);
+color:white;
+border:none;
+border-radius:10px;
+cursor:pointer;
+}
+
+#canais{
+display:none;
+max-width:800px;
+margin:0 auto;
+}
+
+section{margin:40px 0;}
+
+h3{
+color:var(--accent);
+font-size:1.6rem;
+margin:20px 0 15px;
+border-left:5px solid var(--accent);
+padding-left:12px;
+}
+
+a{
+display:block;
+background:var(--card);
+color:var(--text);
+text-decoration:none;
+padding:18px 24px;
+margin:12px 0;
+border-radius:12px;
+border:1px solid var(--border);
+}
+
+.voltar{
+text-align:center;
+margin:50px 0 30px;
+font-size:1.1rem;
+}
+</style>
 </head>
+
 <body>
 
 <header>
-  <h1>🔞 Área Adultos +18</h1>
-  <p>Waldemylson TV - Conteúdo Exclusivo</p>
+<h1>🔞 Área Adultos +18</h1>
+<p>Waldemylson TV - Conteúdo Exclusivo</p>
 </header>
 
-<script>
-document.getElementById('copiar-pix').addEventListener('click', function() {
-  const chave = 'xtreambr@gmail.com';
-  navigator.clipboard.writeText(chave).then(function() {
-    alert('Chave PIX copiada! Abra seu app bancário e cole para doar. Obrigado pelo apoio! ☕');
-  }).catch(function(err) {
-    alert('Erro ao copiar. Copie manualmente: ' + chave);
-  });
-});
-</script>
-
 <div class="warning">
-  <strong>Aviso importante:</strong> Esta área contém material explícito para maiores de 18 anos. Ao entrar, você confirma ter mais de 18 anos e assume responsabilidade pelo acesso. Proibido para menores.
+<strong>Aviso importante:</strong>
+Conteúdo para maiores de 18 anos.
 </div>
 
 <div id="login">
-  <input type="password" id="senha" placeholder="Digite a senha..." autocomplete="off">
-  <button onclick="entrar()">ACESSAR ÁREA +18</button>
+<input type="password" id="senha" placeholder="Digite a senha..." autocomplete="off">
+<button onclick="entrar()">ACESSAR ÁREA +18</button>
 </div>
 
 <div id="canais">
 
-  <section>
-    <h3>Conteúdos Brasileiros / Brasileirinhas</h3>
-    <a href="https://jessica.mulherespeladasvip.com/file/candice-m/2000/2727/2727.mp4" target="_blank">BRASILEIRINHAS - Principal</a>
-    <a href="https://jessica.mulherespeladasvip.com/file/candice-m/0/113/113.mp4" target="_blank">A CASA DAS BRASILEIRINHAS #1</a>
-    <a href="https://jessica.mulherespeladasvip.com/file/candice-m/0/114/114.mp4" target="_blank">A CASA DAS BRASILEIRINHAS #2</a>
-  </section>
-
-  <section>
-    <h3>Canais MY CAM  (LIVE) / Streams</h3>
-    <a href="https://cdn.adultiptv.net/teen.m3u8?rand=0.15286933572970052" target="_blank">MY CAM (Live 1)</a>
-    <a href="https://canais.free.nf/erotic.html" target="_blank">MY CAM  (Live 2)</a>
-    <a href="https://canais.free.nf/latina.html" target="_blank">MY CAM  (Live 3)</a>
-    <a href="https://canais.free.nf/18.html" target="_blank">MY CAM  (Live 4)</a>
-  </section>
-
-  <section>
-    <h3>Canais Premium / Hot</h3>
-    <a href="https://redecanaistv.cafe/player3/ch.php?canal=sexhot" target="_blank">SEXY HOT</a>
-    <a href="https://redecanaistv.cafe/player3/ch.php?canal=sexprive" target="_blank">SEX PRIVE</a>
-    <a href="https://redecanaistv.cafe/player3/ch.php?canal=playboytv" target="_blank">PLAYBOY TV</a>
-     <a href="https://canais.free.nf/x.html" target="_blank">EROTIC </a>
-    <a href="https://outbound-proxy-us-east1-0-blob-usercontent-client-id-7775691497.googleapis.com.de/player3/ch.php?categoria=live&canal=brazzerseu" target="_blank">BRAZZERS DIRETO</a>
+<section>
+<h3>Canais Premium / Hot</h3>
 
 <p><a href="#" onclick="play('https://outbound-proxy-us-east1-0-blob-usercontent-client-id-7775691497.googleapis.com.de/player3/ch.php?categoria=live&canal=brazzerseu');return false;">BRAZZERS DIRETO</a></p>
 
@@ -180,81 +153,77 @@ document.getElementById('copiar-pix').addEventListener('click', function() {
 <p><a href="#" onclick="play('https://webtvstream.bhtelecom.ba/pink_erotic7.m3u8');return false;">PINK EROTIC 7</a></p>
 
 <p><a href="#" onclick="play('https://webtvstream.bhtelecom.ba/pink_erotic8.m3u8');return false;">PINK EROTIC 8</a></p>
-<a href="https://59ec5453559f0.streamlock.net/mexicotv/smil:miamitvmexico/playlist.m3u8" target="_blank">MIAMI TV MEXICO</a>
 
-<a href="https://cdn4.skygo.mn/live/disk1/Babes/HLSv3-FTA/Babes.m3u8" target="_blank">BABES TV</a>
-
-<a href="https://ftv1.b-cdn.net/bfdbb576-83f7-11f0-9f89-0200170e3e04_1000028043_HLS/manifest.m3u8" target="_blank">FTV LIVE</a>
-
-<a href="http://88.212.7.11/live/test_eroxxx_hd_hevc/playlist.m3u8" target="_blank">EROXXX HD</a>
-
-<a href="http://31.148.48.15/O-la-la/tracks-v1a1/mono.ts.m3u8" target="_blank">O-LA-LA TV</a>
-
-<a href="https://smt.goiptv.us.ci/Trans7_eko/playlist.m3u8" target="_blank">TRANS7</a>
+  <section>
+    <h3>Conteúdos Brasileiros / Brasileirinhas</h3>
+    <a href="https://jessica.mulherespeladasvip.com/file/candice-m/2000/2727/2727.mp4" target="_blank">BRASILEIRINHAS - Principal</a>
+    <a href="https://jessica.mulherespeladasvip.com/file/candice-m/0/113/113.mp4" target="_blank">A CASA DAS BRASILEIRINHAS #1</a>
+    <a href="https://jessica.mulherespeladasvip.com/file/candice-m/0/114/114.mp4" target="_blank">A CASA DAS BRASILEIRINHAS #2</a>
   </section>
-<div style="text-align: center; margin: 60px 0 40px; padding: 20px; background: #1a0033; border-radius: 16px; border: 1px solid #4d0066; max-width: 600px; margin-left: auto; margin-right: auto;">
-  <h3 style="color: var(--accent); margin-bottom: 15px;">☕ Doe um cafezinho!</h3>
-  <p style="font-size: 1.1rem; margin-bottom: 20px;">
-    Se o site te ajuda a relaxar ou se divertir, considere apoiar com qualquer valor.<br>
-    Isso mantém os canais online e o sistema rodando 24h! 🙏<br>
-    <strong>Chave PIX (email):</strong> xtreambr@gmail.com
-  </p>
 
-  <button id="copiar-pix" style="padding: 16px 40px; font-size: 1.2rem; background: var(--accent); color: white; border: none; border-radius: 12px; cursor: pointer; transition: all 0.3s;">
-    Copiar Chave PIX e Doar
-  </button>
-
-  <p style="margin-top: 20px; font-size: 0.95rem; color: #aaa;">
-    Após copiar, abra seu app do banco → PIX → Colar e pagar. Qualquer valor ajuda! ❤️
-  </p>
-</div>
-
-<script>
-document.getElementById('copiar-pix').addEventListener('click', function() {
-  const chave = 'xtreambr@gmail.com';
-  navigator.clipboard.writeText(chave).then(function() {
-    alert('Chave PIX copiada! Abra seu app bancário e cole para doar. Obrigado pelo apoio! ☕');
-  }).catch(function(err) {
-    alert('Erro ao copiar. Copie manualmente: ' + chave);
-  });
-});
-</script>
-<script>
-document.getElementById('copiar-pix').addEventListener('click', function() {
-  const chave = 'xtreambr@gmail.com';
-  navigator.clipboard.writeText(chave).then(function() {
-    alert('Chave PIX copiada! Abra seu app bancário e cole para doar. Obrigado pelo apoio! ☕');
-  }).catch(function(err) {
-    alert('Erro ao copiar. Copie manualmente: ' + chave);
-  });
-});
-</script>
-
-  <div class="voltar">
-    <a href="index.html">⬅ Voltar ao Site Principal de TV Online Grátis</a>
-  </div>
+  <section>
+  <a href="#" onclick="play('https://cdn.adultiptv.net/teen.m3u8');return false;">MY CAM (Live 1)</a>
+  
+    <a href="#" onclick="play("https://canais.free.nf/erotic.html" );return false;">MY CAM (Live 2)</a>
+    
+    <a href="#" onclick="play("https://canais.free.nf/latina.html" );return false;">MY CAM (Live 3)</a>
+    
+    <a href="#" onclick="play("https://canais.free.nf/18.html" );return false;">MY CAM (Live 4)</a>
+  </section>
 
 </div>
 
+</section>
+
+<div class="voltar">
+<a href="index.html">⬅ Voltar</a>
+</div>
+
+</div>
+
+<!-- PLAYER -->
+<div id="playerbox" style="display:none;position:fixed;top:0;left:0;width:100%;height:100%;background:black;z-index:9999;">
+<video id="player" controls autoplay style="width:100%;height:100%;"></video>
+<button onclick="fecharPlayer()" style="position:absolute;top:20px;right:20px;font-size:20px;padding:10px 20px;">FECHAR</button>
+</div>
+
+<script src="https://cdn.jsdelivr.net/npm/hls.js@latest"></script>
+
 <script>
-function entrar() {
-  const senha = document.getElementById('senha').value.trim();
-  if (senha === "1725") {  // Mude essa senha com frequência!
-    document.getElementById('login').style.display = 'none';
-    document.getElementById('canais').style.display = 'block';
-    // Opcional: salva no localStorage pra não pedir toda hora (mas cuidado, não é seguro)
-    // localStorage.setItem('adultAccess', 'true');
-  } else {
-    alert("Senha incorreta! Tente novamente.");
-  }
+
+function entrar(){
+const senha=document.getElementById('senha').value.trim();
+
+if(senha==="1725"){
+document.getElementById('login').style.display='none';
+document.getElementById('canais').style.display='block';
+}else{
+alert("Senha incorreta!");
+}
 }
 
-// Opcional: se quiser auto-acesso se já logou antes (comente se não quiser)
-// if (localStorage.getItem('adultAccess') === 'true') {
-//   document.getElementById('login').style.display = 'none';
-//   document.getElementById('canais').style.display = 'block';
-// }
+function play(url){
+
+document.getElementById("playerbox").style.display="block";
+
+var video=document.getElementById("player");
+
+if(Hls.isSupported()){
+var hls=new Hls();
+hls.loadSource(url);
+hls.attachMedia(video);
+}else{
+video.src=url;
+}
+
+}
+
+function fecharPlayer(){
+document.getElementById("playerbox").style.display="none";
+document.getElementById("player").pause();
+}
+
 </script>
 
 </body>
-      </html>
+</html>
