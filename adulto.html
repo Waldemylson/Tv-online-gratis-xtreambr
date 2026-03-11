@@ -224,11 +224,22 @@ alert("Senha incorreta!");
 }
 }
 
+<script>
+
 function play(url){
 
 document.getElementById("playerbox").style.display="block";
 
 var video=document.getElementById("player");
+
+/* detectar LG WebOS */
+var isLG = /Web0S|WebOS|LG Browser/i.test(navigator.userAgent);
+
+if(isLG){
+video.src=url;
+video.play();
+return;
+}
 
 if(Hls.isSupported()){
 var hls=new Hls();
