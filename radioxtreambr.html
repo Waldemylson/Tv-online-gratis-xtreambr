@@ -1,0 +1,170 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Rádios - XTREAMBR TV</title>
+
+<style>
+  body {
+  font-family: Arial;
+  background: linear-gradient(180deg,#0b0b0b,#1a0033);
+  color:#fff;
+  margin:0;
+}
+
+h1 {
+  text-align:center;
+  color:b266ff;
+}
+
+.menu {
+  max-width:800px;
+  margin:20px auto;
+}
+
+.item {
+  background:#2a2a2a;
+  padding:15px;
+  margin:10px 0;
+  border-radius:8px;
+  cursor:pointer;
+  font-size:18px;
+}
+
+/* BOTÕES */
+.btn {
+  background:#6a00ff;
+  border:none;
+  padding:8px 15px;
+  border-radius:6px;
+  cursor:pointer;
+  color:#fff;
+  font-weight:bold;
+}
+
+.btn:hover {
+  background:#8a2be2;
+}
+
+h1 {
+  text-align:center;
+  color:#b266ff;
+}
+
+/* PLAYER */
+.player-box {
+  max-width:800px;
+  margin:15px auto;
+  background:#1a1a1a;
+  padding:15px;
+  border-radius:10px;
+  text-align:center;
+  box-shadow:0 0 10px rgba(138,43,226,0.3);
+}
+
+/* MENU */
+.menu {
+  max-width:800px;
+  margin:20px auto;
+}
+
+.item {
+  background:#2a2a2a;
+  padding:15px;
+  margin:10px 0;
+  border-radius:8px;
+  cursor:pointer;
+  font-size:18px;
+  transition:0.2s;
+}
+
+.item:hover {
+  background:#6a00ff;
+}
+
+audio {
+  width:100%;
+  margin-top:10px;
+}
+
+/* RODAPÉ */
+footer {
+  margin-top:30px;
+  padding:15px;
+  text-align:center;
+  background:#000;
+  color:#aaa;
+  font-size:14px;
+  border-top:1px solid #333;
+}
+</style>
+</head>
+
+<body>
+
+<div class="topbar">
+
+  <!-- HOME (MUDA AQUI SEU LINK) -->
+  <button class="btn" onclick="window.location='index.html'">🏠 Home</button>
+</div>
+
+<h1>📻 Rádios XTREAMBR</h1>
+
+<div class="player-box">
+  <h2 id="current">Escolha Seu Gênero</h2>
+  <audio id="player" controls autoplay></audio>
+</div>
+
+<div class="menu">
+
+  <div class="item" onclick="play('Românticas','https://centova5.transmissaodigital.com:20038/stream')">💖 Românticas / Studio do Amor</div>
+
+  <div class="item" onclick="play('Sertanejo Universitário','https://stream.vagalume.fm/hls/14619606471054026608/aac.m3u8')">🤠 Sertanejo Universitário</div>
+
+  <div class="item" onclick="play('MPB','https://stream.vagalume.fm/hls/1470154983100588/aac.m3u8')">🎼 MPB</div>
+
+  <div class="item" onclick="play('Rock','https://stm1.stmsrv.com:8184/stream')">🎸 Rock</div>
+
+  <div class="item" onclick="play('Pop','https://stream-153.zeno.fm/r321va3vtzzuv')">🎤 Pop</div>
+
+  <div class="item" onclick="play('Eletrônica','https://stream.vagalume.fm/hls/152911357157777/aac.m3u8')">🎧 Eletrônica</div>
+
+  <div class="item" onclick="play('Funk','https://stream.vagalume.fm/hls/1470154922349875/aac.m3u8')">🔥 Funk</div>
+
+  <div class="item" onclick="play('Hip Hop','https://stream.vagalume.fm/hls/1470155107337444/aac.m3u8')">🎤 Hip Hop / Rap</div>
+
+  <div class="item" onclick="play('Gospel','https://stream.vagalume.fm/hls/14658544132100453351/aac.m3u8')">🙏 Gospel</div>
+
+  <div class="item" onclick="play('Jazz','https://stream.vagalume.fm/hls/14635148092037245616/aac.m3u8')">🎷 Jazz</div>
+
+  <div class="item" onclick="play('Clássica','https://radiotreclassica-live.akamaized.net/hls/live/2032595/radiotreclassica/radio3classica_256/chunklist.m3u8')">🎻 Clássica</div>
+
+  <div class="item" onclick="play('Reggae','https://stream.laut.fm/reggae')">🌴 Reggae</div>
+
+  <div class="item" onclick="play('Pagode','https://stream.vagalume.fm/hls/147015499779090/aac.m3u8')">🥁 Pagode</div>
+
+  <div class="item" onclick="play('Samba','https://stream.vagalume.fm/hls/147015499779090/aac.m3u8')">🕺 Samba</div>
+
+  <div class="item" onclick="play('Forró','https://centova5.transmissaodigital.com:20017/;')">🪗 Forró</div>
+
+</div>
+
+<footer>
+  Feito por Waldemylson • Todos direitos da XTREAMBR TV © 2020
+</footer>
+
+<script>
+const player = document.getElementById('player');
+const current = document.getElementById('current');
+
+function play(nome, url){
+  current.innerText = nome + " tocando...";
+  player.src = url;
+  player.load();
+  player.play().catch(()=>{});
+}
+</script>
+
+</body>
+</html>
