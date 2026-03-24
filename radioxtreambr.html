@@ -6,163 +6,181 @@
 <title>Rádios - XTREAMBR TV</title>
 
 <style>
+  :root {
+    /* ==================== PALETA DE CORES - EDITA AQUI ==================== */
+    --cor-fundo:        linear-gradient(135deg, #0a0020 0%, #1a0033 100%);   /* Fundo da página */
+    --cor-titulo:       #00ff88;     /* Verde - Título "Rádios XTREAMBR" */
+    --cor-botao:        #00aaff;     /* Azul - Botão "Home" */
+    --cor-player-fundo: linear-gradient(135deg, #ffd700, #ffea80); /* Amarelo - Fundo do player */
+    --cor-player-borda: #ffcc00;     /* Borda do player */
+    --cor-player-texto: #1a0033;     /* Cor do texto dentro do player */
+    --cor-categoria:    linear-gradient(90deg, #4a148c, #6a1b9a); /* Roxo - Cards das rádios */
+    --cor-categoria-hover: linear-gradient(90deg, #6a1b9a, #9c27b0); /* Hover das categorias */
+    --cor-categoria-borda: #ff79f2;  /* Borda rosa das categorias */
+    --cor-rodape:       #000;        /* Fundo do rodapé */
+    --cor-rodape-texto: #aaa;        /* Texto do rodapé */
+    /* =================================================================== */
+  }
+
+  * { margin:0; padding:0; box-sizing:border-box; }
+
   body {
-  font-family: Arial;
-  background: linear-gradient(180deg,#0b0b0b,#1a0033);
-  color:#fff;
-  margin:0;
-}
+    font-family: 'Segoe UI', Arial, sans-serif;
+    background: var(--cor-fundo);
+    color: white;
+    min-height: 100vh;
+  }
 
-h1 {
-  text-align:center;
-  color:b266ff;
-}
+  .topbar { padding: 20px; text-align: left; }
 
-.menu {
-  max-width:800px;
-  margin:20px auto;
-}
+  .btn {
+    background: var(--cor-botao);
+    color: white;
+    border: none;
+    padding: 14px 28px;
+    border-radius: 50px;
+    font-weight: bold;
+    font-size: 16px;
+    cursor: pointer;
+    box-shadow: 0 6px 20px rgba(0, 170, 255, 0.5);
+    transition: 0.3s;
+  }
 
-.item {
-  background:#2a2a2a;
-  padding:15px;
-  margin:10px 0;
-  border-radius:8px;
-  cursor:pointer;
-  font-size:18px;
-}
+  .btn:hover {
+    background: #00ccff;
+    transform: scale(1.08);
+  }
 
-/* BOTÕES */
-.btn {
-  background:#6a00ff;
-  border:none;
-  padding:8px 15px;
-  border-radius:6px;
-  cursor:pointer;
-  color:#fff;
-  font-weight:bold;
-}
+  h1 {
+    text-align: center;
+    font-size: 3rem;
+    margin: 20px 0 40px;
+    color: var(--cor-titulo);
+    text-shadow: 0 0 30px #00ff88, 0 0 60px #00ff88;
+  }
 
-.btn:hover {
-  background:#8a2be2;
-}
+  /* PLAYER */
+  .player-box {
+    max-width: 820px;
+    margin: 0 auto 40px;
+    background: var(--cor-player-fundo);
+    color: var(--cor-player-texto);
+    padding: 35px 30px;
+    border-radius: 28px;
+    box-shadow: 0 0 50px rgba(255, 215, 0, 0.8);
+    text-align: center;
+    border: 3px solid var(--cor-player-borda);
+  }
 
-h1 {
-  text-align:center;
-  color:#b266ff;
-}
+  .player-box h2 {
+    font-size: 1.9rem;
+    margin-bottom: 22px;
+    font-weight: bold;
+    text-shadow: 0 2px 10px rgba(0,0,0,0.3);
+  }
 
-/* PLAYER */
-.player-box {
-  max-width:800px;
-  margin:15px auto;
-  background:#1a1a1a;
-  padding:15px;
-  border-radius:10px;
-  text-align:center;
-  box-shadow:0 0 10px rgba(138,43,226,0.3);
-}
+  audio {
+    width: 100%;
+    height: 60px;
+    accent-color: var(--cor-player-texto);
+  }
 
-/* MENU */
-.menu {
-  max-width:800px;
-  margin:20px auto;
-}
+  /* CATEGORIAS */
+  .menu {
+    max-width: 820px;
+    margin: 0 auto;
+    padding: 0 15px;
+  }
 
-.item {
-  background:#2a2a2a;
-  padding:15px;
-  margin:10px 0;
-  border-radius:8px;
-  cursor:pointer;
-  font-size:18px;
-  transition:0.2s;
-}
+  .item {
+    background: var(--cor-categoria);
+    padding: 22px 25px;
+    margin: 16px 0;
+    border-radius: 20px;
+    cursor: pointer;
+    font-size: 1.4rem;
+    display: flex;
+    align-items: center;
+    gap: 20px;
+    transition: all 0.4s ease;
+    box-shadow: 0 8px 25px rgba(0,0,0,0.5);
+    border: 2px solid var(--cor-categoria-borda);
+  }
 
-.item:hover {
-  background:#6a00ff;
-}
+  .item:hover {
+    transform: translateY(-8px) scale(1.04);
+    box-shadow: 0 20px 45px rgba(255, 121, 242, 0.7);
+    background: var(--cor-categoria-hover);
+  }
 
-audio {
-  width:100%;
-  margin-top:10px;
-}
+  .item span { font-size: 2.5rem; }
 
-/* RODAPÉ */
-footer {
-  margin-top:30px;
-  padding:15px;
-  text-align:center;
-  background:#000;
-  color:#aaa;
-  font-size:14px;
-  border-top:1px solid #333;
-}
+  .item:hover span {
+    transform: scale(1.25) rotate(12deg);
+  }
+
+  /* RODAPÉ */
+  footer {
+    margin-top: 70px;
+    padding: 25px;
+    text-align: center;
+    background: var(--cor-rodape);
+    color: var(--cor-rodape-texto);
+    font-size: 14px;
+    border-top: 1px solid #333;
+  }
+
+  @media (max-width: 600px) {
+    h1 { font-size: 2.4rem; }
+    .player-box { margin: 0 15px 30px; padding: 28px 20px; }
+  }
 </style>
 </head>
 
 <body>
 
 <div class="topbar">
-
-  <!-- HOME (MUDA AQUI SEU LINK) -->
   <button class="btn" onclick="window.location='index.html'">🏠 Home</button>
 </div>
 
 <h1>📻 Rádios XTREAMBR</h1>
 
 <div class="player-box">
-  <h2 id="current">Escolha Seu Gênero</h2>
-  <audio id="player" controls autoplay></audio>
+  <h2 id="current">Waldemylson diz: Escolha uma rádio para começar</h2>
+  <audio id="player" controls></audio>
 </div>
 
 <div class="menu">
-
-  <div class="item" onclick="play('Românticas','https://centova5.transmissaodigital.com:20038/stream')">💖 Românticas / Studio do Amor</div>
-
-  <div class="item" onclick="play('Sertanejo Universitário','https://stream.vagalume.fm/hls/14619606471054026608/aac.m3u8')">🤠 Sertanejo Universitário</div>
-
-  <div class="item" onclick="play('MPB','https://stream.vagalume.fm/hls/1470154983100588/aac.m3u8')">🎼 MPB</div>
-
-  <div class="item" onclick="play('Rock','https://stm1.stmsrv.com:8184/stream')">🎸 Rock</div>
-
-  <div class="item" onclick="play('Pop','https://stream-153.zeno.fm/r321va3vtzzuv')">🎤 Pop</div>
-
-  <div class="item" onclick="play('Eletrônica','https://stream.vagalume.fm/hls/152911357157777/aac.m3u8')">🎧 Eletrônica</div>
-
-  <div class="item" onclick="play('Funk','https://stream.vagalume.fm/hls/1470154922349875/aac.m3u8')">🔥 Funk</div>
-
-  <div class="item" onclick="play('Hip Hop','https://stream.vagalume.fm/hls/1470155107337444/aac.m3u8')">🎤 Hip Hop / Rap</div>
-
-  <div class="item" onclick="play('Gospel','https://stream.vagalume.fm/hls/14658544132100453351/aac.m3u8')">🙏 Gospel</div>
-
-  <div class="item" onclick="play('Jazz','https://stream.vagalume.fm/hls/14635148092037245616/aac.m3u8')">🎷 Jazz</div>
-
-  <div class="item" onclick="play('Clássica','https://stream10.xdevel.com/audio9s977886-2323/stream/icecast.audio ')">🎻 Clássica</div>
-
-  <div class="item" onclick="play('Reggae','https://stream.laut.fm/reggae')">🌴 Reggae</div>
-
-  <div class="item" onclick="play('Pagode','https://stream.vagalume.fm/hls/147015499779090/aac.m3u8')">🥁 Pagode</div>
-
-  <div class="item" onclick="play('Samba','https://stream.vagalume.fm/hls/147015499779090/aac.m3u8')">🕺 Samba</div>
-
-  <div class="item" onclick="play('Forró','https://centova5.transmissaodigital.com:20017/;')">🪗 Forró</div>
-
+  <div class="item" onclick="play('Românticas','https://centova5.transmissaodigital.com:20038/stream')"><span>💖</span> Românticas / Studio do Amor</div>
+  <div class="item" onclick="play('Sertanejo Universitário','https://stream.vagalume.fm/hls/14619606471054026608/aac.m3u8')"><span>🤠</span> Sertanejo Universitário</div>
+  <div class="item" onclick="play('MPB','https://stream.vagalume.fm/hls/1470154983100588/aac.m3u8')"><span>🎼</span> MPB</div>
+  <div class="item" onclick="play('Rock','https://stm1.stmsrv.com:8184/stream')"><span>🎸</span> Rock</div>
+  <div class="item" onclick="play('Pop','https://stream-153.zeno.fm/r321va3vtzzuv')"><span>🎤</span> Pop</div>
+  <div class="item" onclick="play('Eletrônica','https://stream.vagalume.fm/hls/152911357157777/aac.m3u8')"><span>🎧</span> Eletrônica</div>
+  <div class="item" onclick="play('Funk','https://stream.vagalume.fm/hls/1470154922349875/aac.m3u8')"><span>🔥</span> Funk</div>
+  <div class="item" onclick="play('Hip Hop','https://stream.vagalume.fm/hls/1470155107337444/aac.m3u8')"><span>🎤</span> Hip Hop / Rap</div>
+  <div class="item" onclick="play('Gospel','https://stream.vagalume.fm/hls/14658544132100453351/aac.m3u8')"><span>🙏</span> Gospel</div>
+  <div class="item" onclick="play('Jazz','https://stream.vagalume.fm/hls/14635148092037245616/aac.m3u8')"><span>🎷</span> Jazz</div>
+  <div class="item" onclick="play('Clássica','https://radiotreclassica-live.akamaized.net/hls/live/2032595/radiotreclassica/radio3classica_256/chunklist.m3u8')"><span>🎻</span> Clássica</div>
+  <div class="item" onclick="play('Reggae','https://stream.laut.fm/reggae')"><span>🌴</span> Reggae</div>
+  <div class="item" onclick="play('Pagode','https://stream.vagalume.fm/hls/147015499779090/aac.m3u8')"><span>🥁</span> Pagode</div>
+  <div class="item" onclick="play('Samba','https://stream.vagalume.fm/hls/147015499779090/aac.m3u8')"><span>🕺</span> Samba</div>
+  <div class="item" onclick="play('Forró','https://centova5.transmissaodigital.com:20017/;')"><span>🪗</span> Forró</div>
 </div>
 
 <footer>
-  Feito por Waldemylson • Todos direitos da XTREAMBR TV © 2020
+  Feito por Waldemylson • Todos direitos da XTREAMBR TV © 2020-2026
 </footer>
 
 <script>
 const player = document.getElementById('player');
 const current = document.getElementById('current');
 
-function play(nome, url){
-  current.innerText = nome + " tocando...";
+function play(nome, url) {
+  current.innerText = `Waldemylson diz: ${nome} tocando agora`;
   player.src = url;
   player.load();
-  player.play().catch(()=>{});
+  player.play().catch(() => {});
 }
 </script>
 
