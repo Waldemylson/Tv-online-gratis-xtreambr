@@ -184,5 +184,186 @@ function play(nome, url) {
 }
 </script>
 
+<!-- ============================================================
+     PROTETOR DE TELA ESTILO SKY - SCRIPT ISOLADO
+     Não altera nada do código acima. Apenas adiciona overlay.
+     ============================================================ -->
+<script>
+(function() {
+  'use strict';
+
+  /* ---- CONFIGURAÇÕES ---- */
+  var IDLE_TIMEOUT  = 60 * 1000; // 60 segundos sem interação
+  var LOGO_URL      = 'var LOGO_URL = 'var LOGO_URL = 'https://raw.githubusercontent.com/Waldemylson/Tv-online-gratis-xtreambr/refs/heads/main/8ca88b1a-fe3c-43d8-b570-90eb76c51640__1_-removebg-preview__1_-removebg-preview.png';
+  var LOGO_WIDTH    = 180;       // largura do logo em px
+  var LOGO_SPEED    = 1.8;       // velocidade do logo (px por frame)
+  /* ----------------------- */
+
+  var overlay       = null;
+  var logoEl        = null;
+  var animFrame     = null;
+  var idleTimer     = null;
+  var logoX         = 0;
+  var logoY         = 0;
+  var velX          = LOGO_SPEED;
+  var velY          = LOGO_SPEED;
+  var logoW         = LOGO_WIDTH;
+  var logoH         = 0;           // calculado após carregamento da imagem
+  var isVisible     = false;
+
+  /* Cria o overlay e o logo uma única vez */
+  function criarOverlay() {
+    overlay = document.createElement('div');
+    overlay.id = 'sky-screensaver-overlay';
+    overlay.style.cssText = [
+      'position:fixed',
+      'top:0', 'left:0',
+      'width:100%', 'height:100%',
+      'background:#000',
+      'z-index:999999',
+      'display:none',
+      'cursor:none',
+      'overflow:hidden'
+    ].join(';');
+
+    /* Partículas decorativas */
+    for (var i = 0; i < 40; i++) {
+      var p = document.createElement('div');
+      var size = (Math.random() * 2 + 1).toFixed(1);
+      var left = (Math.random() * 100).toFixed(2);
+      var top  = (Math.random() * 100).toFixed(2);
+      var dur  = (4 + Math.random() * 8).toFixed(1);
+      var delay= (Math.random() * 6).toFixed(1);
+      p.style.cssText = [
+        'position:absolute',
+        'border-radius:50%',
+        'background:rgba(255,255,255,' + (0.1 + Math.random() * 0.3).toFixed(2) + ')',
+        'width:' + size + 'px',
+        'height:' + size + 'px',
+        'left:' + left + '%',
+        'top:' + top + '%',
+        'animation:xtv-blink ' + dur + 's ' + delay + 's ease-in-out infinite alternate',
+        'pointer-events:none'
+      ].join(';');
+      overlay.appendChild(p);
+    }
+
+    /* Logo flutuante */
+    logoEl = document.createElement('img');
+    logoEl.src = LOGO_URL;
+    logoEl.style.cssText = [
+      'position:absolute',
+      'width:' + logoW + 'px',
+      'border-radius:12px',
+      'box-shadow:0 0 30px rgba(255,255,255,0.25)',
+      'pointer-events:none',
+      'user-select:none',
+      '-webkit-user-drag:none'
+    ].join(';');
+
+    logoEl.addEventListener('load', function() {
+      logoH = logoEl.naturalHeight * (logoW / logoEl.naturalWidth);
+      logoEl.style.height = logoH + 'px';
+      /* Posição inicial aleatória */
+      logoX = Math.random() * Math.max(1, window.innerWidth  - logoW);
+      logoY = Math.random() * Math.max(1, window.innerHeight - logoH);
+    });
+
+    /* Keyframes da piscada das partículas */
+    var styleTag = document.createElement('style');
+    styleTag.textContent = '@keyframes xtv-blink{from{opacity:0.1}to{opacity:0.9}}';
+    document.head.appendChild(styleTag);
+
+    overlay.appendChild(logoEl);
+    document.body.appendChild(overlay);
+  }
+
+  /* Animação DVD-bounce */
+  function animar() {
+    if (!isVisible) return;
+
+    var maxX = window.innerWidth  - logoW;
+    var maxY = window.innerHeight - (logoH || logoW * 0.56);
+
+    logoX += velX;
+    logoY += velY;
+
+    if (logoX <= 0)    { logoX = 0;    velX =  Math.abs(velX); }
+    if (logoY <= 0)    { logoY = 0;    velY =  Math.abs(velY); }
+    if (logoX >= maxX) { logoX = maxX; velX = -Math.abs(velX); }
+    if (logoY >= maxY) { logoY = maxY; velY = -Math.abs(velY); }
+
+    logoEl.style.left = logoX + 'px';
+    logoEl.style.top  = logoY + 'px';
+
+    animFrame = requestAnimationFrame(animar);
+  }
+
+  /* Exibe o protetor de tela */
+  function mostrar() {
+    var audioEl = document.getElementById('player');
+    /* Só ativa se houver áudio tocando */
+    if (!audioEl || audioEl.paused || audioEl.src === '') return;
+
+    isVisible = true;
+    overlay.style.display = 'block';
+
+    /* Fade-in suave */
+    overlay.style.opacity = '0';
+    overlay.style.transition = 'opacity 1.5s ease';
+    requestAnimationFrame(function() {
+      requestAnimationFrame(function() {
+        overlay.style.opacity = '1';
+      });
+    });
+
+    cancelAnimationFrame(animFrame);
+    animar();
+  }
+
+  /* Esconde o protetor de tela */
+  function esconder() {
+    if (!isVisible) return;
+    isVisible = false;
+
+    overlay.style.transition = 'opacity 0.4s ease';
+    overlay.style.opacity = '0';
+
+    setTimeout(function() {
+      overlay.style.display = 'none';
+    }, 400);
+
+    cancelAnimationFrame(animFrame);
+    reiniciarTimer();
+  }
+
+  /* Reinicia o contador de inatividade */
+  function reiniciarTimer() {
+    clearTimeout(idleTimer);
+    idleTimer = setTimeout(mostrar, IDLE_TIMEOUT);
+  }
+
+  /* Detecta qualquer interação do usuário */
+  var eventos = ['mousemove','mousedown','keydown','touchstart','touchmove','scroll','wheel','click'];
+  eventos.forEach(function(ev) {
+    document.addEventListener(ev, function() {
+      if (isVisible) {
+        esconder();
+      } else {
+        reiniciarTimer();
+      }
+    }, { passive: true, capture: true });
+  });
+
+  /* Inicializa */
+  criarOverlay();
+  reiniciarTimer();
+
+})();
+</script>
+<!-- ============================================================
+     FIM DO PROTETOR DE TELA
+     ============================================================ -->
+
 </body>
 </html>
