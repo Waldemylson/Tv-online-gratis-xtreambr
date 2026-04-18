@@ -172,6 +172,7 @@ Canais Abertos
 <p><span class="free-tag">Free</span><a href="https://rdcanais.top/globopa" target="_blank">GLOBO TV LIBERAL (DE)</a></p>
 <p><span class="free-tag">Free</span><a href="https://rdcanais.com/globosp" target="_blank">GLOBO SP</a></p>
 <p><span class="free-tag">Free</span><a href="https://cdn-3.nxplay.com.br/GLOBO_SP_TK/index.m3u8?token=fr0nt-t3st" target="_blank">Globo SP (Dê)</a></p>
+<p><span class="free-tag">Free</span><a href="https://cdn-9.nxplay.com.br/GLOBO_SP_TK/index.m3u8?token=fr0nt-t3st" target="_blank">Globo SP (Dê1)</a></p>
 <p><span class="free-tag">Free</span><a href="https://rdcanais.top/globosp" target="_blank">GLOBO SP ❪OP2❫</a></p>
 <p><span class="free-tag">Free</span><a href="https://rdcanais.top/globorj" target="_blank">GLOBO RJ</a></p>
 <p><span class="free-tag">Free</span><a href="https://sinalpublico.vercel.app/play/dtv.html?id=globorj" target="_blank">GLOBO RJ ❪OP3❫</a></p>
@@ -428,5 +429,190 @@ style="background:#ffd700;color:#000;padding:15px;margin:10px;border-radius:10px
     }
   </script>
 
+
+<!-- ============================================================
+     PROTETOR DE TELA - CANAL CAIU - SCRIPT ISOLADO
+     Monitora o tvPlayer. Não altera nenhuma função existente.
+     ============================================================ -->
+<script>
+(function() {
+  'use strict';
+
+  var LOGO_URL   = 'https://raw.githubusercontent.com/Waldemylson/Tv-online-gratis-xtreambr/refs/heads/main/logo_transparente_final.png';
+  var LOGO_WIDTH = 300;
+  var LOGO_SPEED = 1.8;
+  var ERRO_DELAY = 8000; // espera 8s travado antes de mostrar overlay
+
+  var overlay    = null;
+  var logoEl     = null;
+  var animFrame  = null;
+  var erroTimer  = null;
+  var logoX = 80, logoY = 80;
+  var velX = LOGO_SPEED, velY = LOGO_SPEED;
+  var logoH = 0;
+  var visivel = false;
+
+  /* Cria overlay uma única vez */
+  function criarOverlay() {
+    overlay = document.createElement('div');
+    overlay.id = 'canal-screensaver';
+    overlay.style.cssText = [
+      'position:fixed','top:0','left:0',
+      'width:100%','height:100%',
+      'background:rgba(0,0,0,0.96)',
+      'z-index:9999999',
+      'display:none',
+      'overflow:hidden',
+      'pointer-events:none'
+    ].join(';');
+
+    /* Partículas */
+    for (var i = 0; i < 35; i++) {
+      var p = document.createElement('div');
+      var size = (Math.random() * 2 + 1).toFixed(1);
+      p.style.cssText = [
+        'position:absolute',
+        'border-radius:50%',
+        'background:rgba(255,255,255,' + (0.1 + Math.random() * 0.25).toFixed(2) + ')',
+        'width:' + size + 'px', 'height:' + size + 'px',
+        'left:' + (Math.random()*100).toFixed(1) + '%',
+        'top:'  + (Math.random()*100).toFixed(1) + '%',
+        'animation:sc-blink ' + (3+Math.random()*7).toFixed(1) + 's ' + (Math.random()*5).toFixed(1) + 's ease-in-out infinite alternate',
+        'pointer-events:none'
+      ].join(';');
+      overlay.appendChild(p);
+    }
+
+    /* Mensagem "Canal indisponível" */
+    var msg = document.createElement('div');
+    msg.id = 'sc-msg';
+    msg.textContent = '⚠ Canal indisponível — aguardando sinal...';
+    msg.style.cssText = [
+      'position:absolute','bottom:80px','left:0','width:100%',
+      'text-align:center','color:rgba(255,255,255,0.5)',
+      'font-size:16px','font-family:Arial,sans-serif',
+      'pointer-events:none','letter-spacing:1px'
+    ].join(';');
+    overlay.appendChild(msg);
+
+    /* Logo flutuante */
+    logoEl = document.createElement('img');
+    logoEl.src = LOGO_URL;
+    logoEl.style.cssText = [
+      'position:absolute',
+      'width:' + LOGO_WIDTH + 'px',
+      'box-shadow:none',
+      'pointer-events:none',
+      'user-select:none'
+    ].join(';');
+    logoEl.addEventListener('load', function() {
+      logoH = logoEl.naturalHeight * (LOGO_WIDTH / logoEl.naturalWidth);
+      logoEl.style.height = logoH + 'px';
+      logoX = Math.random() * Math.max(1, window.innerWidth - LOGO_WIDTH);
+      logoY = Math.random() * Math.max(1, window.innerHeight - logoH);
+    });
+
+    /* Keyframes */
+    var st = document.createElement('style');
+    st.textContent = '@keyframes sc-blink{from{opacity:0.1}to{opacity:0.8}}' +
+                     '@keyframes sc-fadein{from{opacity:0}to{opacity:1}}';
+    document.head.appendChild(st);
+
+    overlay.appendChild(logoEl);
+    document.body.appendChild(overlay);
+  }
+
+  /* Animação bounce */
+  function animar() {
+    if (!visivel) return;
+    var maxX = window.innerWidth  - LOGO_WIDTH;
+    var maxY = window.innerHeight - (logoH || LOGO_WIDTH * 0.56);
+    logoX += velX; logoY += velY;
+    if (logoX <= 0)    { logoX = 0;    velX =  Math.abs(velX); }
+    if (logoY <= 0)    { logoY = 0;    velY =  Math.abs(velY); }
+    if (logoX >= maxX) { logoX = maxX; velX = -Math.abs(velX); }
+    if (logoY >= maxY) { logoY = maxY; velY = -Math.abs(velY); }
+    logoEl.style.left = logoX + 'px';
+    logoEl.style.top  = logoY + 'px';
+    animFrame = requestAnimationFrame(animar);
+  }
+
+  function mostrar() {
+    if (visivel) return;
+    var box = document.getElementById('playerBox');
+    if (!box || box.style.display === 'none') return; // só se o player estiver aberto
+    visivel = true;
+    overlay.style.display = 'block';
+    overlay.style.animation = 'sc-fadein 1s ease';
+    cancelAnimationFrame(animFrame);
+    animar();
+  }
+
+  function esconder() {
+    if (!visivel) return;
+    visivel = false;
+    overlay.style.display = 'none';
+    cancelAnimationFrame(animFrame);
+    clearTimeout(erroTimer);
+  }
+
+  /* Monitora o tvPlayer sem interferir */
+  function monitorar() {
+    var video = document.getElementById('tvPlayer');
+    if (!video) return;
+
+    /* Canal travou / buffering longo */
+    video.addEventListener('waiting', function() {
+      clearTimeout(erroTimer);
+      erroTimer = setTimeout(mostrar, ERRO_DELAY);
+    });
+
+    /* Canal deu erro */
+    video.addEventListener('error', function() {
+      clearTimeout(erroTimer);
+      erroTimer = setTimeout(mostrar, 2000);
+    });
+
+    /* Sem dados chegando */
+    video.addEventListener('stalled', function() {
+      clearTimeout(erroTimer);
+      erroTimer = setTimeout(mostrar, ERRO_DELAY);
+    });
+
+    /* Canal voltou a tocar — esconde overlay */
+    video.addEventListener('playing', function() {
+      clearTimeout(erroTimer);
+      esconder();
+    });
+
+    /* Canal foi pausado / fechado — esconde overlay */
+    video.addEventListener('pause', function() {
+      clearTimeout(erroTimer);
+      esconder();
+    });
+
+    /* Buffering resolvido */
+    video.addEventListener('canplay', function() {
+      clearTimeout(erroTimer);
+    });
+  }
+
+  /* Aguarda o DOM estar pronto */
+  if (document.readyState === 'loading') {
+    document.addEventListener('DOMContentLoaded', function() {
+      criarOverlay();
+      monitorar();
+    });
+  } else {
+    criarOverlay();
+    monitorar();
+  }
+
+})();
+</script>
+<!-- ============================================================
+     FIM DO PROTETOR DE TELA DE CANAIS
+     ============================================================ -->
+
 </body>
-  </html>
+                                       </html>
