@@ -129,7 +129,7 @@
     <i class="fas fa-search"></i>
   </div>
 
-  <!--   <!-- TELA CATEGORIAS -->
+  <!-- TELA CATEGORIAS -->
   <div id="tela-categorias">
     <p class="section-title" style="color:#ff0;font-size:1.5em;margin:20px 0;">CATEGORIAS</p>
     <div class="categorias-grid">
@@ -155,23 +155,29 @@
       </div>
       <div class="cat-btn" onclick="abrirCategoria('religioso')">
         <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTof8LduHtme_2UofAJf1linKCUN-RKBsfTlvDU6QrTSw&s" style="width:100px;height:55px;object-fit:contain;border-radius:6px;">
-        <span>Religioso / Docs / Infantil</span>
+        <span>Religioso</span>
+      </div>
+      <div class="cat-btn" onclick="abrirCategoria('documentarios')">
+        <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTof8LduHtme_2UofAJf1linKCUN-RKBsfTlvDU6QrTSw&s" style="width:100px;height:55px;object-fit:contain;border-radius:6px;">
+        <span>Documentários</span>
+      </div>
+      <div class="cat-btn" onclick="abrirCategoria('infantil')">
+        <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTof8LduHtme_2UofAJf1linKCUN-RKBsfTlvDU6QrTSw&s" style="width:100px;height:55px;object-fit:contain;border-radius:6px;">
+        <span>Infantil</span>
       </div>
     </div>
 
     <!-- CANAL DO CLIENTE + EXTRAS -->
     <div style="margin-top:30px;">
       <p><a href="#" onclick="abrirCanal('https://raw.githubusercontent.com/Waldemylson/Arte-iptv/main/InShot_20260211_123939575.mp4'); return false;">📡 CANAL DO CLIENTE (DÊ)</a></p>
-      </div>
     </div>
 
-          <p style="text-align:center; margin:40px 0; font-size:1.4em;">
-        <a href="adulto.html" target="_blank" style="color:#ff3366; font-weight:bold;">ADULTOS 🔞</a>
-      </p>
-      <div onclick="window.location.href='https://waldemylson.github.io/Tv-online-gratis-xtreambr/radioxtreambr.html'"
-        style="background:#ffd700;color:#000;padding:15px;margin:10px auto;border-radius:10px;text-align:center;font-weight:bold;cursor:pointer;max-width:400px;">
-        📻 RÁDIOS
-      </div>
+    <p style="text-align:center; margin:40px 0; font-size:1.4em;">
+      <a href="adulto.html" target="_blank" style="color:#ff3366; font-weight:bold;">ADULTOS 🔞</a>
+    </p>
+    <div onclick="window.location.href='https://waldemylson.github.io/Tv-online-gratis-xtreambr/radioxtreambr.html'"
+      style="background:#ffd700;color:#000;padding:15px;margin:10px auto;border-radius:10px;text-align:center;font-weight:bold;cursor:pointer;max-width:400px;">
+      📻 RÁDIOS
     </div>
   </div>
 
@@ -240,13 +246,13 @@ function abrirCanal(url) {
   };
 }
 
-// ======= CANAIS POR CATEGORIA =======
+// ======= CANAIS POR CATEGORIA (ORGANIZADOS ALFABETICAMENTE) =======
 const categorias = {
   abertos: {
     titulo: "📺 Canais Abertos",
     html: `
 <p><span class="free-tag">Free</span><a href="https://gerenciar.vivatele.com:443/viva_padrao/viva2384/3" target="_blank">BAND RJ</a></p>
-<p><span class="free-tag">Free</span><a href="https://cdn-3.nxplay.com.br/BAND_HD_PFZ_NX/index.m3u8?token=fr0nt-t3st" target="_blank">BAND HD(DÊ)</a></p>
+<p><span class="free-tag">Free</span><a href="https://cdn-3.nxplay.com.br/BAND_HD_PFZ_NX/index.m3u8?token=fr0nt-t3st" target="_blank">BAND HD (DÊ)</a></p>
 <p><span class="free-tag">Free</span><a href="https://beyond.spalla.io/player/?live=0195cdf3-d8d8-74b6-9516-6c79c06bcec8" target="_blank">BAND</a></p>
 <p><span class="free-tag">Free</span><a href="https://cdn.live.br1.jmvstream.com/w/LVW-15748/LVW15748_Yed7yzLuRC/chunklist.m3u8" target="_blank">BAND PARÁ (Dê)</a></p>
 <p><span class="free-tag">Free</span><a href="https://5b33b873179a2.streamlock.net:1443/live/livestream/chunklist_w1729097234.m3u8" target="_blank">CULTURA TV (Dê)</a></p>
@@ -254,7 +260,7 @@ const categorias = {
 <p><span class="free-tag">Free</span><a href="https://xn--d204s777hp27.cloudfronte.lat/zzzstream/globomg.m3u8" target="_blank">GLOBO MG</a></p>
 <p><span class="free-tag">Free</span><a href="https://cdn-3.nxplay.com.br/TV_TEM_TK/index.m3u8" target="_blank">GLOBO TV TEM (DÊ)</a></p>
 <p><span class="free-tag">Free</span><a href="https://rdcanais.top/globopa" target="_blank">GLOBO TV LIBERAL (DE)</a></p>
-<p><span class="free-tag">Free</span><a href="http://domainforxc.cfd:80/287945811/148063/2366" target="_blank">GLOBO BELÉM(DÊ)</a></p>
+<p><span class="free-tag">Free</span><a href="http://domainforxc.cfd:80/287945811/148063/2366" target="_blank">GLOBO BELÉM (DÊ)</a></p>
 <p><span class="free-tag">Free</span><a href="https://rdcanais.com/globosp" target="_blank">GLOBO SP</a></p>
 <p><span class="free-tag">Free</span><a href="https://cdn-3.nxplay.com.br/GLOBO_SP_TK/index.m3u8?token=fr0nt-t3st" target="_blank">Globo SP (Dê)</a></p>
 <p><span class="free-tag">Free</span><a href="https://rdcanais.top/globosp" target="_blank">GLOBO SP ❪D2❫</a></p>
@@ -262,7 +268,7 @@ const categorias = {
 <p><span class="free-tag">Free</span><a href="https://xn--d204s777hp27.cloudfronte.lat/zzzstream/globorj.m3u8" target="_blank">GLOBO RJ ❪DÊ)</a></p>
 <p><span class="free-tag">Free</span><a href="http://gerenciar.vivatele.com:80/viva_padrao/viva2384/1" target="_blank">GLOBO RiO SUL (DÊ)</a></p>
 <p><span class="free-tag">Free</span><a href="http://gerenciar.vivatele.com:80/viva_padrao/viva2384/13" target="_blank">RECORD TV</a></p>
-<p><span class="free-tag">Free</span><a href="https://cdn.live.br1.jmvstream.com/w/LVW-10842/LVW10842_513N26MDBL/chunklist.m3u8" target="_blank">RECORD BELÉM(DÊ)</a></p>
+<p><span class="free-tag">Free</span><a href="https://cdn.live.br1.jmvstream.com/w/LVW-10842/LVW10842_513N26MDBL/chunklist.m3u8" target="_blank">RECORD BELÉM (DÊ)</a></p>
 <p><span class="free-tag">Free</span><a href="https://xn--d204s777hp28.cloudfronte.lat/zzzstream/recordrj.m3u8" target="_blank">RECORD RJ (DÊ)</a></p>
 <p><span class="free-tag">Free</span><a href="https://streaming.cloudecast.com/hls/redetves/index.m3u8" target="_blank">REDETV (Dê)</a></p>
 <p><span class="free-tag">Free</span><a href="https://rdcanais.top/redetv" target="_blank">REDE TV ❪OP2❫</a></p>
@@ -271,6 +277,7 @@ const categorias = {
 <p><span class="free-tag">Free</span><a href="https://video09.logicahost.com.br/tvparaense/tvparaense/playlist.m3u8" target="_blank">SBT CASTANHAL (Dê)</a></p>
 <p><span class="free-tag">Free</span><a href="https://stream.amsolution.net.br:8443/live/60d0a8ea6b884/index.m3u8" target="_blank">SBT Maranhão (Dê)</a></p>`
   },
+
   noticias: {
     titulo: "📰 Notícias",
     html: `
@@ -285,29 +292,24 @@ const categorias = {
 <p><span class="free-tag">Free</span><a href="https://rnw-rn-samsungtvplus.otteravision.com/rnw/rn/rnw_rn.m3u8" target="_blank">RECORD NEWS (Dê)</a></p>
 <p><span class="free-tag">Free</span><a href="https://amg00527-amg00527c5-amgplt0026.playout.now3.amagi.tv/ts-us-w2-n1/playlist/amg00527-amg00527c5-amgplt0026/playlist.m3u8" target="_blank">SBTNEWS (Dê)</a></p>
 <p><span class="free-tag">Free</span><a href="https://video30.mais.uol.com.br/live/6146-3.m3u8" target="_blank">UOL NEWS (Dê)</a></p>
-<p><span class="free-tag">Free</span><a href="https://cdn-3.nxplay.com.br/CNBC/tracks-v1a1/mono.ts.m3u8?remote=45.177.139.52&token=fr0nt-t3st" target="_blank">TIMES BRASIL(DÊ)</a></p>
+<p><span class="free-tag">Free</span><a href="https://cdn-3.nxplay.com.br/CNBC/tracks-v1a1/mono.ts.m3u8?remote=45.177.139.52&token=fr0nt-t3st" target="_blank">TIMES BRASIL (DÊ)</a></p>
 <p><span class="free-tag">Free</span><a href="https://jmp2.uk/plu-666c9c60a7efd40008f552f0.m3u8" target="_blank">BM&C NEWS (DÊ)</a></p>`
   },
+
   esportes: {
     titulo: "⚽ Esportes",
     html: `
+<p><span class="free-tag">Free</span><a href="https://dfr80qz435crc.cloudfront.net/MNOP/Amagi/Caze/Caze_TV_BR/720p-vtt/index.m3u8" target="_blank">CAZÉ TV (DÊ)</a></p>
 <p><a href="#" class="premium" onclick="checkPremiumPass('https://redecanaistv.be/player3/ch.php?canal=combate'); return false;">COMBATE</a></p>
-<p><span class="free-tag">Free</span><a href="https://xn--d204s777hp27.cloudfronte.lat/zzzstream/combate.m3u8" target="_blank">COMBATE(DÊ)</a></p>
+<p><span class="free-tag">Free</span><a href="https://xn--d204s777hp27.cloudfronte.lat/zzzstream/combate.m3u8" target="_blank">COMBATE (DÊ)</a></p>
 <p><a href="#" class="premium" onclick="checkPremiumPass('https://redecanaistv.be/player3/ch.php?canal=espn'); return false;">ESPN 1</a></p>
 <p><a href="#" class="premium" onclick="checkPremiumPass('https://redecanaistv.be/player3/ch.php?canal=espn2'); return false;">ESPN 2</a></p>
 <p><a href="#" class="premium" onclick="checkPremiumPass('https://redecanaistv.be/player3/ch.php?canal=espn3'); return false;">ESPN 3</a></p>
 <p><a href="#" class="premium" onclick="checkPremiumPass('https://redecanaistv.be/player3/ch.php?canal=espn4'); return false;">ESPN 4</a></p>
 <p><a href="#" class="premium" onclick="checkPremiumPass('https://redecanaistv.be/player3/ch.php?canal=espn5'); return false;">ESPN 5</a></p>
 <p><a href="#" class="premium" onclick="checkPremiumPass('https://redecanaistv.be/player3/ch.php?canal=espn6'); return false;">ESPN 6</a></p>
-<p><a href="#" class="premium" onclick="checkPremiumPass('https://e834459f.wurl.com/master/f36d25e7e52f1ba8d7e56eb859c636563214f541/U2Ftc3VuZy1icl9GSUZBUGx1c1BvcnR1Z3Vlc2VfSExT/playlist.m3u8'); return false;">FIFA+ (Dê)</a></p>
-<p><span class="free-tag">Free</span><a href="https://dfr80qz435crc.cloudfront.net/MNOP/Amagi/Caze/Caze_TV_BR/720p-vtt/index.m3u8" target="_blank">CAZÉ TV (DÊ)</a></p>
 <p><span class="free-tag">Free</span><a href="https://cdn-uw2-prod.tsv2.amagi.tv/linear/amg01074-fueltv-fueltvbr-samsungbr/playlist.m3u8" target="_blank">FUEL TV (DÊ)</a></p>
 <p><span class="free-tag">Free</span><a href="https://amg00716-globo-amg00716c1-tcl-br-9495.playouts.now.amagi.tv/720p-cc/index.m3u8" target="_blank">Ge TV (DÊ)</a></p>
-<p><a href="#" class="premium" onclick="checkPremiumPass('https://hrm-sftc.otteravision.com/hrm/sftc/sftc_720p_high.m3u8'); return false;">SFT COMBAT (Dê)</a></p>
-<p><span class="free-tag">Free</span><a href="https://cr7v.short.gy/manoiTVOP3/sptvxtra2/75991634025/index.m3u8" target="_blank">SPORTV(DÊ)</a></p>
-<p><a href="#" class="premium" onclick="checkPremiumPass('https://rdcanais.top/sportv'); return false;">SPORTV 1</a></p>
-<p><a href="#" class="premium" onclick="checkPremiumPass('https://rdcanais.top/sportv2'); return false;">SPORTV 2</a></p>
-<p><a href="#" class="premium" onclick="checkPremiumPass('https://rdcanais.top/sportv3'); return false;">SPORTV 3</a></p>
 <p><span class="free-tag">Free</span><a href="https://ogc-nsprt-tcl-roku-syndication.otteravision.com/ogc/nsprt/nsprt_720p.m3u8" target="_blank">NSPORTS (DÊ)</a></p>
 <p><a href="#" class="premium" onclick="checkPremiumPass('https://rdcanais.top/premiereclubes'); return false;">PREMIERE CLUBES</a></p>
 <p><a href="#" class="premium" onclick="checkPremiumPass('https://rdcanais.top/premiere2'); return false;">PREMIERE 2</a></p>
@@ -317,17 +319,23 @@ const categorias = {
 <p><a href="#" class="premium" onclick="checkPremiumPass('https://rdcanais.top/premiere6alternativo'); return false;">PREMIERE 6</a></p>
 <p><a href="#" class="premium" onclick="checkPremiumPass('https://rdcanais.top/premiere7alternativo'); return false;">PREMIERE 7</a></p>
 <p><a href="#" class="premium" onclick="checkPremiumPass('https://rdcanais.top/premiere8alternativo'); return false;">PREMIERE 8</a></p>
+<p><a href="#" class="premium" onclick="checkPremiumPass('https://hrm-sftc.otteravision.com/hrm/sftc/sftc_720p_high.m3u8'); return false;">SFT COMBAT (Dê)</a></p>
+<p><span class="free-tag">Free</span><a href="https://cr7v.short.gy/manoiTVOP3/sptvxtra2/75991634025/index.m3u8" target="_blank">SPORTV (DÊ)</a></p>
+<p><a href="#" class="premium" onclick="checkPremiumPass('https://rdcanais.top/sportv'); return false;">SPORTV 1</a></p>
+<p><a href="#" class="premium" onclick="checkPremiumPass('https://rdcanais.top/sportv2'); return false;">SPORTV 2</a></p>
+<p><a href="#" class="premium" onclick="checkPremiumPass('https://rdcanais.top/sportv3'); return false;">SPORTV 3</a></p>
 <p><a href="#" class="premium" onclick="checkPremiumPass('https://rdcanais.top/ufcfightpass'); return false;">UFC FIGHT PASS ❪OP2❫</a></p>`
   },
+
   filmes: {
     titulo: "🎬 Filmes e Séries",
     html: `
 <p><a href="#" class="premium" onclick="checkPremiumPass('https://redecanaistv.be/player3/ch.php?canal=aie'); return false;">A&E</a></p>
-<p><span class="free-tag">Free</span><a href="https://cdn-3.nxplay.com.br//AeE_BRASIL_TK/tracks-v1a1/mono.ts.m3u8" target="_blank">A&E(DÊ)</a></p>
+<p><span class="free-tag">Free</span><a href="https://cdn-3.nxplay.com.br//AeE_BRASIL_TK/tracks-v1a1/mono.ts.m3u8" target="_blank">A&E (DÊ)</a></p>
 <p><a href="#" class="premium" onclick="checkPremiumPass('https://redecanaistv.be/player3/ch.php?canal=amc'); return false;">AMC</a></p>
 <p><span class="free-tag">Free</span><a href="https://cdn-3.nxplay.com.br//AMC_BRASIL_TK/tracks-v1a1/mono.ts.m3u8" target="_blank">AMC (DÊ)</a></p>
 <p><a href="#" class="premium" onclick="checkPremiumPass('https://redecanaistv.be/player3/ch.php?canal=axn'); return false;">AXN</a></p>
-<p><span class="free-tag">Free</span><a href="https://cdn-3.nxplay.com.br/AXN_TK/index.m3u8?token=fr0nt-t3st" target="_blank">AXN(DÊ)</a></p>
+<p><span class="free-tag">Free</span><a href="https://cdn-3.nxplay.com.br/AXN_TK/index.m3u8?token=fr0nt-t3st" target="_blank">AXN (DÊ)</a></p>
 <p><a href="#" class="premium" onclick="checkPremiumPass('https://redecanaistv.be/player3/ch.php?canal=cinemax'); return false;">CINEMAX</a></p>
 <p><a href="#" class="premium" onclick="checkPremiumPass('https://redecanaistv.be/player3/ch.php?canal=hbo'); return false;">HBO</a></p>
 <p><a href="#" class="premium" onclick="checkPremiumPass('https://redecanaistv.be/player3/ch.php?canal=hbo2'); return false;">HBO 2</a></p>
@@ -341,8 +349,8 @@ const categorias = {
 <p><a href="#" class="premium" onclick="checkPremiumPass('https://rdcanais.top/megapix'); return false;">MEGAPIX</a></p>
 <p><a href="#" class="premium" onclick="checkPremiumPass('https://rdcanais.top/space'); return false;">SPACE</a></p>
 <p><span class="free-tag">Free</span><a href="https://cdn-3.nxplay.com.br/SPACE_TK/tracks-v1a1/mono.ts.m3u8?token=fr0nt-t3st" target="_blank">SPACE (DÊ)</a></p>
-<p><span class="free-tag">Free</span><a href="https://cdn-3.nxplay.com.br/SONY_CHANNEL/index.m3u8 " target="_blank">SONY CHANNEL(DÊ)</a></p>
-<p><span class="free-tag">Free</span><a href="https://cdn-3.nxplay.com.br/SONY_MOVIES/index.m3u8" target="_blank">SONY MOVIES(DÊ)</a></p>
+<p><span class="free-tag">Free</span><a href="https://cdn-3.nxplay.com.br/SONY_CHANNEL/index.m3u8 " target="_blank">SONY CHANNEL (DÊ)</a></p>
+<p><span class="free-tag">Free</span><a href="https://cdn-3.nxplay.com.br/SONY_MOVIES/index.m3u8" target="_blank">SONY MOVIES (DÊ)</a></p>
 <p><a href="#" class="premium" onclick="checkPremiumPass('https://rdcanais.top/telecineaction'); return false;">TELECINE ACTION</a></p>
 <p><a href="#" class="premium" onclick="checkPremiumPass('https://rdcanais.top/telecinecult'); return false;">TELECINE CULT</a></p>
 <p><a href="#" class="premium" onclick="checkPremiumPass('https://rdcanais.top/telecinefun'); return false;">TELECINE FUN</a></p>
@@ -355,56 +363,59 @@ const categorias = {
 <p><a href="#" class="premium" onclick="checkPremiumPass('https://rdcanais.top/universaltv'); return false;">UNIVERSAL TV</a></p>
 <p><a href="#" class="premium" onclick="checkPremiumPass('https://rdcanais.top/warnertv'); return false;">WARNER TV</a></p>`
   },
+
   variedades: {
     titulo: "🎵 Variedades / Entretenimento / Música",
     html: `
 <p><a href="#" class="premium" onclick="checkPremiumPass('https://canais.free.nf/player/movie.html'); return false;">AGITOMAX</a></p>
+<p><a href="#" class="premium" onclick="checkPremiumPass('https://redecanaistv.be/player3/ch.php?canal=fishtv'); return false;">FISHTV</a></p>
 <p><a href="#" class="premium" onclick="checkPremiumPass('https://rdcanais.top/gnt'); return false;">GNT (DE)</a></p>
-<p><a href="#" class="premium" onclick="checkPremiumPass('https://redecanaistv.be/player3/ch.php?canal=saboriarte'); return false;">SABOR & ARTE</a></p>
-<p><a href="#" class="premium" onclick="checkPremiumPass('https://redecanaistv.be/player3/ch.php?canal=multishow'); return false;">MULTISHOW</a></p>
-<p><span class="free-tag">Free</span><a href="https://xn--d204s777hp27.cloudfronte.lat/zzzstream/multishow.m3u8" target="_blank">MULTISHOW(DÊ)</a></p>
-<p><a href="#" class="premium" onclick="checkPremiumPass('https://anym3u8player.com/tv/p.php?url=https://stream.mediawork.cz/retrotv//retrotvHQ1/playlist.m3u8'); return false;">RETRO MUSIC</a></p>
-<p><a href="#" class="premium" onclick="checkPremiumPass('https://tvacabo.top/player/toptv.html'); return false;">TOP TV</a></p>
-<p><a href="#" class="premium" onclick="checkPremiumPass('https://geo.dailymotion.com/player.html?video=x8ttlxm'); return false;">TV GAZETA</a></p>
 <p><a href="#" class="premium" onclick="checkPremiumPass('https://rdcanais.top/globoplaynovelas'); return false;">GLOBOPLAY NOVELAS (OP2)</a></p>
-<p><a href="#" class="premium" onclick="checkPremiumPass('https://redecanaistv.be/player3/ch.php?canal=fishtv'); return false;">fishtv</a></p>`
+<p><a href="#" class="premium" onclick="checkPremiumPass('https://redecanaistv.be/player3/ch.php?canal=multishow'); return false;">MULTISHOW</a></p>
+<p><span class="free-tag">Free</span><a href="https://xn--d204s777hp27.cloudfronte.lat/zzzstream/multishow.m3u8" target="_blank">MULTISHOW (DÊ)</a></p>
+<p><a href="#" class="premium" onclick="checkPremiumPass('https://anym3u8player.com/tv/p.php?url=https://stream.mediawork.cz/retrotv//retrotvHQ1/playlist.m3u8'); return false;">RETRO MUSIC</a></p>
+<p><a href="#" class="premium" onclick="checkPremiumPass('https://redecanaistv.be/player3/ch.php?canal=saboriarte'); return false;">SABOR & ARTE</a></p>
+<p><a href="#" class="premium" onclick="checkPremiumPass('https://tvacabo.top/player/toptv.html'); return false;">TOP TV</a></p>
+<p><a href="#" class="premium" onclick="checkPremiumPass('https://geo.dailymotion.com/player.html?video=x8ttlxm'); return false;">TV GAZETA</a></p>`
   },
+
   religioso: {
-    titulo: "✝️ Religioso / Documentários / Infantil",
+    titulo: "✝️ Religioso",
     html: `
-<p><a href="#" class="premium" onclick="checkPremiumPass('https://rdcanais.top/adultswim'); return false;">ADULT SWIM</a></p>
-<p><a href="#" class="premium" onclick="checkPremiumPass('https://rdcanais.com/cartoonnetwork'); return false;">CARTOON NETWORK</a></p>
-<p><a href="#" class="premium" onclick="checkPremiumPass('https://canais.free.nf/player/movie.html'); return false;">TV CLÁSSICOS</a></p>
+<p><span class="free-tag">Free</span><a href="https://cdn-5.nxplay.com.br/TV_APARECIDA_TK/tracks-v1a1/mono.ts.m3u8?token=fr0nt-t3st" target="_blank">TV APARECIDA</a></p>
+<p><span class="free-tag">Free</span><a href="http://gerenciar.vivatele.com:80/viva_padrao/viva2384/81" target="_blank">REDE GOSPEL</a></p>
+<p><span class="free-tag">Free</span><a href="http://gerenciar.vivatele.com:80/viva_padrao/viva2384/49" target="_blank">REDE VIDA</a></p>
+<p><span class="free-tag">Free</span><a href="https://stream.live.novotempo.com/tv/smil:tvnovotempo.smil/chunklist_b3628000_slpor.m3u8" target="_blank">TV NOVO TEMPO</a></p>
+<p><span class="free-tag">Free</span><a href="https://canais.free.nf/player/pai.html" target="_blank">TV PAI ETERNO</a></p>`
+  },
+
+  documentarios: {
+    titulo: "📜 Documentários",
+    html: `
 <p><a href="#" class="premium" onclick="checkPremiumPass('https://redecanaistv.be/player3/ch.php?canal=animalplanet'); return false;">ANIMAL PLANET</a></p>
-<p><span class="free-tag">Free</span><a href="https://cdn-3.nxplay.com.br/ANIMAL_PLANET_NX/index.m3u8?token=fr0nt-t3st" target="_blank">ANIMAL PLANET(DÊ)</a></p>
-<p><a href="#" class="premium" onclick="checkPremiumPass('https://redecanaistv.be/player3/ch.php?canal=discoveryhomeihealth'); return false;">DISCOVERY H&H</a></p>
-<p><span class="free-tag">Free</span><a href="https://cdn-3.nxplay.com.br/DISCOVERY_HH_NX/index.m3u8" target="_blank">DISCOVERY H&H(DÊ)</a></p>
-<p><span class="free-tag">Free</span><a href="https://cdn-3.nxplay.com.br/DISCOVERY_THEATER_NX/index.m3u8" target="_blank">DISCOVERY THEATER(DÊ)</a></p>
-<p><a href="#" class="premium" onclick="checkPremiumPass('https://redecanaistv.be/player3/ch.php?canal=discoveryturbo'); return false;">DISCOVERY TURBO</a></p>
-<p><a href="#" class="premium" onclick="checkPremiumPass('https://redecanaistv.be/player3/ch.php?canal=discoveryworld'); return false;">DISCOVERY WORD</a></p>
+<p><span class="free-tag">Free</span><a href="https://cdn-3.nxplay.com.br/ANIMAL_PLANET_NX/index.m3u8?token=fr0nt-t3st" target="_blank">ANIMAL PLANET (DÊ)</a></p>
 <p><a href="#" class="premium" onclick="checkPremiumPass('https://redecanaistv.be/player3/ch.php?canal=discovery'); return false;">DISCOVERY CHANNEL</a></p>
-<p><span class="free-tag">Free</span><a href="https://cdn-3.nxplay.com.br/DISCOVERY_CHANNEL_NX/index.m3u8" target="_blank">DISCOVERY CHANNEL(DÊ)</a></p>
+<p><span class="free-tag">Free</span><a href="https://cdn-3.nxplay.com.br/DISCOVERY_CHANNEL_NX/index.m3u8" target="_blank">DISCOVERY CHANNEL (DÊ)</a></p>
 <p><a href="#" class="premium" onclick="checkPremiumPass('https://redecanaistv.be/player3/ch.php?canal=discoverysience'); return false;">DISCOVERY SCIENCE</a></p>
-<p><span class="free-tag">Free</span><a href="https://cdn-3.nxplay.com.br/DISCOVERY_SCIENCE_NX/index.m3u8" target="_blank">DISCOVERY SCIENCE(DÊ)</a></p>
-<p><a href="#" class="premium" onclick="checkPremiumPass('https://rdcanais.top/discoveryturbo'); return false;">DISCOVERY TURBO</a></p>
+<p><span class="free-tag">Free</span><a href="https://cdn-3.nxplay.com.br/DISCOVERY_SCIENCE_NX/index.m3u8" target="_blank">DISCOVERY SCIENCE (DÊ)</a></p>
+<p><a href="#" class="premium" onclick="checkPremiumPass('https://redecanaistv.be/player3/ch.php?canal=discoveryturbo'); return false;">DISCOVERY TURBO</a></p>
+<p><span class="free-tag">Free</span><a href="https://cdn-3.nxplay.com.br/DISCOVERY_HH_NX/index.m3u8" target="_blank">DISCOVERY H&H (DÊ)</a></p>
+<p><span class="free-tag">Free</span><a href="https://cdn-3.nxplay.com.br/DISCOVERY_THEATER_NX/index.m3u8" target="_blank">DISCOVERY THEATER (DÊ)</a></p>
+<p><a href="#" class="premium" onclick="checkPremiumPass('https://redecanaistv.be/player3/ch.php?canal=discoveryhomeihealth'); return false;">DISCOVERY H&H</a></p>
+<p><a href="#" class="premium" onclick="checkPremiumPass('https://redecanaistv.be/player3/ch.php?canal=discoveryworld'); return false;">DISCOVERY WORD</a></p>
 <p><a href="#" class="premium" onclick="checkPremiumPass('https://redecanaistv.be/player3/ch.php?canal=investigacaodiscovery'); return false;">DISCOVERY ID</a></p>
 <p><a href="#" class="premium" onclick="checkPremiumPass('https://redecanaistv.be/player3/ch.php?canal=history'); return false;">HISTORY CHANNEL</a></p>
 <p><a href="#" class="premium" onclick="checkPremiumPass('https://redecanaistv.be/player3/ch.php?canal=history2'); return false;">HISTORY 2</a></p>
 <p><a href="#" class="premium" onclick="checkPremiumPass('https://redecanaistv.be/player3/ch.php?canal=hgtv'); return false;">HGTV</a></p>
-<p><span class="free-tag">Free</span><a href="https://cdn-3.nxplay.com.br/HGTV_BR_NX/index.m3u8" target="_blank">HGTV(DÊ)</a></p>
-<p><a href="#" class="premium" onclick="checkPremiumPass('https://canais.free.nf/player/loading.html'); return false;">LOADING TV</a></p>
-<p><a href="#" class="premium" onclick="checkPremiumPass('https://canais.free.nf/player/movie.html'); return false;">MOVIESPHERE BRAZIL</a></p>
-<p><a href="#" class="premium" onclick="checkPremiumPass('https://rdcanais.top/modoviagem'); return false;">MODO VIAGEM</a></p>
-<p><a href="#" class="premium" onclick="checkPremiumPass('https://canais.free.nf/player/natgeo.html?i=1'); return false;">NAT GEO ANIMALS</a></p>
-<p><span class="free-tag">Free</span><a href="https://stream.live.novotempo.com/tv/smil:tvnovotempo.smil/chunklist_b3628000_slpor.m3u8" target="_blank">TV NOVO TEMPO</a></p>
-<p><span class="free-tag">Free</span><a href="https://canais.free.nf/player/pai.html" target="_blank">TV PAI ETERNO</a></p>
-<p><span class="free-tag">Free</span><a href="http://gerenciar.vivatele.com:80/viva_padrao/viva2384/81" target="_blank">REDE GOSPEL</a></p>
-<p><span class="free-tag">Free</span><a href="http://gerenciar.vivatele.com:80/viva_padrao/viva2384/49" target="_blank">REDE VIDA</a></p>
-<p><span class="free-tag">Free</span><a href="https://cdn-5.nxplay.com.br/TV_APARECIDA_TK/tracks-v1a1/mono.ts.m3u8?token=fr0nt-t3st" target="_blank">TV APARECIDA</a></p>
+<p><span class="free-tag">Free</span><a href="https://cdn-3.nxplay.com.br/HGTV_BR_NX/index.m3u8" target="_blank">HGTV (DÊ)</a></p>`
+  },
+
+  infantil: {
+    titulo: "🧸 Infantil",
+    html: `
+<p><a href="#" class="premium" onclick="checkPremiumPass('https://rdcanais.com/cartoonnetwork'); return false;">CARTOON NETWORK</a></p>
 <p><span class="free-tag">Free</span><a href="http://gerenciar.vivatele.com:80/viva_padrao/viva2384/49" target="_blank">RETRÔ CARTOON</a></p>
-<p><span class="free-tag">Free</span><a href="http://ngzcdn.vulcanzz.click/live/292330036/5179425/375.m3u8?sjwt=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJleHAiOjE3NzUwODc5OTksImlhdCI6MTc3NTAwMTYwMCwibmJmIjoxNzc1MDAxNjAwLCJ1c2VyIjoiMjkyMzMwMDM2IiwidXNlckFnZW50IjoiTW96aWxsYS81LjAgKExpbnV4OyBBbmRyb2lkIDEzOyBTTS1NMTI3RikgQXBwbGVXZWJLaXQvNTM3LjM2IChLSFRNTCwgbGlrZSBHZWNrbykgQ2hyb21lLzE0Ni4wLjc2ODAuMTE5IE1vYmlsZSBTYWZhcmkvNTM3LjM2IiwidXNlcklwIjoiMTg1LjIzNi4xODMuMTA3OjM5NzQyIn0.FPuef5HTEY2okS5LlFreHEjgWTDDZZjHHi49EcUfgXE&id=375&p=m3u8&aid=1775069959" target="_blank">TV RÁ-TIM-BUM</a></p>
-<p><span class="free-tag">Free</span><a href="https://9ada494d.wurl.com/master/f36d25e7e52f1ba8d7e56eb859c636563214f541/TEctYnJfVXBseW5rLU5ld2NvX0hMUw/playlist.m3u8" target="_blank">TERRAVIVA</a></p>
-<p><span class="free-tag">Free</span><a href="https://cdn-3.nxplay.com.br/VEJA_PLUS_FAST/tracks-v1a1/mono.ts.m3u8?remote=45.177.139.52&token=fr0nt-t3st" target="_blank">VEJA+ (DÊ)</a></p>`
+<p><span class="free-tag">Free</span><a href="http://ngzcdn.vulcanzz.click/live/292330036/5179425/375.m3u8?sjwt=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJleHAiOjE3NzUwODc5OTksImlhdCI6MTc3NTAwMTYwMCwibmJmIjoxNzc1MDAxNjAwLCJ1c2VyIjoiMjkyMzMwMDM2IiwidXNlckFnZW50IjoiTW96aWxsYS81LjAgKExpbnV4OyBBbmRyb2lkIDEzOyBTTS1NMTI3RikgQXBwbGVXZWJLaXQvNTM3LjM2IChLSFRNTCwgbGlrZSBHZWNrbykgQ2hyb21lLzE0Ni4wLjc2ODAuMTE5IE1vYmlsZSBTYWZhcmkvNTM3LjM2IiwidXNlcklwIjoiMTg1LjIzNi4xODMuMTA3OjM5NzQyIn0.FPuef5HTEY2okS5LlFreHEjgWTDDZZjHHi49EcUfgXE&id=375&p=m3u8&aid=1775069959" target="_blank">TV RÁ-TIM-BUM</a></p>`
   }
 };
 
@@ -431,7 +442,6 @@ function buscarCanal(term) {
   term = term.trim().toLowerCase();
   if (!term) { fecharBusca(); return; }
 
-  // Junta todos os canais de todas as categorias
   let todos = "";
   for (const id in categorias) todos += categorias[id].html;
 
@@ -457,4 +467,4 @@ function fecharBusca() {
 </script>
 
 </body>
-</html>
+      </html>
