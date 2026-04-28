@@ -195,22 +195,7 @@
   <video id="tvPlayer" controls autoplay playsinline></video>
 </div>
 
-<script>
-// PAYWALL
-const SENHA_MENSAL = "Xtreambrtv1725";
-const PAYWALL_KEY  = "Xtreambr_access";
-if (localStorage.getItem(PAYWALL_KEY) === SENHA_MENSAL) {
-  document.getElementById("paywall").style.display = "none";
-  document.getElementById("conteudo-principal").style.display = "block";
-}
-function verificarSenha() {
-  const v = document.getElementById("paywall-input").value.trim();
-  if (v.toLowerCase() === SENHA_MENSAL.toLowerCase()) {
-    localStorage.setItem(PAYWALL_KEY, SENHA_MENSAL);
-    document.getElementById("paywall").style.display = "none";
-    document.getElementById("conteudo-principal").style.display = "block";
-  } else { alert("Senha incorreta! Pague o Pix e peça a senha no WhatsApp."); }
-}
+
 
 // PREMIUM
 const SENHA_PREMIUM = "1725";
