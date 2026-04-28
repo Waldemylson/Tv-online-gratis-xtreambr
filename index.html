@@ -58,8 +58,7 @@
       transition:background 0.2s, border-color 0.2s;
     }
     .cat-btn:hover, .cat-btn:active { background:#001a00; border-color:#0f0; }
-    .cat-btn .ico { font-size:2em; }
-    .cat-btn .qtd { font-size:0.72em; color:#0a3; font-weight:normal; }
+    .cat-btn img { width:80px; height:55px; object-fit:contain; border-radius:6px; }
 
     /* TELA CANAIS */
     #tela-canais { display:none; }
@@ -84,19 +83,13 @@
     .free-tag { background:#0a3; color:white; padding:3px 8px; border-radius:12px; font-size:0.9em; margin-right:6px; }
     .premium { color:#ff0 !important; }
 
-    /* BUSCA RESULTADOS */
+    /* BUSCA */
     #tela-busca { display:none; }
     .busca-titulo { color:#0f0; font-size:1em; margin:10px 0 16px; }
 
     @media (min-width:600px) {
       .categorias-grid { grid-template-columns: repeat(3, 1fr); }
     }
-    @media (min-width:1200px) {
-      body { font-size:1.5em; }
-      .header { font-size:1.8em; }
-      p { font-size:1.8em; }
-    }
-
     footer { position:fixed; bottom:0; left:0; width:100%; background:#000; color:#0f0; font-size:0.9em; padding:10px 0; text-align:center; border-top:1px solid #333; z-index:10; }
 
     /* PLAYER */
@@ -134,50 +127,53 @@
     <p class="section-title" style="color:#ff0;font-size:1.5em;margin:20px 0;">CATEGORIAS</p>
     <div class="categorias-grid">
       <div class="cat-btn" onclick="abrirCategoria('abertos')">
-        <img src="https://imagem.natelinha.uol.com.br/original/logos-emissoras-analise-natelinha-montagem_2691.jpeg" style="width:100px;height:55px;object-fit:contain;border-radius:6px;">
+        <img src="https://imagem.natelinha.uol.com.br/original/logos-emissoras-analise-natelinha-montagem_2691.jpeg" alt="Abertos">
         <span>Canais Abertos</span>
       </div>
       <div class="cat-btn" onclick="abrirCategoria('noticias')">
-        <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTpfhfVLbVRULDKNYKM5ZlRBAVrT7KtM7Nc9ykH3tBThQ&s=10" style="width:100px;height:55px;object-fit:contain;border-radius:6px;">
+        <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTpfhfVLbVRULDKNYKM5ZlRBAVrT7KtM7Nc9ykH3tBThQ&s=10" alt="Notícias">
         <span>Notícias</span>
       </div>
       <div class="cat-btn" onclick="abrirCategoria('esportes')">
-        <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRVKPH3jqPMmnZkyMZqsWg_iCRuh4nDV8WY_E0WOvoltA&s=10" style="width:100px;height:55px;object-fit:contain;border-radius:6px;">
+        <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRVKPH3jqPMmnZkyMZqsWg_iCRuh4nDV8WY_E0WOvoltA&s=10" alt="Esportes">
         <span>Esportes</span>
       </div>
       <div class="cat-btn" onclick="abrirCategoria('filmes')">
-        <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSXzuVV7FaKZxMy806U146h3ID7uoiXnVEH6UDNqh5JCQ&s=10" style="width:100px;height:55px;object-fit:contain;border-radius:6px;">
+        <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSXzuVV7FaKZxMy806U146h3ID7uoiXnVEH6UDNqh5JCQ&s=10" alt="Filmes">
         <span>Filmes e Séries</span>
       </div>
       <div class="cat-btn" onclick="abrirCategoria('variedades')">
-        <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcR3O8IhIJhzaq49Bj0OZ43cC4U4mxBA6BTqTLMHa7qeEg&s=10" style="width:100px;height:55px;object-fit:contain;border-radius:6px;">
+        <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcR3O8IhIJhzaq49Bj0OZ43cC4U4mxBA6BTqTLMHa7qeEg&s=10" alt="Variedades">
         <span>Variedades</span>
       </div>
       <div class="cat-btn" onclick="abrirCategoria('religioso')">
-        <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTof8LduHtme_2UofAJf1linKCUN-RKBsfTlvDU6QrTSw&s" style="width:100px;height:55px;object-fit:contain;border-radius:6px;">
-        <span>Religioso / Docs / Infantil</span>
+        <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTof8LduHtme_2UofAJf1linKCUN-RKBsfTlvDU6QrTSw&s" alt="Religioso">
+        <span>Religioso</span>
+      </div>
+      <div class="cat-btn" onclick="abrirCategoria('documentarios')">
+        <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRgL0Cpaj2IET3nnQ-GAMvQGr3NpF_V2uSo4hGKSViyLQ&s=10" alt="Documentários">
+        <span>Documentários</span>
+      </div>
+      <div class="cat-btn" onclick="abrirCategoria('infantil')">
+        <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTwpTciezQr9ZqFpMpLs7UGxKA9UDWMjHYv-H5WybV6Yw&s" alt="Infantil">
+        <span>Infantil</span>
+      </div>
+      <div class="cat-btn" onclick="abrirCategoria('cliente')">
+        <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTdJU8ctk0wRTLifsRptaukHRImtomn6yP1bZOtl8QnnQ&s=10" style="width:80px;height:80px;object-fit:contain;" alt="Cliente">
+        <span>Canal do Cliente</span>
       </div>
     </div>
 
-    <!-- CANAL DO CLIENTE + EXTRAS -->
-    <div class="cat-btn" onclick="abrirCategoria('cliente')">
-        <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTdJU8ctk0wRTLifsRptaukHRImtomn6yP1bZOtl8QnnQ&s=10" style="width:80px;height:80px;object-fit:contain;" alt="Cliente">
-        <span>Canal do Cliente</span>
-      </div>        
-  </div>
-    
     <p style="text-align:center; margin:40px 0; font-size:1.4em;">
       <a href="adulto.html" target="_blank" style="color:#ff3366; font-weight:bold;">ADULTOS 🔞</a>
     </p>
     <div onclick="window.location.href='https://waldemylson.github.io/Tv-online-gratis-xtreambr/radioxtreambr.html'"
       style="background:#ffd700;color:#000;padding:15px;margin:10px auto;border-radius:10px;text-align:center;font-weight:bold;cursor:pointer;max-width:400px;">
-    
-    📻 RÁDIOS
-      </div>
+      📻 RÁDIOS
     </div>
   </div>
 
-  <!-- TELA CANAIS DA CATEGORIA -->
+  <!-- TELA CANAIS -->
   <div id="tela-canais">
     <button class="back-btn" onclick="voltarCategorias()">← Voltar</button>
     <div class="cat-titulo" id="cat-titulo-text"></div>
@@ -200,9 +196,9 @@
 </div>
 
 <script>
-// ======= PAYWALL =======
-const SENHA_MENSAL = "xtreambrtv1725";
-const PAYWALL_KEY  = "xtreambr_access";
+// PAYWALL
+const SENHA_MENSAL = "Xtreambrtv1725";
+const PAYWALL_KEY  = "Xtreambr_access";
 if (localStorage.getItem(PAYWALL_KEY) === SENHA_MENSAL) {
   document.getElementById("paywall").style.display = "none";
   document.getElementById("conteudo-principal").style.display = "block";
@@ -216,7 +212,7 @@ function verificarSenha() {
   } else { alert("Senha incorreta! Pague o Pix e peça a senha no WhatsApp."); }
 }
 
-// ======= PREMIUM =======
+// PREMIUM
 const SENHA_PREMIUM = "1725";
 const PREMIUM_KEY   = "premium_access";
 function checkPremiumPass(url) {
@@ -226,7 +222,7 @@ function checkPremiumPass(url) {
   else if (s !== null) { alert("Senha incorreta! Contate o WhatsApp para adquirir."); }
 }
 
-// ======= PLAYER =======
+// PLAYER
 function abrirCanal(url) {
   const box = document.getElementById("playerBox");
   const player = document.getElementById("tvPlayer");
@@ -246,25 +242,22 @@ function abrirCanal(url) {
 const categorias = {
   abertos: {
     titulo: "📺 Canais Abertos",
-    html: `<p><span class="free-tag">Free</span><a href="https://amazonsat.brasilstream.com.br/hls/amazonsat/index.m3u8" target="_blank">AMAZON SAT</a></p>
-    <p><span class="free-tag">Free</span><a href="https://gerenciar.vivatele.com:443/viva_padrao/viva2384/3" target="_blank">BAND RJ</a></p>
+    html: `<p><span class="free-tag">Free</span><a href="https://gerenciar.vivatele.com:443/viva_padrao/viva2384/3" target="_blank">BAND RJ</a></p>
 <p><span class="free-tag">Free</span><a href="https://cdn-3.nxplay.com.br/BAND_HD_PFZ_NX/index.m3u8?token=fr0nt-t3st" target="_blank">BAND HD (DÊ)</a></p>
 <p><span class="free-tag">Free</span><a href="https://beyond.spalla.io/player/?live=0195cdf3-d8d8-74b6-9516-6c79c06bcec8" target="_blank">BAND</a></p>
 <p><span class="free-tag">Free</span><a href="https://cdn.live.br1.jmvstream.com/w/LVW-15748/LVW15748_Yed7yzLuRC/chunklist.m3u8" target="_blank">BAND PARÁ (Dê)</a></p>
-<p><span class="free-tag">Free</span><a href="https://canalgov-stream.ebc.com.br/index.m3u8" target="_blank">CANAL GOV</a></p>
-<p><span class="free-tag">Free</span><a href="https://br5093.streamingdevideo.com.br/abc/abc/playlist.m3u8" target="_blank">COM BRASIL</a></p>
 <p><span class="free-tag">Free</span><a href="https://5b33b873179a2.streamlock.net:1443/live/livestream/chunklist_w1729097234.m3u8" target="_blank">CULTURA TV (Dê)</a></p>
 <p><span class="free-tag">Free</span><a href="https://jmp2.uk/plu-62e010e6cd663f0007e57dc8.m3u8" target="_blank">TV CULTURA</a></p>
 <p><span class="free-tag">Free</span><a href="https://xn--d204s777hp27.cloudfronte.lat/zzzstream/globomg.m3u8" target="_blank">GLOBO MG</a></p>
 <p><span class="free-tag">Free</span><a href="https://cdn-3.nxplay.com.br/TV_TEM_TK/index.m3u8" target="_blank">GLOBO TV TEM (DÊ)</a></p>
 <p><span class="free-tag">Free</span><a href="https://rdcanais.top/globopa" target="_blank">GLOBO TV LIBERAL (DE)</a></p>
+<p><span class="free-tag">Free</span><a href="http://domainforxc.cfd:80/287945811/148063/2366" target="_blank">GLOBO BELÉM (DÊ)</a></p>
 <p><span class="free-tag">Free</span><a href="https://rdcanais.com/globosp" target="_blank">GLOBO SP</a></p>
 <p><span class="free-tag">Free</span><a href="https://cdn-3.nxplay.com.br/GLOBO_SP_TK/index.m3u8?token=fr0nt-t3st" target="_blank">Globo SP (Dê)</a></p>
 <p><span class="free-tag">Free</span><a href="https://rdcanais.top/globosp" target="_blank">GLOBO SP ❪D2❫</a></p>
 <p><span class="free-tag">Free</span><a href="https://rdcanais.top/globorj" target="_blank">GLOBO RJ</a></p>
 <p><span class="free-tag">Free</span><a href="https://xn--d204s777hp27.cloudfronte.lat/zzzstream/globorj.m3u8" target="_blank">GLOBO RJ ❪DÊ)</a></p>
 <p><span class="free-tag">Free</span><a href="http://gerenciar.vivatele.com:80/viva_padrao/viva2384/1" target="_blank">GLOBO RiO SUL (DÊ)</a></p>
-<p><span class="free-tag">Free</span><a href="https://video09.logicahost.com.br/tvnoticiasagricolas/tvnoticiasagricolas/playlist.m3u8" target="_blank">NOTÍCIAS AGRÍCOLAS</a></p>
 <p><span class="free-tag">Free</span><a href="http://gerenciar.vivatele.com:80/viva_padrao/viva2384/13" target="_blank">RECORD TV</a></p>
 <p><span class="free-tag">Free</span><a href="https://cdn.live.br1.jmvstream.com/w/LVW-10842/LVW10842_513N26MDBL/chunklist.m3u8" target="_blank">RECORD BELÉM (DÊ)</a></p>
 <p><span class="free-tag">Free</span><a href="https://xn--d204s777hp28.cloudfronte.lat/zzzstream/recordrj.m3u8" target="_blank">RECORD RJ (DÊ)</a></p>
@@ -272,15 +265,13 @@ const categorias = {
 <p><span class="free-tag">Free</span><a href="https://rdcanais.top/redetv" target="_blank">REDE TV ❪OP2❫</a></p>
 <p><span class="free-tag">Free</span><a href="https://aovivo.maissbt.com/v1/manifest/215c0da80606fed29372070168106400a6ca7e1a/SSAI_TITAN_V3/ac63b34e-0615-4402-a359-892f205ccd70/5.m3u8" target="_blank">SBT SP</a></p>
 <p><span class="free-tag">Free</span><a href="https://cdn.jmvstream.com/w/LVW-10801/LVW10801_Xvg4R0u57n/playlist.m3u8" target="_blank">TH+ SBT</a></p>
-<p><span class="free-tag">Free</span><a href="https://stream3.camara.gov.br/tv1/manifest.m3u8?ManoTV" target="_blank">TV CÂMARA</a></p>
-<p><span class="free-tag">Free</span><a href="https://tbc.zoeweb.tv:443/tbc/tbc/playlist.m3u8" target="_blank">TV BRASIL CENTRAL</a></p>
 <p><span class="free-tag">Free</span><a href="https://video09.logicahost.com.br/tvparaense/tvparaense/playlist.m3u8" target="_blank">SBT CASTANHAL (Dê)</a></p>
 <p><span class="free-tag">Free</span><a href="https://stream.amsolution.net.br:8443/live/60d0a8ea6b884/index.m3u8" target="_blank">SBT Maranhão (Dê)</a></p>`
   },
+
   noticias: {
     titulo: "📰 Notícias",
-    html: `
-<p><span class="free-tag">Free</span><a href="http://gerenciar.vivatele.com:80/viva_padrao/viva2384/21" target="_blank">BAND NEWS (DÊ)</a></p>
+    html: `<p><span class="free-tag">Free</span><a href="http://gerenciar.vivatele.com:80/viva_padrao/viva2384/21" target="_blank">BAND NEWS (DÊ)</a></p>
 <p><span class="free-tag">Free</span><a href="https://redecanaistv.be/player3/ch.php?canal=bandnews" target="_blank">BAND NEWS</a></p>
 <p><span class="free-tag">Free</span><a href="https://d25usgadhphvwi.cloudfront.net/hls/main.m3u8" target="_blank">CNN (Dê)</a></p>
 <p><span class="free-tag">Free</span><a href="http://gerenciar.vivatele.com:80/viva_padrao/viva2384/74" target="_blank">CNN BRASIL</a></p>
@@ -291,9 +282,10 @@ const categorias = {
 <p><span class="free-tag">Free</span><a href="https://rnw-rn-samsungtvplus.otteravision.com/rnw/rn/rnw_rn.m3u8" target="_blank">RECORD NEWS (Dê)</a></p>
 <p><span class="free-tag">Free</span><a href="https://amg00527-amg00527c5-amgplt0026.playout.now3.amagi.tv/ts-us-w2-n1/playlist/amg00527-amg00527c5-amgplt0026/playlist.m3u8" target="_blank">SBTNEWS (Dê)</a></p>
 <p><span class="free-tag">Free</span><a href="https://video30.mais.uol.com.br/live/6146-3.m3u8" target="_blank">UOL NEWS (Dê)</a></p>
-<p><span class="free-tag">Free</span><a href="https://cdn-3.nxplay.com.br/CNBC/tracks-v1a1/mono.ts.m3u8?remote=45.177.139.52&token=fr0nt-t3st" target="_blank">TIMES BRASIL(DÊ)</a></p>
+<p><span class="free-tag">Free</span><a href="https://cdn-3.nxplay.com.br/CNBC/tracks-v1a1/mono.ts.m3u8?remote=45.177.139.52&token=fr0nt-t3st" target="_blank">TIMES BRASIL (DÊ)</a></p>
 <p><span class="free-tag">Free</span><a href="https://jmp2.uk/plu-666c9c60a7efd40008f552f0.m3u8" target="_blank">BM&C NEWS (DÊ)</a></p>`
   },
+
   esportes: {
     titulo: "⚽ Esportes",
     html: `<p><span class="free-tag">Free</span><a href="https://dfr80qz435crc.cloudfront.net/MNOP/Amagi/Caze/Caze_TV_BR/720p-vtt/index.m3u8" target="_blank">CAZÉ TV (DÊ)</a></p>
@@ -323,7 +315,8 @@ const categorias = {
 <p><a href="#" class="premium" onclick="checkPremiumPass('https://rdcanais.top/sportv2'); return false;">SPORTV 2</a></p>
 <p><a href="#" class="premium" onclick="checkPremiumPass('https://rdcanais.top/sportv3'); return false;">SPORTV 3</a></p>
 <p><a href="#" class="premium" onclick="checkPremiumPass('https://rdcanais.top/ufcfightpass'); return false;">UFC FIGHT PASS ❪OP2❫</a></p>`
-  },  
+  },
+
   filmes: {
     titulo: "🎬 Filmes e Séries",
     html: `<p><a href="#" class="premium" onclick="checkPremiumPass('https://redecanaistv.be/player3/ch.php?canal=aie'); return false;">A&E</a></p>
@@ -369,56 +362,58 @@ const categorias = {
 <p><a href="#" class="premium" onclick="checkPremiumPass('https://redecanaistv.be/player3/ch.php?canal=multishow'); return false;">MULTISHOW</a></p>
 <p><span class="free-tag">Free</span><a href="https://xn--d204s777hp27.cloudfronte.lat/zzzstream/multishow.m3u8" target="_blank">MULTISHOW (DÊ)</a></p>
 <p><a href="#" class="premium" onclick="checkPremiumPass('https://anym3u8player.com/tv/p.php?url=https://stream.mediawork.cz/retrotv//retrotvHQ1/playlist.m3u8'); return false;">RETRO MUSIC</a></p>
-<p><span class="free-tag">Free</span><a href="https://cdn-3.nxplay.com.br/ESPN_3/index.m3u8" target="_blank">Prime Box HD</a></p>
-<p><span class="free-tag">Free</span><a href="http://cdn-5.nxplay.com.br/ARTE1/tracks-v1a1/index.m3u8" target="_blank">ARTE 1 HD</a></p>
-<p><span class="free-tag">Free</span><a href="https://cdn-3.nxplay.com.br/Film_Arts_Brasil_TK/index.m3u8" target="_blank">Film & Arts HD</a></p>
-<p><span class="free-tag">Free</span><a href="https://dfr80qz435crc.cloudfront.net/EFGH/Amagi/Globo/Receitas_Fast_BR/Receitas_Fast.m3u8" target="_blank">Receita Fast HD</a></p>
-<p><span class="free-tag">Free</span><a href="https://cdn-3.nxplay.com.br/DISCOVERY_ID_NX/index.m3u8" target="_blank">ID HD</a></p>
-<p><span class="free-tag">Free</span><a href="https://mvg-mv-pt.otteravision.com/mvg/mv_pt/mv_pt.m3u8" target="_blank">Motorvision FHD</a></p>
-<p><span class="free-tag">Free</span><a href="https://f9387554367349db8374885adb2d48cf.mediatailor.us-east-1.amazonaws.com/v1/master/0fb304b2320b25f067414d481a779b77db81760d/Samsung-br_SharkTank/playlist.m3u8" target="_blank">Sony Shark Tank</a></p>
-<p><a href="#" class="premium" onclick="checkPremiumPass('https://redecanaistv.be/player3/ch.php?canal=saboriarte'); return false;">SABOR & ARTE</a></p>`
+<p><a href="#" class="premium" onclick="checkPremiumPass('https://redecanaistv.be/player3/ch.php?canal=saboriarte'); return false;">SABOR & ARTE</a></p>
+<p><a href="#" class="premium" onclick="checkPremiumPass('https://tvacabo.top/player/toptv.html'); return false;">TOP TV</a></p>
+<p><a href="#" class="premium" onclick="checkPremiumPass('https://geo.dailymotion.com/player.html?video=x8ttlxm'); return false;">TV GAZETA</a></p>`
   },
 
   religioso: {
-    titulo: "✝️ Religioso / Documentários / Infantil",
-    html: `
-<p><a href="#" class="premium" onclick="checkPremiumPass('https://rdcanais.top/adultswim'); return false;">ADULT SWIM</a></p>
-<p><a href="#" class="premium" onclick="checkPremiumPass('https://rdcanais.com/cartoonnetwork'); return false;">CARTOON NETWORK</a></p>
-<p><a href="#" class="premium" onclick="checkPremiumPass('https://canais.free.nf/player/movie.html'); return false;">TV CLÁSSICOS</a></p>
-<p><a href="#" class="premium" onclick="checkPremiumPass('https://redecanaistv.be/player3/ch.php?canal=animalplanet'); return false;">ANIMAL PLANET</a></p>
-<p><span class="free-tag">Free</span><a href="https://cdn-3.nxplay.com.br/ANIMAL_PLANET_NX/index.m3u8?token=fr0nt-t3st" target="_blank">ANIMAL PLANET(DÊ)</a></p>
-<p><a href="#" class="premium" onclick="checkPremiumPass('https://redecanaistv.be/player3/ch.php?canal=discoveryhomeihealth'); return false;">DISCOVERY H&H</a></p>
-<p><span class="free-tag">Free</span><a href="https://cdn-3.nxplay.com.br/DISCOVERY_HH_NX/index.m3u8" target="_blank">DISCOVERY H&H(DÊ)</a></p>
-<p><span class="free-tag">Free</span><a href="https://cdn-3.nxplay.com.br/DISCOVERY_THEATER_NX/index.m3u8" target="_blank">DISCOVERY THEATER(DÊ)</a></p>
-<p><a href="#" class="premium" onclick="checkPremiumPass('https://redecanaistv.be/player3/ch.php?canal=discoveryturbo'); return false;">DISCOVERY TURBO</a></p>
-<p><a href="#" class="premium" onclick="checkPremiumPass('https://redecanaistv.be/player3/ch.php?canal=discoveryworld'); return false;">DISCOVERY WORD</a></p>
+    titulo: "✝️ Religioso",
+    html: `<p><span class="free-tag">Free</span><a href="https://cdn-5.nxplay.com.br/TV_APARECIDA_TK/tracks-v1a1/mono.ts.m3u8?token=fr0nt-t3st" target="_blank">TV APARECIDA</a></p>
+<p><span class="free-tag">Free</span><a href="http://gerenciar.vivatele.com:80/viva_padrao/viva2384/81" target="_blank">REDE GOSPEL</a></p>
+<p><span class="free-tag">Free</span><a href="http://gerenciar.vivatele.com:80/viva_padrao/viva2384/49" target="_blank">REDE VIDA</a></p>
+<p><span class="free-tag">Free</span><a href="https://stream.live.novotempo.com/tv/smil:tvnovotempo.smil/chunklist_b3628000_slpor.m3u8" target="_blank">TV NOVO TEMPO</a></p>
+<p><span class="free-tag">Free</span><a href="https://644398c.ha.azioncdn.net/primary/tvuniversal_480p.sdp/playlist.m3u8" target="_blank">IGREJA UNIVERSAL</a></p>
+<p><span class="free-tag">Free</span><a href="https://gerenciar.vivatele.com:443/viva_padrao/viva2384/5" target="_blank">CANÇÃO NOVA</a></p>
+<p><span class="free-tag">Free</span><a href="https://cdn.live.br1.jmvstream.com/w/LVW-19954/LVW19954_V2nXt9iI2m/chunklist.m3u8" target="_blank">REDE SÉCULO 21</a></p>
+<p><span class="free-tag">Free</span><a href="https://canais.free.nf/player/pai.html" target="_blank">TV PAI ETERNO</a></p>`
+  },
+
+  documentarios: {
+    titulo: "📜 Documentários",
+    html: `<p><a href="#" class="premium" onclick="checkPremiumPass('https://redecanaistv.be/player3/ch.php?canal=animalplanet'); return false;">ANIMAL PLANET</a></p>
+<p><span class="free-tag">Free</span><a href="https://cdn-3.nxplay.com.br/ANIMAL_PLANET_NX/index.m3u8?token=fr0nt-t3st" target="_blank">ANIMAL PLANET (DÊ)</a></p>
 <p><a href="#" class="premium" onclick="checkPremiumPass('https://redecanaistv.be/player3/ch.php?canal=discovery'); return false;">DISCOVERY CHANNEL</a></p>
-<p><span class="free-tag">Free</span><a href="https://cdn-3.nxplay.com.br/DISCOVERY_CHANNEL_NX/index.m3u8" target="_blank">DISCOVERY CHANNEL(DÊ)</a></p>
+<p><span class="free-tag">Free</span><a href="https://cdn-3.nxplay.com.br/DISCOVERY_CHANNEL_NX/index.m3u8" target="_blank">DISCOVERY CHANNEL (DÊ)</a></p>
 <p><a href="#" class="premium" onclick="checkPremiumPass('https://redecanaistv.be/player3/ch.php?canal=discoverysience'); return false;">DISCOVERY SCIENCE</a></p>
-<p><span class="free-tag">Free</span><a href="https://cdn-3.nxplay.com.br/DISCOVERY_SCIENCE_NX/index.m3u8" target="_blank">DISCOVERY SCIENCE(DÊ)</a></p>
-<p><a href="#" class="premium" onclick="checkPremiumPass('https://rdcanais.top/discoveryturbo'); return false;">DISCOVERY TURBO</a></p>
+<p><span class="free-tag">Free</span><a href="https://cdn-3.nxplay.com.br/DISCOVERY_SCIENCE_NX/index.m3u8" target="_blank">DISCOVERY SCIENCE (DÊ)</a></p>
+<p><a href="#" class="premium" onclick="checkPremiumPass('https://redecanaistv.be/player3/ch.php?canal=discoveryturbo'); return false;">DISCOVERY TURBO</a></p>
+<p><span class="free-tag">Free</span><a href="https://cdn-3.nxplay.com.br/DISCOVERY_HH_NX/index.m3u8" target="_blank">DISCOVERY H&H (DÊ)</a></p>
+<p><span class="free-tag">Free</span><a href="https://cdn-3.nxplay.com.br/DISCOVERY_THEATER_NX/index.m3u8" target="_blank">DISCOVERY THEATER (DÊ)</a></p>
+<p><a href="#" class="premium" onclick="checkPremiumPass('https://redecanaistv.be/player3/ch.php?canal=discoveryhomeihealth'); return false;">DISCOVERY H&H</a></p>
+<p><a href="#" class="premium" onclick="checkPremiumPass('https://redecanaistv.be/player3/ch.php?canal=discoveryworld'); return false;">DISCOVERY WORD</a></p>
 <p><a href="#" class="premium" onclick="checkPremiumPass('https://redecanaistv.be/player3/ch.php?canal=investigacaodiscovery'); return false;">DISCOVERY ID</a></p>
 <p><a href="#" class="premium" onclick="checkPremiumPass('https://redecanaistv.be/player3/ch.php?canal=history'); return false;">HISTORY CHANNEL</a></p>
 <p><a href="#" class="premium" onclick="checkPremiumPass('https://redecanaistv.be/player3/ch.php?canal=history2'); return false;">HISTORY 2</a></p>
 <p><a href="#" class="premium" onclick="checkPremiumPass('https://redecanaistv.be/player3/ch.php?canal=hgtv'); return false;">HGTV</a></p>
-<p><span class="free-tag">Free</span><a href="http://200.229.190.189:8001/play/a01b" target="_blank">HGTV(DÊ)</a></p>
-<p><a href="#" class="premium" onclick="checkPremiumPass('https://canais.free.nf/player/loading.html'); return false;">LOADING TV</a></p>
-<p><a href="#" class="premium" onclick="checkPremiumPass('https://canais.free.nf/player/movie.html'); return false;">MOVIESPHERE BRAZIL</a></p>
-<p><a href="#" class="premium" onclick="checkPremiumPass('https://rdcanais.top/modoviagem'); return false;">MODO VIAGEM</a></p>
-<p><a href="#" class="premium" onclick="checkPremiumPass('https://canais.free.nf/player/natgeo.html?i=1'); return false;">NAT GEO ANIMALS</a></p>
-<p><span class="free-tag">Free</span><a href="https://stream.live.novotempo.com/tv/smil:tvnovotempo.smil/chunklist_b3628000_slpor.m3u8" target="_blank">TV NOVO TEMPO</a></p>
-<p><span class="free-tag">Free</span><a href="https://canais.free.nf/player/pai.html" target="_blank">TV PAI ETERNO</a></p>
-<p><span class="free-tag">Free</span><a href="http://gerenciar.vivatele.com:80/viva_padrao/viva2384/81" target="_blank">REDE GOSPEL</a></p>
-<p><span class="free-tag">Free</span><a href="http://gerenciar.vivatele.com:80/viva_padrao/viva2384/49" target="_blank">REDE VIDA</a></p>
-<p><span class="free-tag">Free</span><a href="https://cdn-5.nxplay.com.br/TV_APARECIDA_TK/tracks-v1a1/mono.ts.m3u8?token=fr0nt-t3st" target="_blank">TV APARECIDA</a></p>
+<p><span class="free-tag">Free</span><a href="https://cdn-3.nxplay.com.br/HGTV_BR_NX/index.m3u8" target="_blank">HGTV (DÊ)</a></p>`
+  },
+
+  infantil: {
+    titulo: "🧸 Infantil",
+    html: `<p><a href="#" class="premium" onclick="checkPremiumPass('https://rdcanais.com/cartoonnetwork'); return false;">CARTOON NETWORK</a></p>
 <p><span class="free-tag">Free</span><a href="http://gerenciar.vivatele.com:80/viva_padrao/viva2384/49" target="_blank">RETRÔ CARTOON</a></p>
-<p><span class="free-tag">Free</span><a href="http://ngzcdn.vulcanzz.click/live/292330036/5179425/375.m3u8?sjwt=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJleHAiOjE3NzUwODc5OTksImlhdCI6MTc3NTAwMTYwMCwibmJmIjoxNzc1MDAxNjAwLCJ1c2VyIjoiMjkyMzMwMDM2IiwidXNlckFnZW50IjoiTW96aWxsYS81LjAgKExpbnV4OyBBbmRyb2lkIDEzOyBTTS1NMTI3RikgQXBwbGVXZWJLaXQvNTM3LjM2IChLSFRNTCwgbGlrZSBHZWNrbykgQ2hyb21lLzE0Ni4wLjc2ODAuMTE5IE1vYmlsZSBTYWZhcmkvNTM3LjM2IiwidXNlcklwIjoiMTg1LjIzNi4xODMuMTA3OjM5NzQyIn0.FPuef5HTEY2okS5LlFreHEjgWTDDZZjHHi49EcUfgXE&id=375&p=m3u8&aid=1775069959" target="_blank">TV RÁ-TIM-BUM</a></p>
-<p><span class="free-tag">Free</span><a href="https://9ada494d.wurl.com/master/f36d25e7e52f1ba8d7e56eb859c636563214f541/TEctYnJfVXBseW5rLU5ld2NvX0hMUw/playlist.m3u8" target="_blank">TERRAVIVA</a></p>
-<p><span class="free-tag">Free</span><a href="https://cdn-3.nxplay.com.br/VEJA_PLUS_FAST/tracks-v1a1/mono.ts.m3u8?remote=45.177.139.52&token=fr0nt-t3st" target="_blank">VEJA+ (DÊ)</a></p>`
+<p><span class="free-tag">Free</span><a href="https://stmv1.srvif.com/kids/kids/playlist.m3u8" target="_blank">KIDS</a></p>
+<p><span class="free-tag">Free</span><a href="https://stmv1.srvif.com/cartoon/cartoon/playlist.m3u8" target="_blank">CARTOON</a></p>`
+  },
+
+  cliente: {
+    titulo: "📡 Canal do Cliente",
+    html: `<p><a href="#" onclick="abrirCanal('https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTdJU8ctk0wRTLifsRptaukHRImtomn6yP1bZOtl8QnnQ&s=10'); return false;">📡 CANAL DO CLIENTE (DÊ)</a></p>`
   }
 };
 
-// ======= NAVEGAÇÃO =======
+// NAVEGAÇÃO
 function abrirCategoria(id) {
   const cat = categorias[id];
   document.getElementById("tela-categorias").style.display = "none";
@@ -436,12 +431,11 @@ function voltarCategorias() {
   window.scrollTo(0,0);
 }
 
-// ======= BUSCA GLOBAL =======
+// BUSCA
 function buscarCanal(term) {
   term = term.trim().toLowerCase();
   if (!term) { fecharBusca(); return; }
 
-  // Junta todos os canais de todas as categorias
   let todos = "";
   for (const id in categorias) todos += categorias[id].html;
 
