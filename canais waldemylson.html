@@ -307,13 +307,19 @@ Copiar Chave PIX e Doar
 </div>
 
 <script>
+function abrirCanal(url) {
+    // Abre o link em uma nova aba/janela
+    window.open(url, '_blank');
+    return false;
+}
+
 document.getElementById('copiar-pix').addEventListener('click',function(){
-const chave='xtreambr@gmail.com';
-navigator.clipboard.writeText(chave).then(function(){
-alert('Chave PIX copiada! Obrigado pelo apoio!');
-}).catch(function(){
-alert('Erro ao copiar. Copie manualmente: '+chave);
-});
+    const chave='xtreambr@gmail.com';
+    navigator.clipboard.writeText(chave).then(function(){
+        alert('Chave PIX copiada! Obrigado pelo apoio!');
+    }).catch(function(){
+        alert('Erro ao copiar. Copie manualmente: '+chave);
+    });
 });
 </script>
 
