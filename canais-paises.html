@@ -1,0 +1,461 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+  <title>Canais por País - XTREAMBR TV</title>
+  <link rel="icon" type="image/png" sizes="32x32" href="https://raw.githubusercontent.com/Waldemylson/Xtreambr-logo/main/32.png">
+  <link rel="apple-touch-icon" sizes="180x180" href="https://raw.githubusercontent.com/Waldemylson/Xtreambr-logo/main/180.png">
+  <link rel="icon" type="image/png" sizes="192x192" href="https://raw.githubusercontent.com/Waldemylson/Xtreambr-logo/main/192.png">
+  <link rel="icon" type="image/png" sizes="512x512" href="https://raw.githubusercontent.com/Waldemylson/Xtreambr-logo/main/512.png">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.6.0/css/all.min.css">
+  <style>
+    * { margin:0; padding:0; box-sizing:border-box; }
+    body {
+      background: #000;
+      color: #0f0;
+      font-family: Arial, sans-serif;
+      padding: 20px;
+      min-height: 100vh;
+    }
+    .header {
+      text-align: center;
+      margin-bottom: 30px;
+    }
+    .header h1 {
+      color: #0f0;
+      font-size: 1.8rem;
+    }
+    .header p {
+      color: #aaa;
+      font-size: 0.9rem;
+      margin-top: 5px;
+    }
+    .back-home {
+      display: inline-block;
+      background: #001a00;
+      border: 1px solid #0f0;
+      color: #0f0;
+      padding: 10px 20px;
+      border-radius: 25px;
+      text-decoration: none;
+      margin-bottom: 20px;
+      font-size: 0.9rem;
+      transition: all 0.2s;
+    }
+    .back-home:hover {
+      background: #0f0;
+      color: #000;
+    }
+    .grid-paises {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(140px, 1fr));
+      gap: 15px;
+      margin: 25px 0;
+    }
+    .btn-pais {
+      background: #0a0a0a;
+      border: 2px solid #0f0;
+      border-radius: 14px;
+      padding: 18px 10px;
+      text-align: center;
+      cursor: pointer;
+      font-weight: bold;
+      font-size: 1.1rem;
+      transition: all 0.2s;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 8px;
+    }
+    .btn-pais:hover {
+      background: #0f0;
+      color: #000;
+      transform: scale(1.02);
+    }
+    .btn-pais .flag {
+      font-size: 2rem;
+    }
+    .canais-container {
+      margin-top: 20px;
+    }
+    .btn-voltar-paises {
+      background: #001a00;
+      border: 1px solid #0f0;
+      color: #0f0;
+      padding: 10px 20px;
+      border-radius: 25px;
+      cursor: pointer;
+      margin-bottom: 20px;
+      font-size: 0.9rem;
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+    }
+    .btn-voltar-paises:hover {
+      background: #0f0;
+      color: #000;
+    }
+    .titulo-pais {
+      color: #ff0;
+      font-size: 1.4rem;
+      margin-bottom: 20px;
+      padding-bottom: 10px;
+      border-bottom: 1px solid #0f0;
+    }
+    .lista-canais {
+      display: flex;
+      flex-direction: column;
+      gap: 8px;
+    }
+    .canal-item {
+      background: #0a0a0a;
+      border-radius: 10px;
+      padding: 12px 15px;
+      cursor: pointer;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      transition: all 0.2s;
+      border-left: 4px solid #0f0;
+    }
+    .canal-item:hover {
+      background: #0f0;
+      color: #000;
+    }
+    .canal-nome {
+      font-size: 1rem;
+      font-weight: bold;
+    }
+    .canal-assistir {
+      background: rgba(0,255,0,0.2);
+      padding: 4px 12px;
+      border-radius: 20px;
+      font-size: 0.8rem;
+    }
+    .canal-item:hover .canal-assistir {
+      background: #000;
+      color: #0f0;
+    }
+    .sem-canais {
+      text-align: center;
+      padding: 40px;
+      color: #666;
+    }
+    footer {
+      text-align: center;
+      margin-top: 40px;
+      padding-top: 20px;
+      border-top: 1px solid #333;
+      color: #666;
+      font-size: 0.8rem;
+    }
+    @media (max-width: 600px) {
+      .grid-paises { grid-template-columns: repeat(auto-fill, minmax(110px, 1fr)); }
+      .btn-pais { padding: 12px 5px; font-size: 0.9rem; }
+      .canal-item { flex-wrap: wrap; gap: 8px; }
+    }
+  </style>
+</head>
+<body>
+
+<div class="header">
+  <a href="index.html" class="back-home">← Voltar para o início</a>
+  <h1>🌍 CANAIS POR PAÍS</h1>
+  <p>Selecione um país para ver a lista de canais disponíveis</p>
+</div>
+
+<div id="listaPaises" class="grid-paises"></div>
+<div id="canaisContainer" class="canais-container" style="display:none;">
+  <button class="btn-voltar-paises" id="btnVoltarPaises">← Voltar aos Países</button>
+  <div id="tituloPais" class="titulo-pais"></div>
+  <div id="listaCanais" class="lista-canais"></div>
+</div>
+
+<footer>
+  🌐 XTREAMBR TV - Canais de todos os países | Projeto mantido com dedicação
+</footer>
+
+<script>
+// =====================================================
+// BANCO DE DADOS DOS CANAIS POR PAÍS
+// =====================================================
+
+const canaisPorPais = {
+  "Argentina": {
+    flag: "🇦🇷",
+    canais: [
+      { nome: "América TV", url: "https://5f3d44d595f8998b52325566d360366c.cloudfronte.lat/zzzstream/americatv.m3u8" },
+      { nome: "Telefe", url: "https://5f3d44d595f8998b52325566d360366c.cloudfronte.lat/zzzstream/telefe.m3u8" },
+      { nome: "El Trece", url: "https://5f3d44d595f8998b52325566d360366c.cloudfronte.lat/zzzstream/eltrece.m3u8" },
+      { nome: "TN (Todo Noticias)", url: "https://5f3d44d595f8998b52325566d360366c.cloudfronte.lat/zzzstream/tn.m3u8" },
+      { nome: "TyC Sports", url: "https://5f3d44d595f8998b52325566d360366c.cloudfronte.lat/zzzstream/tycsports.m3u8" },
+      { nome: "ESPN Argentina", url: "https://5f3d44d595f8998b52325566d360366c.cloudfronte.lat/zzzstream/espnarg.m3u8" },
+      { nome: "Fox Sports Argentina", url: "https://5f3d44d595f8998b52325566d360366c.cloudfronte.lat/zzzstream/foxsportsarg.m3u8" },
+      { nome: "Canal 26", url: "https://5f3d44d595f8998b52325566d360366c.cloudfronte.lat/zzzstream/canal26.m3u8" },
+      { nome: "La Nación +", url: "https://5f3d44d595f8998b52325566d360366c.cloudfronte.lat/zzzstream/lanacion.m3u8" }
+    ]
+  },
+  "Bolivia": {
+    flag: "🇧🇴",
+    canais: [
+      { nome: "Red Uno", url: "https://5f3d44d595f8998b52325566d360366c.cloudfronte.lat/zzzstream/reduno.m3u8" },
+      { nome: "Unitel", url: "https://5f3d44d595f8998b52325566d360366c.cloudfronte.lat/zzzstream/unitel.m3u8" },
+      { nome: "ATB", url: "https://5f3d44d595f8998b52325566d360366c.cloudfronte.lat/zzzstream/atb.m3u8" },
+      { nome: "Bolivisión", url: "https://5f3d44d595f8998b52325566d360366c.cloudfronte.lat/zzzstream/bolivision.m3u8" },
+      { nome: "RTP Bolivia", url: "https://5f3d44d595f8998b52325566d360366c.cloudfronte.lat/zzzstream/rtpbolivia.m3u8" },
+      { nome: "Tigo Sports Bolivia", url: "https://5f3d44d595f8998b52325566d360366c.cloudfronte.lat/zzzstream/tigosports.m3u8" }
+    ]
+  },
+  "Brasil": {
+    flag: "🇧🇷",
+    canais: [
+      { nome: "Globo SP", url: "https://cdn-3.nxplay.com.br/GLOBO_SP_TK/index.m3u8?token=fr0nt-t3st" },
+      { nome: "Globo RJ", url: "https://xn--d204s777hp27.cloudfronte.lat/zzzstream/globorj.m3u8" },
+      { nome: "Globo MG", url: "https://xn--d204s777hp27.cloudfronte.lat/zzzstream/globomg.m3u8" },
+      { nome: "Globo PE", url: "https://5f3d44d595f8998b52325566d360366c.cloudfronte.lat/zzzstream/globope.m3u8" },
+      { nome: "Globo RS", url: "https://5f3d44d595f8998b52325566d360366c.cloudfronte.lat/zzzstream/globors.m3u8" },
+      { nome: "Record SP", url: "http://gerenciar.vivatele.com:80/viva_padrao/viva2384/13" },
+      { nome: "Record RJ", url: "https://xn--d204s777hp28.cloudfronte.lat/zzzstream/recordrj.m3u8" },
+      { nome: "SBT SP", url: "https://aovivo.maissbt.com/v1/manifest/215c0da80606fed29372070168106400a6ca7e1a/SSAI_TITAN_V3/ac63b34e-0615-4402-a359-892f205ccd70/5.m3u8" },
+      { nome: "Band SP", url: "https://cdn-3.nxplay.com.br/BAND_HD_PFZ_NX/index.m3u8?token=fr0nt-t3st" },
+      { nome: "Band RJ", url: "https://xn--d204s777hp28.cloudfronte.lat/zzzstream/bandrj.m3u8" },
+      { nome: "CNN Brasil", url: "http://gerenciar.vivatele.com:80/viva_padrao/viva2384/74" },
+      { nome: "GloboNews", url: "https://redecanaistv.be/player3/ch.php?canal=globonews" },
+      { nome: "Band News", url: "http://gerenciar.vivatele.com:80/viva_padrao/viva2384/21" },
+      { nome: "Sportv", url: "https://cr7v.short.gy/manoiTVOP3/sptvxtra2/75991634025/index.m3u8" },
+      { nome: "ESPN Brasil", url: "https://redecanaistv.be/player3/ch.php?canal=espn" },
+      { nome: "ESPN 2", url: "https://redecanaistv.be/player3/ch.php?canal=espn2" },
+      { nome: "ESPN 3", url: "https://redecanaistv.be/player3/ch.php?canal=espn3" },
+      { nome: "Combate", url: "https://xn--d204s777hp27.cloudfronte.lat/zzzstream/combate.m3u8" },
+      { nome: "TNT", url: "https://rdcanais.top/tnt" },
+      { nome: "Space", url: "https://rdcanais.top/space" },
+      { nome: "HBO", url: "https://redecanaistv.be/player3/ch.php?canal=hbo" },
+      { nome: "Warner TV", url: "https://rdcanais.top/warnertv" },
+      { nome: "Universal TV", url: "https://rdcanais.top/universaltv" },
+      { nome: "AMC", url: "https://redecanaistv.be/player3/ch.php?canal=amc" },
+      { nome: "AXN", url: "https://redecanaistv.be/player3/ch.php?canal=axn" },
+      { nome: "Sony Channel", url: "https://cdn-3.nxplay.com.br/SONY_CHANNEL/index.m3u8" },
+      { nome: "Discovery Channel", url: "https://cdn-3.nxplay.com.br/DISCOVERY_CHANNEL_NX/index.m3u8" },
+      { nome: "History Channel", url: "https://redecanaistv.be/player3/ch.php?canal=history" },
+      { nome: "National Geographic", url: "https://redecanaistv.be/player3/ch.php?canal=natgeo" },
+      { nome: "Cartoon Network", url: "https://rdcanais.com/cartoonnetwork" },
+      { nome: "Multishow", url: "https://xn--d204s777hp27.cloudfronte.lat/zzzstream/multishow.m3u8" },
+      { nome: "GNT", url: "https://rdcanais.top/gnt" },
+      { nome: "TV Cultura", url: "https://jmp2.uk/plu-62e010e6cd663f0007e57dc8.m3u8" },
+      { nome: "RedeTV", url: "https://streaming.cloudecast.com/hls/redetves/index.m3u8" },
+      { nome: "TV Aparecida", url: "https://cdn-5.nxplay.com.br/TV_APARECIDA_TK/tracks-v1a1/mono.ts.m3u8?token=fr0nt-t3st" },
+      { nome: "Rede Vida", url: "http://gerenciar.vivatele.com:80/viva_padrao/viva2384/49" },
+      { nome: "Cazé TV", url: "https://dfr80qz435crc.cloudfront.net/MNOP/Amagi/Caze/Caze_TV_BR/720p-vtt/index.m3u8" }
+    ]
+  },
+  "Chile": {
+    flag: "🇨🇱",
+    canais: [
+      { nome: "TVN", url: "https://5f3d44d595f8998b52325566d360366c.cloudfronte.lat/zzzstream/tvn.m3u8" },
+      { nome: "CHV (Canal 13)", url: "https://5f3d44d595f8998b52325566d360366c.cloudfronte.lat/zzzstream/chv.m3u8" },
+      { nome: "Mega", url: "https://5f3d44d595f8998b52325566d360366c.cloudfronte.lat/zzzstream/mega.m3u8" },
+      { nome: "CNN Chile", url: "https://5f3d44d595f8998b52325566d360366c.cloudfronte.lat/zzzstream/cnnchile.m3u8" },
+      { nome: "La Red", url: "https://5f3d44d595f8998b52325566d360366c.cloudfronte.lat/zzzstream/lared.m3u8" },
+      { nome: "TV+", url: "https://5f3d44d595f8998b52325566d360366c.cloudfronte.lat/zzzstream/tvmas.m3u8" },
+      { nome: "TNT Sports Chile", url: "https://5f3d44d595f8998b52325566d360366c.cloudfronte.lat/zzzstream/tntsportscl.m3u8" }
+    ]
+  },
+  "Colômbia": {
+    flag: "🇨🇴",
+    canais: [
+      { nome: "Caracol TV", url: "https://5f3d44d595f8998b52325566d360366c.cloudfronte.lat/zzzstream/caracol.m3u8" },
+      { nome: "RCN TV", url: "https://5f3d44d595f8998b52325566d360366c.cloudfronte.lat/zzzstream/rcn.m3u8" },
+      { nome: "Win Sports", url: "https://5f3d44d595f8998b52325566d360366c.cloudfronte.lat/zzzstream/winsports.m3u8" },
+      { nome: "NTN24", url: "https://5f3d44d595f8998b52325566d360366c.cloudfronte.lat/zzzstream/ntn24.m3u8" },
+      { nome: "Señal Colombia", url: "https://5f3d44d595f8998b52325566d360366c.cloudfronte.lat/zzzstream/senalc.m3u8" },
+      { nome: "Canal Trece", url: "https://5f3d44d595f8998b52325566d360366c.cloudfronte.lat/zzzstream/canaltrece.m3u8" },
+      { nome: "Teleantioquia", url: "https://5f3d44d595f8998b52325566d360366c.cloudfronte.lat/zzzstream/teleantioquia.m3u8" },
+      { nome: "Canal Capital", url: "https://5f3d44d595f8998b52325566d360366c.cloudfronte.lat/zzzstream/canalcapital.m3u8" }
+    ]
+  },
+  "Equador": {
+    flag: "🇪🇨",
+    canais: [
+      { nome: "Ecuavisa", url: "https://5f3d44d595f8998b52325566d360366c.cloudfronte.lat/zzzstream/ecuavisa.m3u8" },
+      { nome: "Teleamazonas", url: "https://5f3d44d595f8998b52325566d360366c.cloudfronte.lat/zzzstream/teleamazonas.m3u8" },
+      { nome: "RTS", url: "https://5f3d44d595f8998b52325566d360366c.cloudfronte.lat/zzzstream/rts.m3u8" },
+      { nome: "TC Televisión", url: "https://5f3d44d595f8998b52325566d360366c.cloudfronte.lat/zzzstream/tc.m3u8" },
+      { nome: "Gama TV", url: "https://5f3d44d595f8998b52325566d360366c.cloudfronte.lat/zzzstream/gamatv.m3u8" },
+      { nome: "Oromar TV", url: "https://5f3d44d595f8998b52325566d360366c.cloudfronte.lat/zzzstream/oromar.m3u8" },
+      { nome: "Directv Sports Ecuador", url: "https://5f3d44d595f8998b52325566d360366c.cloudfronte.lat/zzzstream/directvsports.m3u8" }
+    ]
+  },
+  "Espanha": {
+    flag: "🇪🇸",
+    canais: [
+      { nome: "La 1 (TVE)", url: "https://5f3d44d595f8998b52325566d360366c.cloudfronte.lat/zzzstream/la1.m3u8" },
+      { nome: "La 2 (TVE)", url: "https://5f3d44d595f8998b52325566d360366c.cloudfronte.lat/zzzstream/la2.m3u8" },
+      { nome: "Antena 3", url: "https://5f3d44d595f8998b52325566d360366c.cloudfronte.lat/zzzstream/antena3.m3u8" },
+      { nome: "Telecinco", url: "https://5f3d44d595f8998b52325566d360366c.cloudfronte.lat/zzzstream/telecinco.m3u8" },
+      { nome: "La Sexta", url: "https://5f3d44d595f8998b52325566d360366c.cloudfronte.lat/zzzstream/lasexta.m3u8" },
+      { nome: "Cuatro", url: "https://5f3d44d595f8998b52325566d360366c.cloudfronte.lat/zzzstream/cuatro.m3u8" },
+      { nome: "24h TVE", url: "https://5f3d44d595f8998b52325566d360366c.cloudfronte.lat/zzzstream/24htve.m3u8" },
+      { nome: "Teledeporte", url: "https://5f3d44d595f8998b52325566d360366c.cloudfronte.lat/zzzstream/teledeporte.m3u8" },
+      { nome: "Movistar Deportes", url: "https://5f3d44d595f8998b52325566d360366c.cloudfronte.lat/zzzstream/movistardeportes.m3u8" },
+      { nome: "DAZN LaLiga", url: "https://5f3d44d595f8998b52325566d360366c.cloudfronte.lat/zzzstream/daznlaliga.m3u8" },
+      { nome: "Real Madrid TV", url: "https://5f3d44d595f8998b52325566d360366c.cloudfronte.lat/zzzstream/realmadridtv.m3u8" }
+    ]
+  },
+  "México": {
+    flag: "🇲🇽",
+    canais: [
+      { nome: "Las Estrellas", url: "https://5f3d44d595f8998b52325566d360366c.cloudfronte.lat/zzzstream/lasestrellas.m3u8" },
+      { nome: "Azteca 1", url: "https://5f3d44d595f8998b52325566d360366c.cloudfronte.lat/zzzstream/azteca1.m3u8" },
+      { nome: "Azteca 7", url: "https://5f3d44d595f8998b52325566d360366c.cloudfronte.lat/zzzstream/azteca7.m3u8" },
+      { nome: "TUDN", url: "https://5f3d44d595f8998b52325566d360366c.cloudfronte.lat/zzzstream/tudn.m3u8" },
+      { nome: "Canal 5", url: "https://5f3d44d595f8998b52325566d360366c.cloudfronte.lat/zzzstream/canal5.m3u8" },
+      { nome: "Fox Sports México", url: "https://5f3d44d595f8998b52325566d360366c.cloudfronte.lat/zzzstream/foxsportsmx.m3u8" },
+      { nome: "ESPN México", url: "https://5f3d44d595f8998b52325566d360366c.cloudfronte.lat/zzzstream/espnmx.m3u8" },
+      { nome: "Sky Sports México", url: "https://5f3d44d595f8998b52325566d360366c.cloudfronte.lat/zzzstream/skysportsmx.m3u8" },
+      { nome: "Adrenalina Sports", url: "https://5f3d44d595f8998b52325566d360366c.cloudfronte.lat/zzzstream/adrenalina.m3u8" }
+    ]
+  },
+  "Peru": {
+    flag: "🇵🇪",
+    canais: [
+      { nome: "América TV Perú", url: "https://5f3d44d595f8998b52325566d360366c.cloudfronte.lat/zzzstream/americatvperu.m3u8" },
+      { nome: "ATV", url: "https://5f3d44d595f8998b52325566d360366c.cloudfronte.lat/zzzstream/atv.m3u8" },
+      { nome: "Latina TV", url: "https://5f3d44d595f8998b52325566d360366c.cloudfronte.lat/zzzstream/latinatv.m3u8" },
+      { nome: "Panamericana TV", url: "https://5f3d44d595f8998b52325566d360366c.cloudfronte.lat/zzzstream/panamericana.m3u8" },
+      { nome: "Canal N", url: "https://5f3d44d595f8998b52325566d360366c.cloudfronte.lat/zzzstream/canaln.m3u8" },
+      { nome: "Movistar Deportes Perú", url: "https://5f3d44d595f8998b52325566d360366c.cloudfronte.lat/zzzstream/movistardeportesperu.m3u8" },
+      { nome: "La Liga 1 Max", url: "https://5f3d44d595f8998b52325566d360366c.cloudfronte.lat/zzzstream/laliga1max.m3u8" }
+    ]
+  },
+  "Portugal": {
+    flag: "🇵🇹",
+    canais: [
+      { nome: "RTP1", url: "https://5f3d44d595f8998b52325566d360366c.cloudfronte.lat/zzzstream/rtp1.m3u8" },
+      { nome: "RTP2", url: "https://5f3d44d595f8998b52325566d360366c.cloudfronte.lat/zzzstream/rtp2.m3u8" },
+      { nome: "RTP3", url: "https://5f3d44d595f8998b52325566d360366c.cloudfronte.lat/zzzstream/rtp3.m3u8" },
+      { nome: "SIC", url: "https://5f3d44d595f8998b52325566d360366c.cloudfronte.lat/zzzstream/sic.m3u8" },
+      { nome: "TVI", url: "https://5f3d44d595f8998b52325566d360366c.cloudfronte.lat/zzzstream/tvi.m3u8" },
+      { nome: "Sport TV 1", url: "https://5f3d44d595f8998b52325566d360366c.cloudfronte.lat/zzzstream/sporttv1.m3u8" },
+      { nome: "Sport TV 2", url: "https://5f3d44d595f8998b52325566d360366c.cloudfronte.lat/zzzstream/sporttv2.m3u8" },
+      { nome: "Sport TV 3", url: "https://5f3d44d595f8998b52325566d360366c.cloudfronte.lat/zzzstream/sporttv3.m3u8" },
+      { nome: "Benfica TV", url: "https://5f3d44d595f8998b52325566d360366c.cloudfronte.lat/zzzstream/benficatv.m3u8" },
+      { nome: "Porto Canal", url: "https://5f3d44d595f8998b52325566d360366c.cloudfronte.lat/zzzstream/portocanal.m3u8" },
+      { nome: "SIC Notícias", url: "https://5f3d44d595f8998b52325566d360366c.cloudfronte.lat/zzzstream/sicnoticias.m3u8" },
+      { nome: "CMTV", url: "https://5f3d44d595f8998b52325566d360366c.cloudfronte.lat/zzzstream/cmtv.m3u8" }
+    ]
+  },
+  "EUA": {
+    flag: "🇺🇸",
+    canais: [
+      { nome: "CNN International", url: "https://5f3d44d595f8998b52325566d360366c.cloudfronte.lat/zzzstream/cnnint.m3u8" },
+      { nome: "Fox News", url: "https://5f3d44d595f8998b52325566d360366c.cloudfronte.lat/zzzstream/foxnews.m3u8" },
+      { nome: "ABC", url: "https://5f3d44d595f8998b52325566d360366c.cloudfronte.lat/zzzstream/abc.m3u8" },
+      { nome: "NBC", url: "https://5f3d44d595f8998b52325566d360366c.cloudfronte.lat/zzzstream/nbc.m3u8" },
+      { nome: "CBS", url: "https://5f3d44d595f8998b52325566d360366c.cloudfronte.lat/zzzstream/cbs.m3u8" },
+      { nome: "HBO", url: "https://5f3d44d595f8998b52325566d360366c.cloudfronte.lat/zzzstream/hbo.m3u8" },
+      { nome: "HBO 2", url: "https://5f3d44d595f8998b52325566d360366c.cloudfronte.lat/zzzstream/hbo2.m3u8" },
+      { nome: "Fox Sports 1", url: "https://5f3d44d595f8998b52325566d360366c.cloudfronte.lat/zzzstream/fs1.m3u8" },
+      { nome: "Fox Sports 2", url: "https://5f3d44d595f8998b52325566d360366c.cloudfronte.lat/zzzstream/fs2.m3u8" },
+      { nome: "ESPN US", url: "https://5f3d44d595f8998b52325566d360366c.cloudfronte.lat/zzzstream/espnus.m3u8" },
+      { nome: "ESPN 2 US", url: "https://5f3d44d595f8998b52325566d360366c.cloudfronte.lat/zzzstream/espn2us.m3u8" },
+      { nome: "NFL Network", url: "https://5f3d44d595f8998b52325566d360366c.cloudfronte.lat/zzzstream/nflnetwork.m3u8" },
+      { nome: "NBA TV", url: "https://5f3d44d595f8998b52325566d360366c.cloudfronte.lat/zzzstream/nbatv.m3u8" },
+      { nome: "Discovery US", url: "https://5f3d44d595f8998b52325566d360366c.cloudfronte.lat/zzzstream/discoveryus.m3u8" },
+      { nome: "National Geographic US", url: "https://5f3d44d595f8998b52325566d360366c.cloudfronte.lat/zzzstream/natgeous.m3u8" },
+      { nome: "History Channel US", url: "https://5f3d44d595f8998b52325566d360366c.cloudfronte.lat/zzzstream/historyus.m3u8" },
+      { nome: "FX", url: "https://5f3d44d595f8998b52325566d360366c.cloudfronte.lat/zzzstream/fx.m3u8" },
+      { nome: "AMC US", url: "https://5f3d44d595f8998b52325566d360366c.cloudfronte.lat/zzzstream/amcus.m3u8" },
+      { nome: "TNT US", url: "https://5f3d44d595f8998b52325566d360366c.cloudfronte.lat/zzzstream/tntus.m3u8" }
+    ]
+  },
+  "Uruguai": {
+    flag: "🇺🇾",
+    canais: [
+      { nome: "Canal 4 Uruguay", url: "https://5f3d44d595f8998b52325566d360366c.cloudfronte.lat/zzzstream/canal4uy.m3u8" },
+      { nome: "Canal 10 Uruguay", url: "https://5f3d44d595f8998b52325566d360366c.cloudfronte.lat/zzzstream/canal10uy.m3u8" },
+      { nome: "Teledoce", url: "https://5f3d44d595f8998b52325566d360366c.cloudfronte.lat/zzzstream/teledoce.m3u8" },
+      { nome: "VTV Uruguay", url: "https://5f3d44d595f8998b52325566d360366c.cloudfronte.lat/zzzstream/vtvuy.m3u8" },
+      { nome: "TV Ciudad", url: "https://5f3d44d595f8998b52325566d360366c.cloudfronte.lat/zzzstream/tvciudad.m3u8" }
+    ]
+  },
+  "Venezuela": {
+    flag: "🇻🇪",
+    canais: [
+      { nome: "Venevisión", url: "https://5f3d44d595f8998b52325566d360366c.cloudfronte.lat/zzzstream/venevision.m3u8" },
+      { nome: "Televen", url: "https://5f3d44d595f8998b52325566d360366c.cloudfronte.lat/zzzstream/televen.m3u8" },
+      { nome: "Globovisión", url: "https://5f3d44d595f8998b52325566d360366c.cloudfronte.lat/zzzstream/globovision.m3u8" },
+      { nome: "Venevisión Plus", url: "https://5f3d44d595f8998b52325566d360366c.cloudfronte.lat/zzzstream/venevisionplus.m3u8" },
+      { nome: "TVes", url: "https://5f3d44d595f8998b52325566d360366c.cloudfronte.lat/zzzstream/tves.m3u8" },
+      { nome: "Canal I", url: "https://5f3d44d595f8998b52325566d360366c.cloudfronte.lat/zzzstream/canali.m3u8" }
+    ]
+  }
+};
+
+// =====================================================
+// LÓGICA DA PÁGINA
+// =====================================================
+
+const listaPaisesDiv = document.getElementById("listaPaises");
+const canaisContainer = document.getElementById("canaisContainer");
+const tituloPaisDiv = document.getElementById("tituloPais");
+const listaCanaisDiv = document.getElementById("listaCanais");
+const btnVoltar = document.getElementById("btnVoltarPaises");
+
+// Criar botões dos países
+for (let pais in canaisPorPais) {
+  const info = canaisPorPais[pais];
+  const btn = document.createElement("div");
+  btn.className = "btn-pais";
+  btn.innerHTML = `<span class="flag">${info.flag}</span><span>${pais}</span>`;
+  btn.onclick = (function(paisNome, canaisLista) {
+    return function() { mostrarCanais(paisNome, canaisLista); };
+  })(pais, info.canais);
+  listaPaisesDiv.appendChild(btn);
+}
+
+function mostrarCanais(pais, canais) {
+  listaPaisesDiv.style.display = "none";
+  canaisContainer.style.display = "block";
+  tituloPaisDiv.innerHTML = `${canaisPorPais[pais].flag} ${pais} (${canais.length} canais)`;
+  listaCanaisDiv.innerHTML = "";
+  
+  canais.forEach(canal => {
+    const item = document.createElement("div");
+    item.className = "canal-item";
+    item.innerHTML = `
+      <span class="canal-nome">📺 ${canal.nome}</span>
+      <span class="canal-assistir">▶ Assistir</span>
+    `;
+    item.onclick = function() { 
+      if (canal.url && canal.url !== "#") {
+        window.open(canal.url, "_blank");
+      } else {
+        alert("Link do canal indisponível no momento.");
+      }
+    };
+    listaCanaisDiv.appendChild(item);
+  });
+  
+  window.scrollTo(0, 0);
+}
+
+function voltarPaises() {
+  listaPaisesDiv.style.display = "grid";
+  canaisContainer.style.display = "none";
+}
+
+btnVoltar.onclick = voltarPaises;
+
+// Função global para abrir canal (usada pelo onclick)
+window.abrirCanal = function(url) {
+  if (url && url !== "#") {
+    window.open(url, "_blank");
+  } else {
+    alert("Link do canal indisponível no momento.");
+  }
+};
+</script>
+
+</body>
+</html>
