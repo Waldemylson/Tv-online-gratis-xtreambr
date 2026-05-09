@@ -182,24 +182,6 @@
 // =====================================================
 
 const canaisPorPais = {
-"Sky Brasil": {
-    flag: "🇧🇷",
-    canais: [
-      // ========== ABERTOS (SKY - cloudfronte.lat) ==========
-      { nome: "Globo RJ", url: "https://xn--d204s777hp28.cloudfronte.lat/zzzstream/globorj.m3u8" },
-      { nome: "Globo SP", url: "https://xn--d204s777hp28.cloudfronte.lat/zzzstream/globosp.m3u8" },
-      { nome: "Globo Minas", url: "https://xn--d204s777hp28.cloudfronte.lat/zzzstream/globomg.m3u8" },
-     { nome: "SBT RJ", url: "https://xn--d204s777hp28.cloudfronte.lat/zzzstream/sbtrj.m3u8" },
-      { nome: "SBT SP", url: "https://xn--d204s777hp28.cloudfronte.lat/zzzstream/sbtsp.m3u8" },
-      { nome: "SBT", url: "https://xn--d204s777hp28.cloudfronte.lat/zzzstream/sbt.m3u8" },
-      { nome: "Record RJ", url: "https://xn--d204s777hp28.cloudfronte.lat/zzzstream/recordrj.m3u8" },
-      { nome: "Record SP", url: "https://xn--d204s777hp28.cloudfronte.lat/zzzstream/recordsp.m3u8" },
-      { nome: "Band RJ", url: "https://xn--d204s777hp28.cloudfronte.lat/zzzstream/bandrj.m3u8" },
-      { nome: "Band SP", url: "https://xn--d204s777hp28.cloudfronte.lat/zzzstream/bandsp.m3u8" },
-      { nome: "Band", url: "https://xn--d204s777hp28.cloudfronte.lat/zzzstream/band.m3u8" },
-      { nome: "RedeTV", url: "https://xn--d204s777hp28.cloudfronte.lat/zzzstream/redetv.m3u8" },
-      { nome: "TV Cultura", url: "https://xn--d204s777hp28.cloudfronte.lat/zzzstream/tvcultura.m3u8" },
-      { nome: "TV Brasil", url: "https://xn--d204s777hp28.cloudfronte.lat/zzzstream/tvbrasil.m3u8" },
 
       // ========== ABERTOS (AUGE TV - servidor alternativo) ==========
       { nome: "SBT SP*", url: "https://hplay.tv:443/augetv/12396547488/38.m3u8" },
@@ -209,76 +191,14 @@ const canaisPorPais = {
       { nome: "TV Cultura*", url: "https://5b33b873179a2.streamlock.net:1443/live/livestream/playlist.m3u8" },
       { nome: "TV Brasil*", url: "https://hplay.tv:443/augetv/12396547488/21.m3u8" },
       
-      // ========== FILMES (SKY) ==========
-      { nome: "HBO", url: "https://xn--d204s777hp28.cloudfronte.lat/zzzstream/hbo.m3u8" },
-      { nome: "HBO 2", url: "https://xn--d204s777hp28.cloudfronte.lat/zzzstream/hbo2.m3u8" },
-      { nome: "HBO Family", url: "https://xn--d204s777hp28.cloudfronte.lat/zzzstream/hbofamily.m3u8" },
-      { nome: "HBO Signature", url: "https://xn--d204s777hp28.cloudfronte.lat/zzzstream/hbosignature.m3u8" },
-      { nome: "HBO Xtreme", url: "https://xn--d204s777hp28.cloudfronte.lat/zzzstream/hboxtreme.m3u8" },
-      { nome: "HBO Pop", url: "https://xn--d204s777hp28.cloudfronte.lat/zzzstream/hbopop.m3u8" },
-      { nome: "Megapix", url: "https://xn--d204s777hp28.cloudfronte.lat/zzzstream/megapix.m3u8" },
-      { nome: "Telecine Action", url: "https://xn--d204s777hp28.cloudfronte.lat/zzzstream/telecineaction.m3u8" },
-      { nome: "Telecine Pipoca", url: "https://xn--d204s777hp28.cloudfronte.lat/zzzstream/telecinepipoca.m3u8" },
-      { nome: "Telecine Premium", url: "https://xn--d204s777hp28.cloudfronte.lat/zzzstream/telecinepremium.m3u8" },
-      { nome: "Telecine Touch", url: "https://xn--d204s777hp28.cloudfronte.lat/zzzstream/telecinetouch.m3u8" },
-      { nome: "Telecine Fun", url: "https://xn--d204s777hp28.cloudfronte.lat/zzzstream/telecinefun.m3u8" },
-      { nome: "Telecine Cult", url: "https://xn--d204s777hp28.cloudfronte.lat/zzzstream/telecinecult.m3u8" },
-      { nome: "Paramount Network", url: "https://xn--d204s777hp28.cloudfronte.lat/zzzstream/paramount.m3u8" },
-      { nome: "Sony Channel", url: "https://cdn-3.nxplay.com.br/SONY_CHANNEL/index.m3u8" },
-      { nome: "Sony Movies", url: "https://cdn-3.nxplay.com.br/SONY_MOVIES/index.m3u8" },
-      { nome: "AXN Movies", url: "https://xn--d204s777hp28.cloudfronte.lat/zzzstream/axn.m3u8" },
-      { nome: "Universal TV", url: "https://xn--d204s777hp28.cloudfronte.lat/zzzstream/universaltv.m3u8" },
-      { nome: "Studio Universal", url: "https://xn--d204s777hp28.cloudfronte.lat/zzzstream/studiouniversal.m3u8" },
-      { nome: "AMC", url: "https://xn--d204s777hp28.cloudfronte.lat/zzzstream/amc.m3u8" },
-      { nome: "TNT", url: "https://xn--d204s777hp28.cloudfronte.lat/zzzstream/tnt.m3u8" },
-      { nome: "Space", url: "https://xn--d204s777hp28.cloudfronte.lat/zzzstream/space.m3u8" },
-      { nome: "Warner Channel", url: "https://xn--d204s777hp28.cloudfronte.lat/zzzstream/warner.m3u8" },
-      { nome: "A&E", url: "https://xn--d204s777hp28.cloudfronte.lat/zzzstream/ae.m3u8" },
-
-      // ========== FILMES (AUGE TV) ==========
+       // ========== FILMES (AUGE TV) ==========
       { nome: "ARTE 1*", url: "https://hplay.tv:443/augetv/12396547488/6724.m3u8" },
       { nome: "TVC*", url: "https://stmv1.voxtvhd.com.br/canaltvc/canaltvc/playlist.m3u8" },
 
-      // ========== SÉRIES (SKY) ==========
-      { nome: "AXN", url: "https://xn--d204s777hp28.cloudfronte.lat/zzzstream/axn.m3u8" },
-       { nome: "FX", url: "https://xn--d204s777hp28.cloudfronte.lat/zzzstream/fx.m3u8" },
-      { nome: "TNT Series", url: "https://xn--d204s777hp28.cloudfronte.lat/zzzstream/tntseries.m3u8" },
-
-      // ========== ESPORTES (SKY) ==========
-      { nome: "SporTV", url: "https://xn--d204s777hp28.cloudfronte.lat/zzzstream/sportv.m3u8" },
-      { nome: "SporTV 2", url: "https://xn--d204s777hp28.cloudfronte.lat/zzzstream/sportv2.m3u8" },
-      { nome: "SporTV 3", url: "https://xn--d204s777hp28.cloudfronte.lat/zzzstream/sportv3.m3u8" },
-      { nome: "SporTV 4", url: "https://xn--d204s777hp28.cloudfronte.lat/zzzstream/sportv4.m3u8" },
-      { nome: "ESPN", url: "https://786bdf0b68846bffb04d4307ff13198f.cloudflaire.lat/assets/themes/embedtv_4c3ca2102c8502d661d829fe8f76829c/style.css" },
-      { nome: "ESPN 2", url: "https://xn--d204s777hp28.cloudfronte.lat/zzzstream/espn2.m3u8" },
-      { nome: "ESPN 3", url: "https://xn--d204s777hp28.cloudfronte.lat/zzzstream/espn3.m3u8" },
-      { nome: "ESPN 4", url: "https://xn--d204s777hp28.cloudfronte.lat/zzzstream/espn4.m3u8" },
-      { nome: "ESPN 5", url: "https://xn--d204s777hp28.cloudfronte.lat/zzzstream/espn5.m3u8" },
-      { nome: "ESPN 6", url: "https://xn--d204s777hp28.cloudfronte.lat/zzzstream/espn6.m3u8" },
-      { nome: "Band Sports", url: "https://xn--d204s777hp28.cloudfronte.lat/zzzstream/bandsports.m3u8" },
-      { nome: "Combate", url: "https://xn--d204s777hp28.cloudfronte.lat/zzzstream/combate.m3u8" },
-      { nome: "Premiere 1", url: "https://xn--d204s777hp28.cloudfronte.lat/zzzstream/premiere.m3u8" },
-      { nome: "Premiere 2", url: "https://xn--d204s777hp28.cloudfronte.lat/zzzstream/premiere2.m3u8" },
-      { nome: "Premiere 3", url: "https://xn--d204s777hp28.cloudfronte.lat/zzzstream/premiere3.m3u8" },
-      { nome: "Premiere 4", url: "https://xn--d204s777hp28.cloudfronte.lat/zzzstream/premiere4.m3u8" },
-      { nome: "Premiere 5", url: "https://xn--d204s777hp28.cloudfronte.lat/zzzstream/premiere5.m3u8" },
-      { nome: "Premiere 6", url: "https://xn--d204s777hp28.cloudfronte.lat/zzzstream/premiere6.m3u8" },
-      { nome: "Premiere 7", url: "https://xn--d204s777hp28.cloudfronte.lat/zzzstream/premiere7.m3u8" },
-      { nome: "Premiere 8", url: "https://xn--d204s777hp28.cloudfronte.lat/zzzstream/premiere8.m3u8" },
-      { nome: "Premiere 9", url: "https://xn--d204s777hp28.cloudfronte.lat/zzzstream/premiere9.m3u8" },
-
-      // ========== ESPORTES (AUGE TV) ==========
+     // ========== ESPORTES (AUGE TV) ==========
       { nome: "ALL SPORTS*", url: "https://hplay.tv:443/augetv/12396547488/6732.m3u8" },
       { nome: "Band Sports*", url: "https://hplay.tv:443/augetv/12396547488/6733.m3u8" },
 
-      // ========== NOTÍCIAS (SKY) ==========
-      { nome: "Globo News", url: "https://xn--d204s777hp28.cloudfronte.lat/zzzstream/globonews.m3u8" },
-      { nome: "CNN Brasil", url: "https://xn--d204s777hp28.cloudfronte.lat/zzzstream/cnnbrasil.m3u8" },
-      { nome: "Record News", url: "https://xn--d204s777hp28.cloudfronte.lat/zzzstream/recordnews.m3u8" },
-      { nome: "Band News", url: "https://xn--d204s777hp28.cloudfronte.lat/zzzstream/bandnews.m3u8" },
-      { nome: "Jovem Pan News", url: "https://xn--d204s777hp28.cloudfronte.lat/zzzstream/jovempannews.m3u8" },
-      { nome: "Times Brasil", url: "https://xn--d204s777hp28.cloudfronte.lat/zzzstream/timesbrasil.m3u8" },
-      { nome: "CNBC", url: "https://xn--d204s777hp28.cloudfronte.lat/zzzstream/cnbc.m3u8" },
       
       // ========== NOTÍCIAS (AUGE TV) ==========
       { nome: "CNN Brasil*", url: "https://hplay.tv:443/augetv/12396547488/902.m3u8" },
@@ -300,57 +220,15 @@ const canaisPorPais = {
       { nome: "TV SÉCULO 21*", url: "https://hplay.tv:443/augetv/12396547488/46.m3u8" },
       { nome: "TV PARANÁ TURISMO*", url: "https://aovivo.paranaeducativa.pr.gov.br/hls/tve.m3u8" },
 
-      // ========== INFANTIS (SKY) ==========
-      { nome: "Cartoon Network", url: "https://xn--d204s777hp28.cloudfronte.lat/zzzstream/cartoonnetwork.m3u8" },
-      { nome: "Discovery Kids", url: "https://xn--d204s777hp28.cloudfronte.lat/zzzstream/discoverykids.m3u8" },
-      { nome: "Nickelodeon", url: "https://xn--d204s777hp28.cloudfronte.lat/zzzstream/nickelodeon.m3u8" },
-      { nome: "Nick Jr", url: "https://xn--d204s777hp28.cloudfronte.lat/zzzstream/nickjr.m3u8" },
-      { nome: "Disney Channel", url: "https://xn--d204s777hp28.cloudfronte.lat/zzzstream/disneychannel.m3u8" },
-      { nome: "Disney Junior", url: "https://xn--d204s777hp28.cloudfronte.lat/zzzstream/disneyjunior.m3u8" },
-      { nome: "Disney XD", url: "https://xn--d204s777hp28.cloudfronte.lat/zzzstream/disneyxd.m3u8" },
-      { nome: "Gloob", url: "https://xn--d204s777hp28.cloudfronte.lat/zzzstream/gloob.m3u8" },
-      { nome: "Gloobinho", url: "https://xn--d204s777hp28.cloudfronte.lat/zzzstream/gloobinho.m3u8" },
-      { nome: "Tooncast", url: "https://xn--d204s777hp28.cloudfronte.lat/zzzstream/tooncast.m3u8" },
-      { nome: "Baby TV", url: "https://xn--d204s777hp28.cloudfronte.lat/zzzstream/babytv.m3u8" },
-      { nome: "Zoomoo", url: "https://xn--d204s777hp28.cloudfronte.lat/zzzstream/zoomoo.m3u8" },
-
+      
       // ========== INFANTIS (AUGE TV) ==========
       { nome: "RETRO CARTOON*", url: "https://stmv1.srvif.com/retrotv/retrotv/playlist.m3u8" },
       { nome: "CBTV play*", url: "https://stmv2.samcast.com.br/carla7379/carla7379/playlist.m3u8" },
       { nome: "Caravana Play*", url: "https://stmv2.voxtvhd.com.br/keynni6990/keynni6990/playlist.m3u8" },
       { nome: "RA TIM BUM*", url: "https://hplay.tv:443/augetv/12396547488/6737.m3u8" },
 
-      // ========== DOCUMENTÁRIOS (SKY) ==========
-      { nome: "Discovery Channel", url: "https://xn--d204s777hp28.cloudfronte.lat/zzzstream/discovery.m3u8" },
-      { nome: "Discovery Science", url: "https://xn--d204s777hp28.cloudfronte.lat/zzzstream/discoveryscience.m3u8" },
-      { nome: "Discovery Turbo", url: "https://xn--d204s777hp28.cloudfronte.lat/zzzstream/discoveryturbo.m3u8" },
-      { nome: "Discovery Theater", url: "https://cdn-3.nxplay.com.br/DISCOVERY_THEATER_NX/index.m3u8" },
-      { nome: "Discovery World", url: "https://xn--d204s777hp28.cloudfronte.lat/zzzstream/discoveryworld.m3u8" },
-     { nome: "Discovery Investigation", url: "https://xn--d204s777hp28.cloudfronte.lat/zzzstream/discoveryid.m3u8" },
-      { nome: "Discovery Home & Health", url: "https://xn--d204s777hp28.cloudfronte.lat/zzzstream/discoveryhh.m3u8" },
-      { nome: "National Geographic", url: "https://xn--d204s777hp28.cloudfronte.lat/zzzstream/natgeo.m3u8" },
-      { nome: "Nat Geo Wild", url: "https://xn--d204s777hp28.cloudfronte.lat/zzzstream/natgeowild.m3u8" },
-      { nome: "History Channel", url: "https://xn--d204s777hp28.cloudfronte.lat/zzzstream/history.m3u8" },
-      { nome: "History 2", url: "https://xn--d204s777hp28.cloudfronte.lat/zzzstream/history2.m3u8" },
-      { nome: "H2", url: "https://xn--d204s777hp28.cloudfronte.lat/zzzstream/h2.m3u8" },
-      { nome: "Animal Planet", url: "https://xn--d204s777hp28.cloudfronte.lat/zzzstream/animalplanet.m3u8" },
-      { nome: "TLC", url: "https://xn--d204s777hp28.cloudfronte.lat/zzzstream/tlc.m3u8" },
       
-      // ========== MÚSICA (SKY) ==========
-      { nome: "MTV", url: "https://xn--d204s777hp28.cloudfronte.lat/zzzstream/mtv.m3u8" },
-      { nome: "VH1", url: "https://xn--d204s777hp28.cloudfronte.lat/zzzstream/vh1.m3u8" },
-      { nome: "Mix TV", url: "https://xn--d204s777hp28.cloudfronte.lat/zzzstream/mixtv.m3u8" },
-      { nome: "Multishow", url: "https://xn--d204s777hp28.cloudfronte.lat/zzzstream/multishow.m3u8" },
-      { nome: "Bis", url: "https://xn--d204s777hp28.cloudfronte.lat/zzzstream/bis.m3u8" },
-      { nome: "E!", url: "https://xn--d204s777hp28.cloudfronte.lat/zzzstream/e.m3u8" },
-
-      // ========== VARIEDADES (SKY) ==========
-      { nome: "GNT", url: "https://xn--d204s777hp28.cloudfronte.lat/zzzstream/gnt.m3u8" },
-      { nome: "Viva", url: "https://xn--d204s777hp28.cloudfronte.lat/zzzstream/viva.m3u8" },
-      { nome: "Lifetime", url: "https://xn--d204s777hp28.cloudfronte.lat/zzzstream/lifetime.m3u8" },
-      { nome: "Food Network", url: "https://xn--d204s777hp28.cloudfronte.lat/zzzstream/foodnetwork.m3u8" },
-      { nome: "HGTV", url: "https://xn--d204s777hp28.cloudfronte.lat/zzzstream/hgtv.m3u8" },
-       
+      
       // ========== VARIEDADES (AUGE TV) ==========
       { nome: "SABOR E ARTE*", url: "https://hplay.tv:443/augetv/12396547488/6740.m3u8" },
       { nome: "7TVs*", url: "https://Stmv1.samcast.com.br/beatpapo/beatpapo/playlist.m3u8" },
