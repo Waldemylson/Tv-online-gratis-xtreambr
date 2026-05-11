@@ -1,395 +1,207 @@
-<!DOCTYPE html>
-<html lang="pt-BR">
-<head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>📺 Meus Canais | TV Online</title>
-<style>
-* {
-    margin: 0;
-    padding: 0;
-    box-sizing: border-box;
-}
-
-body {
-    background: linear-gradient(135deg, #0a0a0a 0%, #1a1a2e 100%);
-    color: #fff;
-    font-family: 'Segoe UI', system-ui, sans-serif;
-    min-height: 100vh;
-}
-
-header {
-    background: linear-gradient(90deg, #ff6600, #ff3300);
-    padding: 20px;
-    text-align: center;
-    box-shadow: 0 4px 20px rgba(0,0,0,0.3);
-    position: sticky;
-    top: 0;
-    z-index: 100;
-}
-
-header h1 {
-    font-size: 1.8rem;
-    letter-spacing: 2px;
-}
-
-header p {
-    opacity: 0.9;
-    font-size: 0.85rem;
-}
-
-.container {
-    max-width: 1200px;
-    margin: 0 auto;
-    padding: 20px;
-}
-
-/* MENU CATEGORIAS */
-.menu-categorias {
-    display: flex;
-    flex-wrap: wrap;
-    gap: 10px;
-    justify-content: center;
-    margin-bottom: 30px;
-    position: sticky;
-    top: 80px;
-    background: rgba(0,0,0,0.8);
-    padding: 10px;
-    border-radius: 50px;
-    backdrop-filter: blur(10px);
-    z-index: 99;
-}
-
-.btn-cat {
-    background: #1e1e3a;
-    border: none;
-    color: #ff6600;
-    padding: 8px 20px;
-    font-size: 0.9rem;
-    font-weight: bold;
-    border-radius: 40px;
-    cursor: pointer;
-    transition: all 0.3s ease;
-}
-
-.btn-cat:hover {
-    background: #ff6600;
-    color: #fff;
-    transform: scale(1.05);
-}
-
-.btn-cat.ativo {
-    background: #ff6600;
-    color: #fff;
-    box-shadow: 0 0 15px rgba(255,102,0,0.5);
-}
-
-/* ÁREA DOS CANAIS */
-.canais-area {
-    background: rgba(0,0,0,0.5);
-    border-radius: 20px;
-    padding: 25px;
-    min-height: 500px;
-    border: 1px solid rgba(255,102,0,0.3);
-}
-
-.titulo-cat {
-    font-size: 1.6rem;
-    margin-bottom: 25px;
-    padding-bottom: 10px;
-    border-bottom: 3px solid #ff6600;
-    display: inline-block;
-}
-
-.grade-canais {
-    display: grid;
-    grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
-    gap: 12px;
-}
-
-.canal-link {
-    display: flex;
-    align-items: center;
-    gap: 12px;
-    background: #1e1e3a;
-    color: #fff;
-    text-decoration: none;
-    padding: 12px 15px;
-    border-radius: 12px;
-    border-left: 4px solid #ff6600;
-    transition: all 0.2s ease;
-}
-
-.canal-link:hover {
-    background: #2a2a4a;
-    transform: translateX(5px);
-    border-left-width: 8px;
-}
-
-.canal-logo {
-    width: 36px;
-    height: 36px;
-    object-fit: contain;
-    border-radius: 6px;
-    background: #0a0a0a;
-    padding: 4px;
-}
-
-.canal-nome {
-    flex: 1;
-    font-size: 0.9rem;
-    font-weight: 500;
-}
-
-.sem-canais {
-    text-align: center;
-    padding: 50px;
-    color: #888;
-    font-size: 1.2rem;
-}
-
-.info-box {
-    background: rgba(255,102,0,0.1);
-    border: 1px solid #ff6600;
-    padding: 12px;
-    border-radius: 12px;
-    margin-top: 30px;
-    text-align: center;
-    font-size: 0.8rem;
-}
-
-.stats {
-    font-size: 0.8rem;
-    color: #ff9966;
-    margin-top: 5px;
-}
-
-@media (max-width: 768px) {
-    .btn-cat { padding: 6px 14px; font-size: 0.75rem; }
-    .grade-canais { grid-template-columns: 1fr; }
-    .titulo-cat { font-size: 1.3rem; }
-    .canal-logo { width: 28px; height: 28px; }
-}
-</style>
-</head>
-<body>
-
-<header>
-    <h1>📺 MEUS CANAIS ONLINE</h1>
-    <p>Clique em qualquer canal para assistir | Links atualizados</p>
-</header>
-
-<div class="container">
-    <div class="menu-categorias">
-        <button class="btn-cat" data-cat="abertos">📡 ABERTOS</button>
-        <button class="btn-cat" data-cat="esportes">⚽ ESPORTES</button>
-        <button class="btn-cat" data-cat="noticias">📰 NOTÍCIAS</button>
-        <button class="btn-cat" data-cat="variedades">🎬 VARIEDADES</button>
-        <button class="btn-cat" data-cat="novelas">💕 NOVELAS</button>
-        <button class="btn-cat" data-cat="todos">⭐ TODOS</button>
-    </div>
-
-    <div class="canais-area" id="canaisArea">
-        <div class="sem-canais">📺 Clique em uma categoria acima para ver os canais</div>
-    </div>
-
-    <div class="info-box">
-        📌 <strong>Dica:</strong> Clique em qualquer canal para abrir no seu player (VLC, MX Player, etc.)<br>
-        🔄 Se algum canal não carregar, tente novamente em alguns segundos
-    </div>
-</div>
-
-<script>
-// ============================================================
-// BANCO DE DADOS DOS CANAIS (ORGANIZADO POR CATEGORIA)
-// ============================================================
-const canais = {
-    abertos: {
-        nome: "📡 CANAIS ABERTOS",
-        cor: "#ff6600",
-        lista: [
-            { nome: "Globo RJ HD", logo: "https://i.imgur.com/waZJG1M.png", url: "http://79.127.238.228:14217/" },
-            { nome: "Globo RJ HD²", logo: "https://i.imgur.com/waZJG1M.png", url: "https://gerenciar.vivatele.com:443/viva_padrao/viva23.." },
-            { nome: "Globo SP HD", logo: "https://i.imgur.com/waZJG1M.png", url: "http://79.127.238.228:14211/" },
-            { nome: "RecordTV RJ HD", logo: "https://i.imgur.com/lyQ1v9M.png", url: "https://gerenciar.vivatele.com:443/live/viva_padrao/v.." },
-            { nome: "RecordTV Conquista HD", logo: "https://i.imgur.com/lyQ1v9M.png", url: "https://tvconquistalrv.duckdns.org:3334/hls/tvconquis.." },
-            { nome: "Record Internacional", logo: "https://i.imgur.com/lyQ1v9M.png", url: "https://viamotionhsi.netplus.ch/live/eds/rederecordin.." },
-            { nome: "Band RJ HD", logo: "https://i.imgur.com/nCJNjyN.png", url: "https://gerenciar.vivatele.com:443/viva_padrao/viva23.." },
-            { nome: "Band - TV Modelo", logo: "https://i.imgur.com/nCJNjyN.png", url: "https://video09.logicahost.com.br/tvmodelo/tvmodelo/c.." },
-            { nome: "+SBT HD", logo: "https://i.imgur.com/g47oQ4n.png", url: "https://cr7v.short.gy/25mensais/s2/Whats7591634025.m3u8" },
-            { nome: "SBT Interior", logo: "https://i.imgur.com/KO1v3pS.png", url: "https://cdn.jmvstream.com/w/LVW-10801/LVW10801_Xvg4R0.." },
-            { nome: "TV Difusora (SBT São Luís)", logo: "https://i.imgur.com/F35mKJK.png", url: "https://stream.amsolution.net.br:8443/live/66db1cf131.." },
-            { nome: "TV Difusora Leste", logo: "https://i.imgur.com/F35mKJK.png", url: "https://stream.amsolution.net.br:8443/live/60d0a8ea6b.." },
-            { nome: "SBT Guajará", logo: "https://i.imgur.com/oOhk9Gg.png", url: "https://video05.logicahost.com.br/tvguajara/tvguajara.." },
-            { nome: "TV ARATU HD", logo: "https://i.imgur.com/tyFtNYn.png", url: "https://cdn.live.br1.jmvstream.com/w/LVW-9359/LVW9359.." },
-            { nome: "SBT CIDADE VERDE FHD", logo: "https://i.imgur.com/KO1v3pS.png", url: "https://stmv1.transmissaodigital.com/cidadeverdenovo/.." }
-        ]
-    },
-    esportes: {
-        nome: "⚽ CANAIS DE ESPORTES",
-        cor: "#00ff88",
-        lista: [
-            { nome: "SporTV HD", logo: "https://i.imgur.com/bwqLqyg.png", url: "https://cr7v.short.gy/manoiTVOP1/sptv1/75991634025/in.." },
-            { nome: "SporTV FHD", logo: "https://i.imgur.com/bwqLqyg.png", url: "https://cr7v.short.gy/manoiTVOP3/sptvxtra2/7599163402.." },
-            { nome: "SporTV 2 HD", logo: "https://i.imgur.com/ZpjPkqS.png", url: "http://79.127.243.211:14469/" },
-            { nome: "SporTV 3 HD", logo: "https://i.imgur.com/ttHpdGp.png", url: "http://79.127.243.211:14473/" },
-            { nome: "ESPN HD", logo: "https://i.imgur.com/CkoAvYH.png", url: "https://cr7v.short.gy/live25/spn/Index.m3u8" },
-            { nome: "ESPN FHD", logo: "https://i.imgur.com/CkoAvYH.png", url: "https://cr7v.short.gy/manoiTVOP2/spnHD²/Index.m3u8" },
-            { nome: "ESPN 2 HD", logo: "https://i.imgur.com/ZAHnoPh.png", url: "http://46.151.196.223:14438/" },
-            { nome: "ESPN 3 HD", logo: "https://i.imgur.com/VCPTlBD.png", url: "http://46.151.196.223:14444/" },
-            { nome: "ESPN 4 HD", logo: "https://i.imgur.com/ErWFVO3.png", url: "http://46.151.196.223:14450/" },
-            { nome: "Band Sports HD", logo: "https://i.imgur.com/LSZ5VKi.png", url: "http://200.4.96.59:8825/play/a06c/62074302.m3u8" },
-            { nome: "Premiere Clubes HD", logo: "https://i.imgur.com/T6VmjYB.png", url: "https://cr7v.short.gy/Canal1/index.m3u8" },
-            { nome: "Premiere Clubes FHD", logo: "https://i.imgur.com/T6VmjYB.png", url: "https://cr7v.short.gy/aoVIVO/PPVaoVIVO/index.m3u8" },
-            { nome: "Premiere 2 HD", logo: "https://i.imgur.com/Sa86nNV.png", url: "https://cr7v.short.gy/Canal2/index.m3u8" },
-            { nome: "Premiere 3 HD", logo: "https://i.imgur.com/vdKC1eu.png", url: "https://cr7v.short.gy/Canal3/index.m3u8" },
-            { nome: "Premiere 4 HD", logo: "https://i.imgur.com/n5KKEiL.png", url: "https://cr7v.short.gy/Canal4/index.m3u8" },
-            { nome: "Premiere 5 HD", logo: "https://i.imgur.com/qVVCNKG.png", url: "https://cr7v.short.gy/Mano/testchamaWhats75991634025..." },
-            { nome: "Premiere 6 HD", logo: "https://i.imgur.com/4CAJWni.png", url: "https://cr7v.short.gy/mano2/testchamaWhats75991634025.." },
-            { nome: "Ge TV HD (TCL TV)", logo: "https://i.imgur.com/TnHuVPZ.png", url: "https://amg00716-globo-amg00716c1-tcl-br-9495.playout.." },
-            { nome: "Ge TV FHD (TCL TV)", logo: "https://i.imgur.com/TnHuVPZ.png", url: "https://amg00716-globo-amg00716c1-tcl-br-9495.playout.." },
-            { nome: "Ge TV HD (SamsungTV)", logo: "https://i.imgur.com/TnHuVPZ.png", url: "https://dfr80qz435crc.cloudfront.net/EFGH/Amagi/Globo.." },
-            { nome: "Ge TV FHD (SamsungTV)", logo: "https://i.imgur.com/TnHuVPZ.png", url: "https://dfr80qz435crc.cloudfront.net/EFGH/Amagi/Globo.." },
-            { nome: "Cazé TV HD", logo: "https://i.imgur.com/oJJ8AAI.png", url: "https://dfr80qz435crc.cloudfront.net/MNOP/Amagi/Caze/.." },
-            { nome: "Cazé TV FHD", logo: "https://i.imgur.com/oJJ8AAI.png", url: "https://dfr80qz435crc.cloudfront.net/MNOP/Amagi/Caze/.." },
-            { nome: "XSports", logo: "https://i.imgur.com/3V3GMDh.png", url: "https://cr7v.short.gy/manoitv/X-Sports/Index.m3u8" },
-            { nome: "Desempedido HD", logo: "https://i.imgur.com/RSHGmuX.png", url: "https://cc-vvkv6xjfc6w5v.akamaized.net/ogc/desi/desi..." },
-            { nome: "Desempedido FHD", logo: "https://i.imgur.com/RSHGmuX.png", url: "https://cc-vvkv6xjfc6w5v.akamaized.net/ogc/desi/desi_.." },
-            { nome: "NSPORTS", logo: "https://i.imgur.com/7QnJojr.png", url: "https://video01.soultv.com.br/nsports/nsports/playlis.." }
-        ]
-    },
-    noticias: {
-        nome: "📰 CANAIS DE NOTÍCIAS",
-        cor: "#00aaff",
-        lista: [
-            { nome: "Times Brasil | CNBC", logo: "https://i.imgur.com/FPpNGo0.png", url: "https://cr7v.short.gy/ManoTV/TimesBrasil/Whats7599163.." },
-            { nome: "Canal UOL HD", logo: "https://imgur.com/VnDkr2s.png", url: "https://video01.soultv.com.br/uoltv/uoltv/playlist.m3u8" },
-            { nome: "CNN Brasil Money HD", logo: "https://i.imgur.com/3rHuAWH.png", url: "https://amg01391-sbtinfast-amg01391c11-lg-br-9982.pla.." },
-            { nome: "JP NEWS SD", logo: "https://i.imgur.com/MWGAfvV.png", url: "https://d6yfbj4xxtrod.cloudfront.net/out/v1/7836eb391.." },
-            { nome: "JP NEWS HD", logo: "https://i.imgur.com/MWGAfvV.png", url: "https://d6yfbj4xxtrod.cloudfront.net/out/v1/7836eb391.." },
-            { nome: "CNN BRASIL SD", logo: "https://i.imgur.com/4dfmnBs.png", url: "https://d25usgadhphvwi.cloudfront.net/hls/stv-plus-64.." },
-            { nome: "CNN BRASIL HD", logo: "https://i.imgur.com/4dfmnBs.png", url: "https://d25usgadhphvwi.cloudfront.net/hls/stv-plus-96.." },
-            { nome: "CNN BRASIL FHD", logo: "https://i.imgur.com/4dfmnBs.png", url: "https://d25usgadhphvwi.cloudfront.net/hls/stv-plus128.." },
-            { nome: "Globo News HD", logo: "https://i.imgur.com/Wu4ykxo.png", url: "http://79.127.238.228:14093/" },
-            { nome: "Globo News FHD", logo: "https://i.imgur.com/Wu4ykxo.png", url: "http://xxip9.top:8080/Gizvid192@giz.com/1234@4321/164.." }
-        ]
-    },
-    variedades: {
-        nome: "🎬 VARIEDADES & DOCUMENTÁRIOS",
-        cor: "#aa66ff",
-        lista: [
-            { nome: "ARTE 1 HD", logo: "https://i.imgur.com/4QWoV1Z.png", url: "http://200.4.96.59:8825/play/a02x/index.m3u8?art" },
-            { nome: "TLC HD", logo: "https://i.imgur.com/2F9asSD.png", url: "http://79.127.238.228:14433/TLChd" },
-            { nome: "GNT HD", logo: "https://i.imgur.com/8RDEcE9.png", url: "#" },
-            { nome: "Modo Viagem HD", logo: "https://i.imgur.com/Ou3X8zC.png", url: "http://45.235.0.78/Modo_Viagem/playlist.m3u8" },
-            { nome: "Receita Fast HD", logo: "https://i.imgur.com/X8bDYyO.png", url: "https://dfr80qz435crc.cloudfront.net/EFGH/Amagi/Globo.." },
-            { nome: "Food Network HD", logo: "https://i.imgur.com/AH3uBDj.png", url: "http://200.229.190.189:8001/play/a01g" },
-            { nome: "Pluto TV KFood", logo: "https://images.pluto.tv/channels/633ee9ba83c08f00076b60a6/col..", url: "https://service-stitcher.clusters.pluto.tv/v1/stitch/.." },
-            { nome: "Pluto TV Cozinha", logo: "https://images.pluto.tv/channels/5f1ef23020a5ac0007e5e8ea/col..", url: "https://service-stitcher.clusters.pluto.tv/v1/stitch/.." },
-            { nome: "Hallo! Doc.", logo: "https://i.imgur.com/lFkmVqX.png", url: "https://cdn-3.nxplay.com.br/HALLODOC/index.m3u8" },
-            { nome: "Discovery Turbo HD", logo: "https://i.imgur.com/lH1Srp9.png", url: "http://185.152.67.187:14367/" },
-            { nome: "ID SD", logo: "https://i.imgur.com/OJWv4Ij.png", url: "http://185.152.67.187:14379/" },
-            { nome: "ID HD", logo: "https://i.imgur.com/OJWv4Ij.png", url: "http://200.4.96.59:8825/play/a03g/index.m3u8" },
-            { nome: "Discovery World HD", logo: "https://i.imgur.com/6sTkahx.png", url: "http://200.4.96.59:8825/play/a03f/index.m3u8" },
-            { nome: "Disc. Home & Health HD", logo: "https://i.imgur.com/VSezlWv.png", url: "http://hls1.sua.tv:80/live/discoveryhehfhd/s.m3u8" },
-            { nome: "Discovery Channel HD", logo: "https://i.imgur.com/dgGgYjc.png", url: "http://89.187.190.167:14604/" },
-            { nome: "Discovery Channel FHD", logo: "https://i.imgur.com/dgGgYjc.png", url: "http://hls1.sua.tv:80/live/discoverychannelfhd/s.m3u8" },
-            { nome: "Discovery Science HD", logo: "https://i.imgur.com/1Hm6dQU.png", url: "http://185.152.67.187:14355/" },
-            { nome: "Discovery Theater HD", logo: "https://i.imgur.com/NUFWsJ0.png", url: "http://200.4.96.59:8825/play/a03e/index.m3u8" },
-            { nome: "History HD", logo: "https://i.imgur.com/0rNNqVy.png", url: "http://200.4.96.59:8825/play/a02q/index.m3u8?art" },
-            { nome: "History 2 HD", logo: "https://i.imgur.com/rgDKfki.png", url: "#" },
-            { nome: "HGTV HD", logo: "https://i.imgur.com/dT19vNc.png", url: "http://200.229.190.189:8001/play/a01b" },
-            { nome: "Animal Planet HD", logo: "https://i.imgur.com/t97qwNh.png", url: "http://185.152.67.187:14386/" }
-        ]
-    },
-    novelas: {
-        nome: "💕 NOVELAS & SÉRIES",
-        cor: "#ff66b5",
-        lista: [
-            { nome: "GloboPlay Novelas HD", logo: "https://i.imgur.com/FOCEoUz.png", url: "http://79.127.238.228:14455/" },
-            { nome: "TNT Novelas FHD", logo: "https://i.imgur.com/x9XvCqL.png", url: "http://200.4.96.59:8825/play/a04f/index.m3u8" },
-            { nome: "Novelissima", logo: "https://imgur.com/7MCMU3j.png", url: "#" }
-        ]
-    }
-};
-
-// FUNÇÃO PARA EXIBIR CANAIS
-function exibirCategoria(categoriaId) {
-    const area = document.getElementById('canaisArea');
-    const dados = canais[categoriaId];
-    
-    if (!dados || dados.lista.length === 0) {
-        area.innerHTML = '<div class="sem-canais">⚠️ Nenhum canal encontrado nesta categoria</div>';
-        return;
-    }
-    
-    let html = `<div class="titulo-cat">${dados.nome} <span class="stats">(${dados.lista.length} canais)</span></div>`;
-    html += '<div class="grade-canais">';
-    
-    dados.lista.forEach(canal => {
-        const logoUrl = canal.logo && canal.logo !== '#' ? canal.logo : 'https://via.placeholder.com/36x36?text=TV';
-        const url = canal.url !== '#' ? canal.url : '#';
-        const onclick = url !== '#' ? `window.open('${url}', '_blank')` : 'alert(\'Link indisponível no momento\')';
-        
-        html += `
-            <div class="canal-link" onclick="${onclick}" style="cursor:pointer">
-                <img src="${logoUrl}" class="canal-logo" onerror="this.src='https://via.placeholder.com/36x36?text=TV'">
-                <span class="canal-nome">📺 ${canal.nome}</span>
-            </div>
-        `;
-    });
-    
-    html += '</div>';
-    area.innerHTML = html;
-}
-
-// FUNÇÃO PARA EXIBIR TODOS OS CANAIS
-function exibirTodos() {
-    let total = 0;
-    let html = `<div class="titulo-cat">⭐ TODOS OS CANAIS</div>`;
-    html += '<div class="grade-canais">';
-    
-    Object.keys(canais).forEach(cat => {
-        canais[cat].lista.forEach(canal => {
-            total++;
-            const logoUrl = canal.logo && canal.logo !== '#' ? canal.logo : 'https://via.placeholder.com/36x36?text=TV';
-            const url = canal.url !== '#' ? canal.url : '#';
-            const onclick = url !== '#' ? `window.open('${url}', '_blank')` : 'alert(\'Link indisponível no momento\')';
-            
-            html += `
-                <div class="canal-link" onclick="${onclick}" style="cursor:pointer">
-                    <img src="${logoUrl}" class="canal-logo" onerror="this.src='https://via.placeholder.com/36x36?text=TV'">
-                    <span class="canal-nome">📺 ${canal.nome}</span>
-                </div>
-            `;
-        });
-    });
-    
-    html += '</div>';
-    html += `<div class="stats" style="text-align:center; margin-top:15px">📊 Total: ${total} canais disponíveis</div>`;
-    document.getElementById('canaisArea').innerHTML = html;
-}
-
-// CONFIGURAR MENU
-document.querySelectorAll('.btn-cat').forEach(botao => {
-    botao.addEventListener('click', function() {
-        document.querySelectorAll('.btn-cat').forEach(btn => btn.classList.remove('ativo'));
-        this.classList.add('ativo');
-        const categoria = this.getAttribute('data-cat');
-        
-        if (categoria === 'todos') {
-            exibirTodos();
-        } else {
-            exibirCategoria(categoria);
-        }
-    });
-});
-
-// ABRIR COM CATEGORIA "TODOS" PADRÃO
-document.addEventListener('DOMContentLoaded', () => {
-    document.querySelector('.btn-cat[data-cat="todos"]').classList.add('ativo');
-    exibirTodos();
-});
-</script>
-</body>
-</html>
+#EXTM3U
+#EXTINF:-1,band
+https://megaflix.cloudfronte.lat/zzzstream/band.m3u8
+#EXTINF:-1,bandrj
+https://megaflix.cloudfronte.lat/zzzstream/bandrj.m3u8
+#EXTINF:-1,bandsp
+https://megaflix.cloudfronte.lat/zzzstream/bandsp.m3u8
+#EXTINF:-1,bandnews
+https://megaflix.cloudfronte.lat/zzzstream/bandnews.m3u8
+#EXTINF:-1,bandsports
+https://megaflix.cloudfronte.lat/zzzstream/bandsports.m3u8
+#EXTINF:-1,globonews
+https://megaflix.cloudfronte.lat/zzzstream/globonews.m3u8
+#EXTINF:-1,globosp
+https://megaflix.cloudfronte.lat/zzzstream/globosp.m3u8
+#EXTINF:-1,globorj
+https://megaflix.cloudfronte.lat/zzzstream/globorj.m3u8
+#EXTINF:-1,globomg
+https://megaflix.cloudfronte.lat/zzzstream/globomg.m3u8
+#EXTINF:-1,globope
+https://megaflix.cloudfronte.lat/zzzstream/globope.m3u8
+#EXTINF:-1,globors
+https://megaflix.cloudfronte.lat/zzzstream/globors.m3u8
+#EXTINF:-1,globoce
+https://megaflix.cloudfronte.lat/zzzstream/globoce.m3u8
+#EXTINF:-1,globoam
+https://megaflix.cloudfronte.lat/zzzstream/globoam.m3u8
+#EXTINF:-1,globopa
+https://megaflix.cloudfronte.lat/zzzstream/globopa.m3u8
+#EXTINF:-1,globopb
+https://megaflix.cloudfronte.lat/zzzstream/globopb.m3u8
+#EXTINF:-1,record
+https://megaflix.cloudfronte.lat/zzzstream/record.m3u8
+#EXTINF:-1,recordsp
+https://megaflix.cloudfronte.lat/zzzstream/recordsp.m3u8
+#EXTINF:-1,recordrj
+https://megaflix.cloudfronte.lat/zzzstream/recordrj.m3u8
+#EXTINF:-1,recordmg
+https://megaflix.cloudfronte.lat/zzzstream/recordmg.m3u8
+#EXTINF:-1,recordnews
+https://megaflix.cloudfronte.lat/zzzstream/recordnews.m3u8
+#EXTINF:-1,sbt
+https://megaflix.cloudfronte.lat/zzzstream/sbt.m3u8
+#EXTINF:-1,sbtsp
+https://megaflix.cloudfronte.lat/zzzstream/sbtsp.m3u8
+#EXTINF:-1,sbtrj
+https://megaflix.cloudfronte.lat/zzzstream/sbtrj.m3u8
+#EXTINF:-1,redetv
+https://megaflix.cloudfronte.lat/zzzstream/redetv.m3u8
+#EXTINF:-1,tvcultura
+https://megaflix.cloudfronte.lat/zzzstream/tvcultura.m3u8
+#EXTINF:-1,tvbrasil
+https://megaflix.cloudfronte.lat/zzzstream/tvbrasil.m3u8
+#EXTINF:-1,cnnbrasil
+https://megaflix.cloudfronte.lat/zzzstream/cnnbrasil.m3u8
+#EXTINF:-1,jovempan
+https://megaflix.cloudfronte.lat/zzzstream/jovempan.m3u8
+#EXTINF:-1,tnt
+https://megaflix.cloudfronte.lat/zzzstream/tnt.m3u8
+#EXTINF:-1,tntseries
+https://megaflix.cloudfronte.lat/zzzstream/tntseries.m3u8
+#EXTINF:-1,space
+https://megaflix.cloudfronte.lat/zzzstream/space.m3u8
+#EXTINF:-1,warner
+https://megaflix.cloudfronte.lat/zzzstream/warner.m3u8
+#EXTINF:-1,axn
+https://megaflix.cloudfronte.lat/zzzstream/axn.m3u8
+#EXTINF:-1,sony
+https://megaflix.cloudfronte.lat/zzzstream/sony.m3u8
+#EXTINF:-1,fx
+https://megaflix.cloudfronte.lat/zzzstream/fx.m3u8
+#EXTINF:-1,universal
+https://megaflix.cloudfronte.lat/zzzstream/universal.m3u8
+#EXTINF:-1,amc
+https://megaflix.cloudfronte.lat/zzzstream/amc.m3u8
+#EXTINF:-1,ae
+https://megaflix.cloudfronte.lat/zzzstream/ae.m3u8
+#EXTINF:-1,lifetime
+https://megaflix.cloudfronte.lat/zzzstream/lifetime.m3u8
+#EXTINF:-1,hbo
+https://megaflix.cloudfronte.lat/zzzstream/hbo.m3u8
+#EXTINF:-1,hbo2
+https://megaflix.cloudfronte.lat/zzzstream/hbo2.m3u8
+#EXTINF:-1,hbofamily
+https://megaflix.cloudfronte.lat/zzzstream/hbofamily.m3u8
+#EXTINF:-1,hbosignature
+https://megaflix.cloudfronte.lat/zzzstream/hbosignature.m3u8
+#EXTINF:-1,hboxtreme
+https://megaflix.cloudfronte.lat/zzzstream/hboxtreme.m3u8
+#EXTINF:-1,hbopop
+https://megaflix.cloudfronte.lat/zzzstream/hbopop.m3u8
+#EXTINF:-1,megapix
+https://megaflix.cloudfronte.lat/zzzstream/megapix.m3u8
+#EXTINF:-1,telecineaction
+https://megaflix.cloudfronte.lat/zzzstream/telecineaction.m3u8
+#EXTINF:-1,telecinepipoca
+https://megaflix.cloudfronte.lat/zzzstream/telecinepipoca.m3u8
+#EXTINF:-1,telecinepremium
+https://megaflix.cloudfronte.lat/zzzstream/telecinepremium.m3u8
+#EXTINF:-1,telecinetouch
+https://megaflix.cloudfronte.lat/zzzstream/telecinetouch.m3u8
+#EXTINF:-1,telecinefun
+https://megaflix.cloudfronte.lat/zzzstream/telecinefun.m3u8
+#EXTINF:-1,telecinecult
+https://megaflix.cloudfronte.lat/zzzstream/telecinecult.m3u8
+#EXTINF:-1,paramount
+https://megaflix.cloudfronte.lat/zzzstream/paramount.m3u8
+#EXTINF:-1,discovery
+https://megaflix.cloudfronte.lat/zzzstream/discovery.m3u8
+#EXTINF:-1,discoveryscience
+https://megaflix.cloudfronte.lat/zzzstream/discoveryscience.m3u8
+#EXTINF:-1,discoveryturbo
+https://megaflix.cloudfronte.lat/zzzstream/discoveryturbo.m3u8
+#EXTINF:-1,discoveryworld
+https://megaflix.cloudfronte.lat/zzzstream/discoveryworld.m3u8
+#EXTINF:-1,discoverytheater
+https://megaflix.cloudfronte.lat/zzzstream/discoverytheater.m3u8
+#EXTINF:-1,discoveryhh
+https://megaflix.cloudfronte.lat/zzzstream/discoveryhh.m3u8
+#EXTINF:-1,id
+https://megaflix.cloudfronte.lat/zzzstream/id.m3u8
+#EXTINF:-1,natgeo
+https://megaflix.cloudfronte.lat/zzzstream/natgeo.m3u8
+#EXTINF:-1,natgeowild
+https://megaflix.cloudfronte.lat/zzzstream/natgeowild.m3u8
+#EXTINF:-1,history
+https://megaflix.cloudfronte.lat/zzzstream/history.m3u8
+#EXTINF:-1,history2
+https://megaflix.cloudfronte.lat/zzzstream/history2.m3u8
+#EXTINF:-1,animalplanet
+https://megaflix.cloudfronte.lat/zzzstream/animalplanet.m3u8
+#EXTINF:-1,tlc
+https://megaflix.cloudfronte.lat/zzzstream/tlc.m3u8
+#EXTINF:-1,hgtv
+https://megaflix.cloudfronte.lat/zzzstream/hgtv.m3u8
+#EXTINF:-1,foodnetwork
+https://megaflix.cloudfronte.lat/zzzstream/foodnetwork.m3u8
+#EXTINF:-1,travel
+https://megaflix.cloudfronte.lat/zzzstream/travel.m3u8
+#EXTINF:-1,cartoonnetwork
+https://megaflix.cloudfronte.lat/zzzstream/cartoonnetwork.m3u8
+#EXTINF:-1,discoverykids
+https://megaflix.cloudfronte.lat/zzzstream/discoverykids.m3u8
+#EXTINF:-1,nickelodeon
+https://megaflix.cloudfronte.lat/zzzstream/nickelodeon.m3u8
+#EXTINF:-1,nickjr
+https://megaflix.cloudfronte.lat/zzzstream/nickjr.m3u8
+#EXTINF:-1,disneychannel
+https://megaflix.cloudfronte.lat/zzzstream/disneychannel.m3u8
+#EXTINF:-1,disneyjunior
+https://megaflix.cloudfronte.lat/zzzstream/disneyjunior.m3u8
+#EXTINF:-1,disneyxd
+https://megaflix.cloudfronte.lat/zzzstream/disneyxd.m3u8
+#EXTINF:-1,gloob
+https://megaflix.cloudfronte.lat/zzzstream/gloob.m3u8
+#EXTINF:-1,babytv
+https://megaflix.cloudfronte.lat/zzzstream/babytv.m3u8
+#EXTINF:-1,mtv
+https://megaflix.cloudfronte.lat/zzzstream/mtv.m3u8
+#EXTINF:-1,multishow
+https://megaflix.cloudfronte.lat/zzzstream/multishow.m3u8
+#EXTINF:-1,gnt
+https://megaflix.cloudfronte.lat/zzzstream/gnt.m3u8
+#EXTINF:-1,viva
+https://megaflix.cloudfronte.lat/zzzstream/viva.m3u8
+#EXTINF:-1,bis
+https://megaflix.cloudfronte.lat/zzzstream/bis.m3u8
+#EXTINF:-1,e
+https://megaflix.cloudfronte.lat/zzzstream/e.m3u8
+#EXTINF:-1,sportv
+https://megaflix.cloudfronte.lat/zzzstream/sportv.m3u8
+#EXTINF:-1,sportv2
+https://megaflix.cloudfronte.lat/zzzstream/sportv2.m3u8
+#EXTINF:-1,sportv3
+https://megaflix.cloudfronte.lat/zzzstream/sportv3.m3u8
+#EXTINF:-1,espn
+https://megaflix.cloudfronte.lat/zzzstream/espn.m3u8
+#EXTINF:-1,espn2
+https://megaflix.cloudfronte.lat/zzzstream/espn2.m3u8
+#EXTINF:-1,espn3
+https://megaflix.cloudfronte.lat/zzzstream/espn3.m3u8
+#EXTINF:-1,espn4
+https://megaflix.cloudfronte.lat/zzzstream/espn4.m3u8
+#EXTINF:-1,foxsports
+https://megaflix.cloudfronte.lat/zzzstream/foxsports.m3u8
+#EXTINF:-1,foxsports2
+https://megaflix.cloudfronte.lat/zzzstream/foxsports2.m3u8
+#EXTINF:-1,combate
+https://megaflix.cloudfronte.lat/zzzstream/combate.m3u8
+#EXTINF:-1,premiere
+https://megaflix.cloudfronte.lat/zzzstream/premiere.m3u8
+#EXTINF:-1,premiere2
+https://megaflix.cloudfronte.lat/zzzstream/premiere2.m3u8
+#EXTINF:-1,premiere3
+https://megaflix.cloudfronte.lat/zzzstream/premiere3.m3u8
+#EXTINF:-1,premiere4
+https://megaflix.cloudfronte.lat/zzzstream/premiere4.m3u8
+#EXTINF:-1,premiere5
+https://megaflix.cloudfronte.lat/zzzstream/premiere5.m3u8
+#EXTINF:-1,premiere6
+https://megaflix.cloudfronte.lat/zzzstream/premiere6.m3u8
+#EXTINF:-1,premiere7
+https://megaflix.cloudfronte.lat/zzzstream/premiere7.m3u8
+#EXTINF:-1,premiere8
+https://megaflix.cloudfronte.lat/zzzstream/premiere8.m3u8
+#EXTINF:-1,premiere9
+https://megaflix.cloudfronte.lat/zzzstream/premiere9.m3u8
