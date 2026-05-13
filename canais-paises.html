@@ -566,15 +566,15 @@ const canaisPorPais = {
       { nome: "Lunior TV", url: "https://5f22d76e220e1.streamlock.net/iuniortv/iuniortv/chunklist_w774879328.m3u8" },
       { nome: "Persiana Junior", url: "https://junhls.persiana.live/hls/stream.m3u8" }
       
-    ]
-  },
-                  
-  const listaPaisesDiv = document.getElementById("listaPaises");
+        ]
+  }
+};  // <--- ADICIONE ESTA LINHA AQUI!
+
+const listaPaisesDiv = document.getElementById("listaPaises");
 const canaisContainer = document.getElementById("canaisContainer");
 const tituloPaisDiv = document.getElementById("tituloPais");
 const listaCanaisDiv = document.getElementById("listaCanais");
 const btnVoltar = document.getElementById("btnVoltarPaises");
-
 // Criar botões dos países
 for (let pais in canaisPorPais) {
   const info = canaisPorPais[pais];
