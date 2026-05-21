@@ -1,0 +1,467 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+  <title>Canais por País - Jundial</title>
+  <style>
+    * { margin:0; padding:0; box-sizing:border-box; }
+    body {
+      background: #000;
+      color: #0f0;
+      font-family: Arial, sans-serif;
+      padding: 20px;
+      min-height: 100vh;
+    }
+    .header {
+      text-align: center;
+      margin-bottom: 30px;
+    }
+    .header h1 {
+      color: #0f0;
+      font-size: 1.8rem;
+    }
+    .header p {
+      color: #aaa;
+      font-size: 0.9rem;
+      margin-top: 5px;
+    }
+    .back-home {
+      display: inline-block;
+      background: #001a00;
+      border: 1px solid #0f0;
+      color: #0f0;
+      padding: 10px 20px;
+      border-radius: 25px;
+      text-decoration: none;
+      margin-bottom: 20px;
+      font-size: 0.9rem;
+      transition: all 0.2s;
+    }
+    .back-home:hover {
+      background: #0f0;
+      color: #000;
+    }
+    .grid-paises {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(140px, 1fr));
+      gap: 15px;
+      margin: 25px 0;
+    }
+    .btn-pais {
+      background: #0a0a0a;
+      border: 2px solid #0f0;
+      border-radius: 14px;
+      padding: 18px 10px;
+      text-align: center;
+      cursor: pointer;
+      font-weight: bold;
+      font-size: 1.1rem;
+      transition: all 0.2s;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 8px;
+    }
+    .btn-pais:hover {
+      background: #0f0;
+      color: #000;
+      transform: scale(1.02);
+    }
+    .btn-pais .flag {
+      font-size: 2rem;
+    }
+    .canais-container {
+      margin-top: 20px;
+    }
+    .btn-voltar-paises {
+      background: #001a00;
+      border: 1px solid #0f0;
+      color: #0f0;
+      padding: 10px 20px;
+      border-radius: 25px;
+      cursor: pointer;
+      margin-bottom: 20px;
+      font-size: 0.9rem;
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+    }
+    .btn-voltar-paises:hover {
+      background: #0f0;
+      color: #000;
+    }
+    .titulo-pais {
+      color: #ff0;
+      font-size: 1.4rem;
+      margin-bottom: 20px;
+      padding-bottom: 10px;
+      border-bottom: 1px solid #0f0;
+    }
+    .lista-canais {
+      display: flex;
+      flex-direction: column;
+      gap: 8px;
+    }
+    .canal-item {
+      background: #0a0a0a;
+      border-radius: 10px;
+      padding: 12px 15px;
+      cursor: pointer;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      transition: all 0.2s;
+      border-left: 4px solid #0f0;
+    }
+    .canal-item:hover {
+      background: #0f0;
+      color: #000;
+    }
+    .canal-nome {
+      font-size: 1rem;
+      font-weight: bold;
+    }
+    .canal-assistir {
+      background: rgba(0,255,0,0.2);
+      padding: 4px 12px;
+      border-radius: 20px;
+      font-size: 0.8rem;
+    }
+    .canal-item:hover .canal-assistir {
+      background: #000;
+      color: #0f0;
+    }
+    .sem-canais {
+      text-align: center;
+      padding: 40px;
+      color: #666;
+    }
+    footer {
+      text-align: center;
+      margin-top: 40px;
+      padding-top: 20px;
+      border-top: 1px solid #333;
+      color: #666;
+      font-size: 0.8rem;
+    }
+    @media (max-width: 600px) {
+      .grid-paises { grid-template-columns: repeat(auto-fill, minmax(110px, 1fr)); }
+      .btn-pais { padding: 12px 5px; font-size: 0.9rem; }
+      .canal-item { flex-wrap: wrap; gap: 8px; }
+    }
+  </style>
+</head>
+<body>
+
+<div class="header">
+  <a href="index.html" class="back-home">← Voltar para o início</a>
+  <h1>🌍 CANAIS POR PAÍS - JUNDIAL</h1>
+  <p>Selecione um país para ver a lista de canais disponíveis (Fonte: IPTV-ORG)</p>
+</div>
+
+<div id="listaPaises" class="grid-paises"></div>
+<div id="canaisContainer" class="canais-container" style="display:none;">
+  <button class="btn-voltar-paises" id="btnVoltarPaises">← Voltar aos Países</button>
+  <div id="tituloPais" class="titulo-pais"></div>
+  <div id="listaCanais" class="lista-canais"></div>
+</div>
+
+<footer>
+  🌐 Canais Jundial - Baseado no repositório IPTV-ORG | Projeto mantido com dedicação
+</footer>
+
+<script>
+// =====================================================
+// BANCO DE DADOS DOS CANAIS POR PAÍS (IPTV-ORG)
+// TODOS OS PAÍSES DISPONÍVEIS
+// =====================================================
+
+const canaisPorPais = {
+  "Afeganistão": { flag: "🇦🇫", url: "https://raw.githubusercontent.com/iptv-org/iptv/master/streams/af.m3u" },
+  "África do Sul": { flag: "🇿🇦", url: "https://raw.githubusercontent.com/iptv-org/iptv/master/streams/za.m3u" },
+  "Albânia": { flag: "🇦🇱", url: "https://raw.githubusercontent.com/iptv-org/iptv/master/streams/al.m3u" },
+  "Alemanha": { flag: "🇩🇪", url: "https://raw.githubusercontent.com/iptv-org/iptv/master/streams/de.m3u" },
+  "Andorra": { flag: "🇦🇩", url: "https://raw.githubusercontent.com/iptv-org/iptv/master/streams/ad.m3u" },
+  "Angola": { flag: "🇦🇴", url: "https://raw.githubusercontent.com/iptv-org/iptv/master/streams/ao.m3u" },
+  "Arábia Saudita": { flag: "🇸🇦", url: "https://raw.githubusercontent.com/iptv-org/iptv/master/streams/sa.m3u" },
+  "Argélia": { flag: "🇩🇿", url: "https://raw.githubusercontent.com/iptv-org/iptv/master/streams/dz.m3u" },
+  "Argentina": { flag: "🇦🇷", url: "https://raw.githubusercontent.com/iptv-org/iptv/master/streams/ar.m3u" },
+  "Armênia": { flag: "🇦🇲", url: "https://raw.githubusercontent.com/iptv-org/iptv/master/streams/am.m3u" },
+  "Austrália": { flag: "🇦🇺", url: "https://raw.githubusercontent.com/iptv-org/iptv/master/streams/au.m3u" },
+  "Áustria": { flag: "🇦🇹", url: "https://raw.githubusercontent.com/iptv-org/iptv/master/streams/at.m3u" },
+  "Azerbaijão": { flag: "🇦🇿", url: "https://raw.githubusercontent.com/iptv-org/iptv/master/streams/az.m3u" },
+  "Bahamas": { flag: "🇧🇸", url: "https://raw.githubusercontent.com/iptv-org/iptv/master/streams/bs.m3u" },
+  "Bangladesh": { flag: "🇧🇩", url: "https://raw.githubusercontent.com/iptv-org/iptv/master/streams/bd.m3u" },
+  "Barbados": { flag: "🇧🇧", url: "https://raw.githubusercontent.com/iptv-org/iptv/master/streams/bb.m3u" },
+  "Bélgica": { flag: "🇧🇪", url: "https://raw.githubusercontent.com/iptv-org/iptv/master/streams/be.m3u" },
+  "Benim": { flag: "🇧🇯", url: "https://raw.githubusercontent.com/iptv-org/iptv/master/streams/bj.m3u" },
+  "Bielorrússia": { flag: "🇧🇾", url: "https://raw.githubusercontent.com/iptv-org/iptv/master/streams/by.m3u" },
+  "Bolívia": { flag: "🇧🇴", url: "https://raw.githubusercontent.com/iptv-org/iptv/master/streams/bo.m3u" },
+  "Bósnia e Herzegovina": { flag: "🇧🇦", url: "https://raw.githubusercontent.com/iptv-org/iptv/master/streams/ba.m3u" },
+  "Botsuana": { flag: "🇧🇼", url: "https://raw.githubusercontent.com/iptv-org/iptv/master/streams/bw.m3u" },
+  "Brasil": { flag: "🇧🇷", url: "https://raw.githubusercontent.com/iptv-org/iptv/master/streams/br.m3u" },
+  "Brunei": { flag: "🇧🇳", url: "https://raw.githubusercontent.com/iptv-org/iptv/master/streams/bn.m3u" },
+  "Bulgária": { flag: "🇧🇬", url: "https://raw.githubusercontent.com/iptv-org/iptv/master/streams/bg.m3u" },
+  "Burkina Faso": { flag: "🇧🇫", url: "https://raw.githubusercontent.com/iptv-org/iptv/master/streams/bf.m3u" },
+  "Burundi": { flag: "🇧🇮", url: "https://raw.githubusercontent.com/iptv-org/iptv/master/streams/bi.m3u" },
+  "Butão": { flag: "🇧🇹", url: "https://raw.githubusercontent.com/iptv-org/iptv/master/streams/bt.m3u" },
+  "Cabo Verde": { flag: "🇨🇻", url: "https://raw.githubusercontent.com/iptv-org/iptv/master/streams/cv.m3u" },
+  "Camarões": { flag: "🇨🇲", url: "https://raw.githubusercontent.com/iptv-org/iptv/master/streams/cm.m3u" },
+  "Camboja": { flag: "🇰🇭", url: "https://raw.githubusercontent.com/iptv-org/iptv/master/streams/kh.m3u" },
+  "Canadá": { flag: "🇨🇦", url: "https://raw.githubusercontent.com/iptv-org/iptv/master/streams/ca.m3u" },
+  "Catar": { flag: "🇶🇦", url: "https://raw.githubusercontent.com/iptv-org/iptv/master/streams/qa.m3u" },
+  "Cazaquistão": { flag: "🇰🇿", url: "https://raw.githubusercontent.com/iptv-org/iptv/master/streams/kz.m3u" },
+  "Chade": { flag: "🇹🇩", url: "https://raw.githubusercontent.com/iptv-org/iptv/master/streams/td.m3u" },
+  "Chile": { flag: "🇨🇱", url: "https://raw.githubusercontent.com/iptv-org/iptv/master/streams/cl.m3u" },
+  "China": { flag: "🇨🇳", url: "https://raw.githubusercontent.com/iptv-org/iptv/master/streams/cn.m3u" },
+  "Chipre": { flag: "🇨🇾", url: "https://raw.githubusercontent.com/iptv-org/iptv/master/streams/cy.m3u" },
+  "Colômbia": { flag: "🇨🇴", url: "https://raw.githubusercontent.com/iptv-org/iptv/master/streams/co.m3u" },
+  "Comores": { flag: "🇰🇲", url: "https://raw.githubusercontent.com/iptv-org/iptv/master/streams/km.m3u" },
+  "Congo": { flag: "🇨🇬", url: "https://raw.githubusercontent.com/iptv-org/iptv/master/streams/cg.m3u" },
+  "Coreia do Norte": { flag: "🇰🇵", url: "https://raw.githubusercontent.com/iptv-org/iptv/master/streams/kp.m3u" },
+  "Coreia do Sul": { flag: "🇰🇷", url: "https://raw.githubusercontent.com/iptv-org/iptv/master/streams/kr.m3u" },
+  "Costa do Marfim": { flag: "🇨🇮", url: "https://raw.githubusercontent.com/iptv-org/iptv/master/streams/ci.m3u" },
+  "Costa Rica": { flag: "🇨🇷", url: "https://raw.githubusercontent.com/iptv-org/iptv/master/streams/cr.m3u" },
+  "Croácia": { flag: "🇭🇷", url: "https://raw.githubusercontent.com/iptv-org/iptv/master/streams/hr.m3u" },
+  "Cuba": { flag: "🇨🇺", url: "https://raw.githubusercontent.com/iptv-org/iptv/master/streams/cu.m3u" },
+  "Dinamarca": { flag: "🇩🇰", url: "https://raw.githubusercontent.com/iptv-org/iptv/master/streams/dk.m3u" },
+  "Egito": { flag: "🇪🇬", url: "https://raw.githubusercontent.com/iptv-org/iptv/master/streams/eg.m3u" },
+  "El Salvador": { flag: "🇸🇻", url: "https://raw.githubusercontent.com/iptv-org/iptv/master/streams/sv.m3u" },
+  "Emirados Árabes Unidos": { flag: "🇦🇪", url: "https://raw.githubusercontent.com/iptv-org/iptv/master/streams/ae.m3u" },
+  "Equador": { flag: "🇪🇨", url: "https://raw.githubusercontent.com/iptv-org/iptv/master/streams/ec.m3u" },
+  "Eritreia": { flag: "🇪🇷", url: "https://raw.githubusercontent.com/iptv-org/iptv/master/streams/er.m3u" },
+  "Eslováquia": { flag: "🇸🇰", url: "https://raw.githubusercontent.com/iptv-org/iptv/master/streams/sk.m3u" },
+  "Eslovênia": { flag: "🇸🇮", url: "https://raw.githubusercontent.com/iptv-org/iptv/master/streams/si.m3u" },
+  "Espanha": { flag: "🇪🇸", url: "https://raw.githubusercontent.com/iptv-org/iptv/master/streams/es.m3u" },
+  "Estados Unidos": { flag: "🇺🇸", url: "https://raw.githubusercontent.com/iptv-org/iptv/master/streams/us.m3u" },
+  "Estônia": { flag: "🇪🇪", url: "https://raw.githubusercontent.com/iptv-org/iptv/master/streams/ee.m3u" },
+  "Etiópia": { flag: "🇪🇹", url: "https://raw.githubusercontent.com/iptv-org/iptv/master/streams/et.m3u" },
+  "Fiji": { flag: "🇫🇯", url: "https://raw.githubusercontent.com/iptv-org/iptv/master/streams/fj.m3u" },
+  "Filipinas": { flag: "🇵🇭", url: "https://raw.githubusercontent.com/iptv-org/iptv/master/streams/ph.m3u" },
+  "Finlândia": { flag: "🇫🇮", url: "https://raw.githubusercontent.com/iptv-org/iptv/master/streams/fi.m3u" },
+  "França": { flag: "🇫🇷", url: "https://raw.githubusercontent.com/iptv-org/iptv/master/streams/fr.m3u" },
+  "Gabão": { flag: "🇬🇦", url: "https://raw.githubusercontent.com/iptv-org/iptv/master/streams/ga.m3u" },
+  "Gâmbia": { flag: "🇬🇲", url: "https://raw.githubusercontent.com/iptv-org/iptv/master/streams/gm.m3u" },
+  "Gana": { flag: "🇬🇭", url: "https://raw.githubusercontent.com/iptv-org/iptv/master/streams/gh.m3u" },
+  "Geórgia": { flag: "🇬🇪", url: "https://raw.githubusercontent.com/iptv-org/iptv/master/streams/ge.m3u" },
+  "Gibraltar": { flag: "🇬🇮", url: "https://raw.githubusercontent.com/iptv-org/iptv/master/streams/gi.m3u" },
+  "Grécia": { flag: "🇬🇷", url: "https://raw.githubusercontent.com/iptv-org/iptv/master/streams/gr.m3u" },
+  "Guatemala": { flag: "🇬🇹", url: "https://raw.githubusercontent.com/iptv-org/iptv/master/streams/gt.m3u" },
+  "Guiana": { flag: "🇬🇾", url: "https://raw.githubusercontent.com/iptv-org/iptv/master/streams/gy.m3u" },
+  "Guiné": { flag: "🇬🇳", url: "https://raw.githubusercontent.com/iptv-org/iptv/master/streams/gn.m3u" },
+  "Guiné Equatorial": { flag: "🇬🇶", url: "https://raw.githubusercontent.com/iptv-org/iptv/master/streams/gq.m3u" },
+  "Guiné-Bissau": { flag: "🇬🇼", url: "https://raw.githubusercontent.com/iptv-org/iptv/master/streams/gw.m3u" },
+  "Haiti": { flag: "🇭🇹", url: "https://raw.githubusercontent.com/iptv-org/iptv/master/streams/ht.m3u" },
+  "Holanda": { flag: "🇳🇱", url: "https://raw.githubusercontent.com/iptv-org/iptv/master/streams/nl.m3u" },
+  "Honduras": { flag: "🇭🇳", url: "https://raw.githubusercontent.com/iptv-org/iptv/master/streams/hn.m3u" },
+  "Hong Kong": { flag: "🇭🇰", url: "https://raw.githubusercontent.com/iptv-org/iptv/master/streams/hk.m3u" },
+  "Hungria": { flag: "🇭🇺", url: "https://raw.githubusercontent.com/iptv-org/iptv/master/streams/hu.m3u" },
+  "Iêmen": { flag: "🇾🇪", url: "https://raw.githubusercontent.com/iptv-org/iptv/master/streams/ye.m3u" },
+  "Ilhas Marshall": { flag: "🇲🇭", url: "https://raw.githubusercontent.com/iptv-org/iptv/master/streams/mh.m3u" },
+  "Ilhas Salomão": { flag: "🇸🇧", url: "https://raw.githubusercontent.com/iptv-org/iptv/master/streams/sb.m3u" },
+  "Índia": { flag: "🇮🇳", url: "https://raw.githubusercontent.com/iptv-org/iptv/master/streams/in.m3u" },
+  "Indonésia": { flag: "🇮🇩", url: "https://raw.githubusercontent.com/iptv-org/iptv/master/streams/id.m3u" },
+  "Irã": { flag: "🇮🇷", url: "https://raw.githubusercontent.com/iptv-org/iptv/master/streams/ir.m3u" },
+  "Iraque": { flag: "🇮🇶", url: "https://raw.githubusercontent.com/iptv-org/iptv/master/streams/iq.m3u" },
+  "Irlanda": { flag: "🇮🇪", url: "https://raw.githubusercontent.com/iptv-org/iptv/master/streams/ie.m3u" },
+  "Islândia": { flag: "🇮🇸", url: "https://raw.githubusercontent.com/iptv-org/iptv/master/streams/is.m3u" },
+  "Israel": { flag: "🇮🇱", url: "https://raw.githubusercontent.com/iptv-org/iptv/master/streams/il.m3u" },
+  "Itália": { flag: "🇮🇹", url: "https://raw.githubusercontent.com/iptv-org/iptv/master/streams/it.m3u" },
+  "Jamaica": { flag: "🇯🇲", url: "https://raw.githubusercontent.com/iptv-org/iptv/master/streams/jm.m3u" },
+  "Japão": { flag: "🇯🇵", url: "https://raw.githubusercontent.com/iptv-org/iptv/master/streams/jp.m3u" },
+  "Jordânia": { flag: "🇯🇴", url: "https://raw.githubusercontent.com/iptv-org/iptv/master/streams/jo.m3u" },
+  "Kiribati": { flag: "🇰🇮", url: "https://raw.githubusercontent.com/iptv-org/iptv/master/streams/ki.m3u" },
+  "Kuwait": { flag: "🇰🇼", url: "https://raw.githubusercontent.com/iptv-org/iptv/master/streams/kw.m3u" },
+  "Laos": { flag: "🇱🇦", url: "https://raw.githubusercontent.com/iptv-org/iptv/master/streams/la.m3u" },
+  "Lesoto": { flag: "🇱🇸", url: "https://raw.githubusercontent.com/iptv-org/iptv/master/streams/ls.m3u" },
+  "Letônia": { flag: "🇱🇻", url: "https://raw.githubusercontent.com/iptv-org/iptv/master/streams/lv.m3u" },
+  "Líbano": { flag: "🇱🇧", url: "https://raw.githubusercontent.com/iptv-org/iptv/master/streams/lb.m3u" },
+  "Libéria": { flag: "🇱🇷", url: "https://raw.githubusercontent.com/iptv-org/iptv/master/streams/lr.m3u" },
+  "Líbia": { flag: "🇱🇾", url: "https://raw.githubusercontent.com/iptv-org/iptv/master/streams/ly.m3u" },
+  "Liechtenstein": { flag: "🇱🇮", url: "https://raw.githubusercontent.com/iptv-org/iptv/master/streams/li.m3u" },
+  "Lituânia": { flag: "🇱🇹", url: "https://raw.githubusercontent.com/iptv-org/iptv/master/streams/lt.m3u" },
+  "Luxemburgo": { flag: "🇱🇺", url: "https://raw.githubusercontent.com/iptv-org/iptv/master/streams/lu.m3u" },
+  "Macedônia": { flag: "🇲🇰", url: "https://raw.githubusercontent.com/iptv-org/iptv/master/streams/mk.m3u" },
+  "Madagascar": { flag: "🇲🇬", url: "https://raw.githubusercontent.com/iptv-org/iptv/master/streams/mg.m3u" },
+  "Malásia": { flag: "🇲🇾", url: "https://raw.githubusercontent.com/iptv-org/iptv/master/streams/my.m3u" },
+  "Malawi": { flag: "🇲🇼", url: "https://raw.githubusercontent.com/iptv-org/iptv/master/streams/mw.m3u" },
+  "Maldivas": { flag: "🇲🇻", url: "https://raw.githubusercontent.com/iptv-org/iptv/master/streams/mv.m3u" },
+  "Mali": { flag: "🇲🇱", url: "https://raw.githubusercontent.com/iptv-org/iptv/master/streams/ml.m3u" },
+  "Malta": { flag: "🇲🇹", url: "https://raw.githubusercontent.com/iptv-org/iptv/master/streams/mt.m3u" },
+  "Marrocos": { flag: "🇲🇦", url: "https://raw.githubusercontent.com/iptv-org/iptv/master/streams/ma.m3u" },
+  "Maurício": { flag: "🇲🇺", url: "https://raw.githubusercontent.com/iptv-org/iptv/master/streams/mu.m3u" },
+  "Mauritânia": { flag: "🇲🇷", url: "https://raw.githubusercontent.com/iptv-org/iptv/master/streams/mr.m3u" },
+  "México": { flag: "🇲🇽", url: "https://raw.githubusercontent.com/iptv-org/iptv/master/streams/mx.m3u" },
+  "Micronésia": { flag: "🇫🇲", url: "https://raw.githubusercontent.com/iptv-org/iptv/master/streams/fm.m3u" },
+  "Moçambique": { flag: "🇲🇿", url: "https://raw.githubusercontent.com/iptv-org/iptv/master/streams/mz.m3u" },
+  "Moldávia": { flag: "🇲🇩", url: "https://raw.githubusercontent.com/iptv-org/iptv/master/streams/md.m3u" },
+  "Mônaco": { flag: "🇲🇨", url: "https://raw.githubusercontent.com/iptv-org/iptv/master/streams/mc.m3u" },
+  "Mongólia": { flag: "🇲🇳", url: "https://raw.githubusercontent.com/iptv-org/iptv/master/streams/mn.m3u" },
+  "Montenegro": { flag: "🇲🇪", url: "https://raw.githubusercontent.com/iptv-org/iptv/master/streams/me.m3u" },
+  "Myanmar": { flag: "🇲🇲", url: "https://raw.githubusercontent.com/iptv-org/iptv/master/streams/mm.m3u" },
+  "Namíbia": { flag: "🇳🇦", url: "https://raw.githubusercontent.com/iptv-org/iptv/master/streams/na.m3u" },
+  "Nauru": { flag: "🇳🇷", url: "https://raw.githubusercontent.com/iptv-org/iptv/master/streams/nr.m3u" },
+  "Nepal": { flag: "🇳🇵", url: "https://raw.githubusercontent.com/iptv-org/iptv/master/streams/np.m3u" },
+  "Nicarágua": { flag: "🇳🇮", url: "https://raw.githubusercontent.com/iptv-org/iptv/master/streams/ni.m3u" },
+  "Níger": { flag: "🇳🇪", url: "https://raw.githubusercontent.com/iptv-org/iptv/master/streams/ne.m3u" },
+  "Nigéria": { flag: "🇳🇬", url: "https://raw.githubusercontent.com/iptv-org/iptv/master/streams/ng.m3u" },
+  "Noruega": { flag: "🇳🇴", url: "https://raw.githubusercontent.com/iptv-org/iptv/master/streams/no.m3u" },
+  "Nova Zelândia": { flag: "🇳🇿", url: "https://raw.githubusercontent.com/iptv-org/iptv/master/streams/nz.m3u" },
+  "Omã": { flag: "🇴🇲", url: "https://raw.githubusercontent.com/iptv-org/iptv/master/streams/om.m3u" },
+  "Palau": { flag: "🇵🇼", url: "https://raw.githubusercontent.com/iptv-org/iptv/master/streams/pw.m3u" },
+  "Panamá": { flag: "🇵🇦", url: "https://raw.githubusercontent.com/iptv-org/iptv/master/streams/pa.m3u" },
+  "Papua Nova Guiné": { flag: "🇵🇬", url: "https://raw.githubusercontent.com/iptv-org/iptv/master/streams/pg.m3u" },
+  "Paquistão": { flag: "🇵🇰", url: "https://raw.githubusercontent.com/iptv-org/iptv/master/streams/pk.m3u" },
+  "Paraguai": { flag: "🇵🇾", url: "https://raw.githubusercontent.com/iptv-org/iptv/master/streams/py.m3u" },
+  "Peru": { flag: "🇵🇪", url: "https://raw.githubusercontent.com/iptv-org/iptv/master/streams/pe.m3u" },
+  "Polônia": { flag: "🇵🇱", url: "https://raw.githubusercontent.com/iptv-org/iptv/master/streams/pl.m3u" },
+  "Portugal": { flag: "🇵🇹", url: "https://raw.githubusercontent.com/iptv-org/iptv/master/streams/pt.m3u" },
+  "Quênia": { flag: "🇰🇪", url: "https://raw.githubusercontent.com/iptv-org/iptv/master/streams/ke.m3u" },
+  "Quirguistão": { flag: "🇰🇬", url: "https://raw.githubusercontent.com/iptv-org/iptv/master/streams/kg.m3u" },
+  "Reino Unido": { flag: "🇬🇧", url: "https://raw.githubusercontent.com/iptv-org/iptv/master/streams/gb.m3u" },
+  "República Centro-Africana": { flag: "🇨🇫", url: "https://raw.githubusercontent.com/iptv-org/iptv/master/streams/cf.m3u" },
+  "República Democrática do Congo": { flag: "🇨🇩", url: "https://raw.githubusercontent.com/iptv-org/iptv/master/streams/cd.m3u" },
+  "República Dominicana": { flag: "🇩🇴", url: "https://raw.githubusercontent.com/iptv-org/iptv/master/streams/do.m3u" },
+  "República Tcheca": { flag: "🇨🇿", url: "https://raw.githubusercontent.com/iptv-org/iptv/master/streams/cz.m3u" },
+  "Romênia": { flag: "🇷🇴", url: "https://raw.githubusercontent.com/iptv-org/iptv/master/streams/ro.m3u" },
+  "Ruanda": { flag: "🇷🇼", url: "https://raw.githubusercontent.com/iptv-org/iptv/master/streams/rw.m3u" },
+  "Rússia": { flag: "🇷🇺", url: "https://raw.githubusercontent.com/iptv-org/iptv/master/streams/ru.m3u" },
+  "Samoa": { flag: "🇼🇸", url: "https://raw.githubusercontent.com/iptv-org/iptv/master/streams/ws.m3u" },
+  "San Marino": { flag: "🇸🇲", url: "https://raw.githubusercontent.com/iptv-org/iptv/master/streams/sm.m3u" },
+  "Santa Lúcia": { flag: "🇱🇨", url: "https://raw.githubusercontent.com/iptv-org/iptv/master/streams/lc.m3u" },
+  "São Tomé e Príncipe": { flag: "🇸🇹", url: "https://raw.githubusercontent.com/iptv-org/iptv/master/streams/st.m3u" },
+  "Senegal": { flag: "🇸🇳", url: "https://raw.githubusercontent.com/iptv-org/iptv/master/streams/sn.m3u" },
+  "Sérvia": { flag: "🇷🇸", url: "https://raw.githubusercontent.com/iptv-org/iptv/master/streams/rs.m3u" },
+  "Seicheles": { flag: "🇸🇨", url: "https://raw.githubusercontent.com/iptv-org/iptv/master/streams/sc.m3u" },
+  "Serra Leoa": { flag: "🇸🇱", url: "https://raw.githubusercontent.com/iptv-org/iptv/master/streams/sl.m3u" },
+  "Singapura": { flag: "🇸🇬", url: "https://raw.githubusercontent.com/iptv-org/iptv/master/streams/sg.m3u" },
+  "Síria": { flag: "🇸🇾", url: "https://raw.githubusercontent.com/iptv-org/iptv/master/streams/sy.m3u" },
+  "Somália": { flag: "🇸🇴", url: "https://raw.githubusercontent.com/iptv-org/iptv/master/streams/so.m3u" },
+  "Sri Lanka": { flag: "🇱🇰", url: "https://raw.githubusercontent.com/iptv-org/iptv/master/streams/lk.m3u" },
+  "Suazilândia": { flag: "🇸🇿", url: "https://raw.githubusercontent.com/iptv-org/iptv/master/streams/sz.m3u" },
+  "Sudão": { flag: "🇸🇩", url: "https://raw.githubusercontent.com/iptv-org/iptv/master/streams/sd.m3u" },
+  "Suécia": { flag: "🇸🇪", url: "https://raw.githubusercontent.com/iptv-org/iptv/master/streams/se.m3u" },
+  "Suíça": { flag: "🇨🇭", url: "https://raw.githubusercontent.com/iptv-org/iptv/master/streams/ch.m3u" },
+  "Suriname": { flag: "🇸🇷", url: "https://raw.githubusercontent.com/iptv-org/iptv/master/streams/sr.m3u" },
+  "Tailândia": { flag: "🇹🇭", url: "https://raw.githubusercontent.com/iptv-org/iptv/master/streams/th.m3u" },
+  "Taiwan": { flag: "🇹🇼", url: "https://raw.githubusercontent.com/iptv-org/iptv/master/streams/tw.m3u" },
+  "Tajiquistão": { flag: "🇹🇯", url: "https://raw.githubusercontent.com/iptv-org/iptv/master/streams/tj.m3u" },
+  "Tanzânia": { flag: "🇹🇿", url: "https://raw.githubusercontent.com/iptv-org/iptv/master/streams/tz.m3u" },
+  "Timor-Leste": { flag: "🇹🇱", url: "https://raw.githubusercontent.com/iptv-org/iptv/master/streams/tl.m3u" },
+  "Togo": { flag: "🇹🇬", url: "https://raw.githubusercontent.com/iptv-org/iptv/master/streams/tg.m3u" },
+  "Tonga": { flag: "🇹🇴", url: "https://raw.githubusercontent.com/iptv-org/iptv/master/streams/to.m3u" },
+  "Trinidad e Tobago": { flag: "🇹🇹", url: "https://raw.githubusercontent.com/iptv-org/iptv/master/streams/tt.m3u" },
+  "Tunísia": { flag: "🇹🇳", url: "https://raw.githubusercontent.com/iptv-org/iptv/master/streams/tn.m3u" },
+  "Turcomenistão": { flag: "🇹🇲", url: "https://raw.githubusercontent.com/iptv-org/iptv/master/streams/tm.m3u" },
+  "Turquia": { flag: "🇹🇷", url: "https://raw.githubusercontent.com/iptv-org/iptv/master/streams/tr.m3u" },
+  "Tuvalu": { flag: "🇹🇻", url: "https://raw.githubusercontent.com/iptv-org/iptv/master/streams/tv.m3u" },
+  "Ucrânia": { flag: "🇺🇦", url: "https://raw.githubusercontent.com/iptv-org/iptv/master/streams/ua.m3u" },
+  "Uganda": { flag: "🇺🇬", url: "https://raw.githubusercontent.com/iptv-org/iptv/master/streams/ug.m3u" },
+  "Uruguai": { flag: "🇺🇾", url: "https://raw.githubusercontent.com/iptv-org/iptv/master/streams/uy.m3u" },
+  "Uzbequistão": { flag: "🇺🇿", url: "https://raw.githubusercontent.com/iptv-org/iptv/master/streams/uz.m3u" },
+  "Vanuatu": { flag: "🇻🇺", url: "https://raw.githubusercontent.com/iptv-org/iptv/master/streams/vu.m3u" },
+  "Vaticano": { flag: "🇻🇦", url: "https://raw.githubusercontent.com/iptv-org/iptv/master/streams/va.m3u" },
+  "Venezuela": { flag: "🇻🇪", url: "https://raw.githubusercontent.com/iptv-org/iptv/master/streams/ve.m3u" },
+  "Vietnã": { flag: "🇻🇳", url: "https://raw.githubusercontent.com/iptv-org/iptv/master/streams/vn.m3u" },
+  "Zâmbia": { flag: "🇿🇲", url: "https://raw.githubusercontent.com/iptv-org/iptv/master/streams/zm.m3u" },
+  "Zimbábue": { flag: "🇿🇼", url: "https://raw.githubusercontent.com/iptv-org/iptv/master/streams/zw.m3u" }
+};
+
+// =====================================================
+// LÓGICA DA PÁGINA
+// =====================================================
+
+const listaPaisesDiv = document.getElementById("listaPaises");
+const canaisContainer = document.getElementById("canaisContainer");
+const tituloPaisDiv = document.getElementById("tituloPais");
+const listaCanaisDiv = document.getElementById("listaCanais");
+const btnVoltar = document.getElementById("btnVoltarPaises");
+
+async function carregarCanaisDoPais(pais, url) {
+  try {
+    const response = await fetch(url);
+    if (!response.ok) throw new Error(`HTTP ${response.status}`);
+    const conteudo = await response.text();
+    
+    const linhas = conteudo.split('\n');
+    const canais = [];
+    let nomeAtual = "";
+    
+    for (const linha of linhas) {
+      if (linha.startsWith('#EXTINF:')) {
+        const match = linha.match(/,([^,]+)$/);
+        if (match) {
+          nomeAtual = match[1].trim();
+        }
+      } else if (linha.startsWith('http') && nomeAtual) {
+        canais.push({ nome: nomeAtual, url: linha.trim() });
+        nomeAtual = "";
+      }
+    }
+    
+    return canais;
+  } catch (error) {
+    console.error(`Erro ao carregar ${pais}:`, error);
+    return [];
+  }
+}
+
+async function mostrarCanais(pais, info) {
+  listaPaisesDiv.style.display = "none";
+  canaisContainer.style.display = "block";
+  tituloPaisDiv.innerHTML = `${info.flag} ${pais} - Carregando canais...`;
+  listaCanaisDiv.innerHTML = '<div class="sem-canais">🔄 Carregando lista de canais...</div>';
+  
+  const canais = await carregarCanaisDoPais(pais, info.url);
+  
+  if (canais.length === 0) {
+    listaCanaisDiv.innerHTML = '<div class="sem-canais">❌ Nenhum canal encontrado ou erro ao carregar.</div>';
+    tituloPaisDiv.innerHTML = `${info.flag} ${pais} (0 canais)`;
+    return;
+  }
+  
+  tituloPaisDiv.innerHTML = `${info.flag} ${pais} (${canais.length} canais)`;
+  listaCanaisDiv.innerHTML = "";
+  
+  canais.forEach(canal => {
+    const item = document.createElement("div");
+    item.className = "canal-item";
+    item.innerHTML = `
+      <span class="canal-nome">📺 ${canal.nome}</span>
+      <span class="canal-assistir">▶ Assistir</span>
+    `;
+    item.onclick = function() { 
+      if (canal.url && canal.url !== "#") {
+        window.open(canal.url, "_blank");
+      } else {
+        alert("Link do canal indisponível no momento.");
+      }
+    };
+    listaCanaisDiv.appendChild(item);
+  });
+  
+  window.scrollTo(0, 0);
+}
+
+for (let pais in canaisPorPais) {
+  const info = canaisPorPais[pais];
+  const btn = document.createElement("div");
+  btn.className = "btn-pais";
+  btn.innerHTML = `<span class="flag">${info.flag}</span><span>${pais}</span>`;
+  btn.onclick = (function(paisNome, infoPais) {
+    return function() { mostrarCanais(paisNome, infoPais); };
+  })(pais, info);
+  listaPaisesDiv.appendChild(btn);
+}
+
+function voltarPaises() {
+  listaPaisesDiv.style.display = "grid";
+  canaisContainer.style.display = "none";
+}
+
+btnVoltar.onclick = voltarPaises;
+</script>
+
+</body>
+</html>
