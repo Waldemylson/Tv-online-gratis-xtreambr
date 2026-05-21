@@ -3,6 +3,8 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <!-- Corrige Mixed Content -->
+  <meta http-equiv="Content-Security-Policy" content="upgrade-insecure-requests">
   <title>Canais Adultos - XTREAMBR TV</title>
   <style>
     body { 
@@ -29,8 +31,6 @@
       color:#ff0; 
       text-decoration:underline; 
     }
-
-    /* Player em tela cheia */
     #player-container { 
       display:none; 
       position:fixed; 
@@ -56,7 +56,6 @@
       cursor:pointer; 
       border-radius:8px; 
     }
-
     .controles {
       margin-top: 50px;
     }
@@ -90,7 +89,6 @@
   <!-- Canais carregados aqui -->
 </div>
 
-<!-- Player Nativo -->
 <div id="player-container">
   <button class="fechar" onclick="fecharPlayer()">FECHAR ✖</button>
   <video id="videoPlayer" controls autoplay></video>
@@ -103,8 +101,10 @@
   </a>
 </div>
 
+<!-- HLS.js para suporte a .m3u8 -->
+<script src="https://cdn.jsdelivr.net/npm/hls.js@latest"></script>
+
 <script>
-// URL do seu arquivo Dirty.m3u
 const m3uUrl = "https://raw.githubusercontent.com/Waldemylson/Tv-online-gratis-xtreambr/refs/heads/main/dirty.m3u";
 
 const videoPlayer = document.getElementById('videoPlayer');
@@ -116,7 +116,6 @@ async function carregarCanais() {
     const response = await fetch(m3uUrl);
     const text = await response.text();
     const lines = text.split('\n');
-
     let name = '';
     
     for (let line of lines) {
@@ -127,9 +126,7 @@ async function carregarCanais() {
       } 
       else if (line && !line.startsWith('#') && name) {
         const p = document.createElement('p');
-        p.innerHTML = `
-          <a href="#" onclick="abrir('${line}'); return false;">${name}</a>
-        `;
+        p.innerHTML = `<a href="#" onclick="abrir('${line}'); return false;">${name}</a>`;
         listaCanais.appendChild(p);
         name = '';
       }
@@ -140,9 +137,25 @@ async function carregarCanais() {
 }
 
 function abrir(url) {
-  videoPlayer.src = url;
   playerContainer.style.display = 'block';
-  videoPlayer.play().catch(() => {});
+  
+  if (videoPlayer.canPlayType('application/vnd.apple.mpegurl')) {
+    // Safari/iOS
+    videoPlayer.src = url;
+    videoPlayer.play().catch(() => {});
+  } 
+  else if (Hls.isSupported()) {
+    // Chrome, Firefox, etc.
+    var hls = new Hls();
+    hls.loadSource(url);
+    hls.attachMedia(videoPlayer);
+    videoPlayer.play().catch(() => {});
+  } 
+  else {
+    // Fallback
+    videoPlayer.src = url;
+    videoPlayer.play().catch(() => {});
+  }
 }
 
 function fecharPlayer() {
@@ -151,7 +164,6 @@ function fecharPlayer() {
   playerContainer.style.display = 'none';
 }
 
-// Carrega os canais ao abrir a página
 carregarCanais();
 </script>
 
