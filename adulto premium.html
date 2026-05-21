@@ -3,7 +3,6 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <!-- Corrige Mixed Content -->
   <meta http-equiv="Content-Security-Policy" content="upgrade-insecure-requests">
   <title>Canais Adultos - XTREAMBR TV</title>
   <style>
@@ -26,6 +25,7 @@
     a { 
       color:#0f0; 
       text-decoration:none; 
+      cursor:pointer;
     }
     a:hover { 
       color:#ff0; 
@@ -86,7 +86,20 @@
 <p style="color:#ff0; font-size:1.2em;">Clique no nome do canal para assistir</p>
 
 <div id="lista-canais">
-  <!-- Canais carregados aqui -->
+  <p><a onclick="abrir('http://15.204.105.50:25461/live/G2s9zK2n9m/xDtwVfWM8T/85.ts')">惊艳</a></p>
+  <p><a onclick="abrir('http://15.204.105.50:25461/live/G2s9zK2n9m/xDtwVfWM8T/86.ts')">潘朵啦</a></p>
+  <p><a onclick="abrir('http://15.204.105.50:25461/live/G2s9zK2n9m/xDtwVfWM8T/87.ts')">彩虹</a></p>
+  <p><a onclick="abrir('http://15.204.105.50:25461/live/G2s9zK2n9m/xDtwVfWM8T/88.ts')">松1</a></p>
+  <p><a onclick="abrir('http://15.204.105.50:25461/live/G2s9zK2n9m/xDtwVfWM8T/89.ts')">松2</a></p>
+  <p><a onclick="abrir('http://15.204.105.50:25461/live/G2s9zK2n9m/xDtwVfWM8T/90.ts')">松3</a></p>
+  <p><a onclick="abrir('http://190.14.10.19:16000/play/a045/index.m3u8')">PLAYBOY</a></p>
+  <p><a onclick="abrir('http://live.adultiptv.net/livecams.m3u8')">Live Cams</a></p>
+  <p><a onclick="abrir('http://live.adultiptv.net/milf.m3u8')">MILF</a></p>
+  <p><a onclick="abrir('http://live.adultiptv.net/bigtits.m3u8')">Big Tits</a></p>
+  <p><a onclick="abrir('http://live.adultiptv.net/pornstar.m3u8')">Pornstar</a></p>
+  <p><a onclick="abrir('http://live.adultiptv.net/latina.m3u8')">Latina</a></p>
+  <p><a onclick="abrir('http://live.adultiptv.net/asian.m3u8')">Asian</a></p>
+  <p><a onclick="abrir('http://live.adultiptv.net/anal.m3u8')">Anal</a></p>
 </div>
 
 <div id="player-container">
@@ -101,58 +114,26 @@
   </a>
 </div>
 
-<!-- HLS.js para suporte a .m3u8 -->
 <script src="https://cdn.jsdelivr.net/npm/hls.js@latest"></script>
 
 <script>
-const m3uUrl = "const m3uUrl = "https://api.allorigins.win/raw?url=" + encodeURIComponent("https://raw.githubusercontent.com/Waldemylson/Tv-online-gratis-xtreambr/refs/heads/main/dirty.m3u");";
-
 const videoPlayer = document.getElementById('videoPlayer');
 const playerContainer = document.getElementById('player-container');
-const listaCanais = document.getElementById('lista-canais');
-
-async function carregarCanais() {
-  try {
-    const response = await fetch(m3uUrl);
-    const text = await response.text();
-    const lines = text.split('\n');
-    let name = '';
-    
-    for (let line of lines) {
-      line = line.trim();
-      
-      if (line.startsWith('#EXTINF:')) {
-        name = line.split(',').pop().trim();
-      } 
-      else if (line && !line.startsWith('#') && name) {
-        const p = document.createElement('p');
-        p.innerHTML = `<a href="#" onclick="abrir('${line}'); return false;">${name}</a>`;
-        listaCanais.appendChild(p);
-        name = '';
-      }
-    }
-  } catch (e) {
-    listaCanais.innerHTML = `<p style="color:red;">Erro ao carregar a lista de canais.</p>`;
-  }
-}
 
 function abrir(url) {
   playerContainer.style.display = 'block';
   
   if (videoPlayer.canPlayType('application/vnd.apple.mpegurl')) {
-    // Safari/iOS
     videoPlayer.src = url;
     videoPlayer.play().catch(() => {});
   } 
   else if (Hls.isSupported()) {
-    // Chrome, Firefox, etc.
     var hls = new Hls();
     hls.loadSource(url);
     hls.attachMedia(videoPlayer);
     videoPlayer.play().catch(() => {});
   } 
   else {
-    // Fallback
     videoPlayer.src = url;
     videoPlayer.play().catch(() => {});
   }
@@ -163,8 +144,6 @@ function fecharPlayer() {
   videoPlayer.src = '';
   playerContainer.style.display = 'none';
 }
-
-carregarCanais();
 </script>
 
 </body>
